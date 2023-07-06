@@ -1,0 +1,92 @@
+<app-main-nav></app-main-nav>
+
+<!-- Skeleton Loader -->
+<div *ngIf="isLoading==true" class="page-container">
+  <div class="pictures">
+    <div class="slides">
+      <div *ngFor="let i of [0,1,2,3,4]" class="box box-sml"></div>
+    </div>
+    <div class="main-slide">
+      <div class="box"></div>
+    </div>
+  </div>
+  <div class="product">
+    <div class="line line-lg"></div>
+    <div *ngFor="let i of [0,1,2,3,4,5,6]" class="line"></div>
+    <div *ngFor="let i of [0,1,2,3]" class="line line-sm"></div>
+  </div>
+</div>
+<!-- Skeleton Loader End -->
+
+
+
+<div *ngIf="isLoading==false" class="page-container">
+  <div class="pictures">
+    <div class="slides">
+        <div *ngFor="let img of product.images;let index=index">
+            <img (click)="changeImage(index)" src="{{img.src}}" class="slide-images">
+        </div>
+    </div>
+    <div class="main-slide">
+        <img *ngIf="product.images.length>0" src="{{currentImage }}" (mouseover)="zoomImg()" (mouseout)="removeZoom()" class="main-product-image">
+        <!-- <img *ngIf="product.images.length>0 && zoomit" src="{{currentImage}}" class="zoom-product-image"> -->
+        <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png" class="main-product-image">
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="title"><strong> {{product.title}}</strong> </div>
+    <div class="details">
+      <div class="description">
+        <span class="font-500"><strong>Product Details</strong></span><br>
+        <p style="white-space: pre-line">
+          {{product.body_html}}
+        </p>
+      </div>
+      <div *ngIf="product.variants.length==1 && product.variants[0].option1=='Default Title';else variantTemplate">
+          <span class="font-500"><strong>Price : </strong></span>{{" $" + product.variants[0].price}}
+      </div>
+      <ng-template #variantTemplate>
+        <div class="font-500"><strong>Choose a option</strong></div>
+        <div class="variants">
+          <div class="variant-tag" *ngFor="let variant of product.variants;let index=index" (click)="selectVariant(index)"
+          [ngClass]="{'selected' : selectedIndex === index}">
+              <span *ngIf="variant.option1!=null">
+                {{variant.option1}}
+              </span>
+              <span *ngIf="variant.option2!=null">
+                {{ "/ " + variant.option2 }}
+              </span>
+              <span *ngIf="variant.option3!=null">
+                {{"/ " + variant.option3}}
+              </span>
+              <span>
+                {{ " - $" + variant.price}}
+              </span>
+          </div>
+        </div>
+      </ng-template>
+      <div class="item">
+        <span class="font-500"><strong>Vendor : </strong></span><a class="link" [href]="'/market/vendor/'+this.product.vendor"> {{product.vendor}}</a>
+      </div>
+    </div>
+    <div class="btns">
+      <button class="btn" [disabled]="(product.variants.length>1 && selectedVariant==null) || (product.variants.length==1 && product.variants[0].inventory_policy=='deny')" (click)="buyNow()">Buy Now</button>
+      <button class="btn accent" [disabled]="(product.variants.length>1 && selectedVariant==null) || (product.variants.length==1 && product.variants[0].inventory_policy=='deny')" (click)="addToCart()">Add to Cart</button>
+    </div>
+    <div class="response" *ngIf="response!=''" class="response">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+        </svg>
+        {{response}}
+      </p>
+      <div>
+        <a href="/cart">Check Cart</a>
+      </div>
+      <div >
+        <a href="/market">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</div>

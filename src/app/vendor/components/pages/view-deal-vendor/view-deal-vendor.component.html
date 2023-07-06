@@ -1,0 +1,183 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+<!--Loading circle-->
+<div *ngIf="loading==true" class="svg-loader">
+    <svg class="svg-container" height="50" width="50" viewBox="0 0 100 100">
+      <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+      <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+    </svg>
+</div>
+
+<!--Loading circle ends-->
+<div class="page-container">
+    <p class="page-title"> Deal Preview | <span class="variant-tag smaller" [ngClass]="status">{{status | titlecase }} </span> </p>
+    <div class="f-ro section-1">
+        <div class="f-ro pro-con">
+            <div class="pictures">
+                <div class="slides">
+                    <div *ngFor="let img of product.images;let index=index">
+                        <img (click)="changeImage(index)" src="{{img.src}}" class="slide-images">
+                    </div>
+                </div>
+                <div class="main-slide">
+                    <img *ngIf="product.images.length>0" src="{{currentImage }}" class="main-product-image">
+                    <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png"
+                        class="main-product-image">
+                </div>
+            </div>
+            <div class="deal">
+                <div class="title"><strong> {{deal.items.deal_title}}</strong> </div>
+                <div class="details">
+                    <div class="description">
+                        <span class="font-500"><strong>Deal Details</strong></span><br>
+                        <p style="white-space: pre-line">
+                            {{deal.items.deal_description}}
+                        </p>
+                    </div>
+                    <div *ngIf="product.variants.length==1 && product.variants[0].option1=='Default Title'">
+                        <span class="font-500"><strong>Price Tiers: </strong></span>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Deal Price</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let tier of deal.items.deal_tiers; let i = index">
+                                <tr>
+                                    <td scope="row">{{i+1}}</td>
+                                    <td>{{tier.quantity}}</td>
+                                    <td>${{(tier.price).toFixed(2)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="item">
+                        <span class="font-500"><strong>Deal Start Date: </strong></span> {{deal.items.deal_start_date}}
+                    </div>
+                    <div class="item">
+                        <span class="font-500"><strong>Deal End Date: </strong></span> {{deal.items.deal_end_date}}
+                    </div>
+                    <div class="item">
+                        <span class="font-500"><strong>Vendor : </strong></span>{{product.vendor}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="f-co man-con">
+            <div class="card man">
+                <p> Manage Deal </p>
+                <span class="title" *ngIf="canEdit==false"> Cannot Edit or Delete Deal if started or expired.  </span>
+                <div *ngIf="canEdit==true">
+                    <div><button class="edit" (click)="editDeal()">Edit</button></div>
+                    <div><button class="del" (click)="deleteDeal()">Delete</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="f-ro section-2">
+        <div class="card man">
+            <p> Product Details </p>
+            <span class="info"> Category : <b> {{product.product_type}}</b> </span>
+            <span class="info"> Status : <span class="variant-tag" [ngClass]="product.status">{{product.status | titlecase }} </span> </span>
+            <span class="info"> Taxable : <b>{{product.variants[0].taxable ? 'Yes' : 'No'}} </b> </span>
+        </div>
+        <div class="card man">
+            <p> Delivery Regions</p>
+            {{displayFSA.join(', ')}}
+            <span *ngIf="!showedAllDelivery" (click)="showAll()" style="color:blue; cursor: pointer;">& {{product.delivery_areas.length }} more..</span>
+        </div>
+        <div class="card man">
+            <p> Tags </p>
+            <div class="tags" *ngIf="product.tags.length!=0">
+                <div class="variant-tag" *ngFor="let tag of product.tags | slice:0:X;">
+                    {{tag}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--old style -->
+<!--
+<div *ngIf="loading==false" class="container">
+    <div class="flex-row">
+        <div class="main-slide">
+            <img *ngIf="product.images.length>0" src="{{ this.product.images[0].src}}" class="main-product-image">
+            <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png" class="main-product-image">
+        </div>
+        <div class="details">
+            <h4>{{product.title}}</h4>
+            <b class="title">About this Item:</b>
+            <p>{{product.body_html}}</p>
+            <b *ngIf="product.variants.length==1" class="title">Regular Price: ${{product.variants[0].price}}</b>
+            <b *ngIf="expired==true">This deal is already over (past the end date) </b>
+        </div>
+    </div>
+    <div class="deal-discription">
+
+        <div class="general">
+            <h4 class="title">Deal Title: <span class="deal-ans">{{deal.items.deal_title}}</span></h4>
+            <h4 class="title">Deal Description</h4>
+            <p>{{deal.items.deal_description}}</p>
+            <h4 class="title">Start Date: <span class="deal-ans">{{deal.items.deal_start_date}}</span></h4>
+            <h4 class="title">End Date: <span class="deal-ans">{{deal.items.deal_end_date}}</span></h4>
+            <h4 class="title">Timer <small>(time after the first person initiate the deal)</small>: <span class="deal-ans">{{deal.items.deal_timer}} days</span></h4>
+        </div>
+
+
+
+        <div>
+            <span class="title" *ngIf="canEdit==true" (click)="editDeal()">Edit the deal: &nbsp; <button class="edit-deal">Edit Deal</button></span>
+            <span class="title" *ngIf="canEdit==false"> Cannot Edit Deal if started or expired.  </span>
+            <br>
+            <span class="title" *ngIf="canEdit==true">
+                Delete this deal ? &nbsp;
+                <button class="delete" data-toggle="modal" data-target="#exampleModal">Delete</button>
+            </span>
+            <span class="title" *ngIf="canEdit==false"> Cannot Delete Deal if started or expired.  </span>
+            -->
+            <!-- Modal -->
+            <!-- 
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete the deal?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="closeit" data-dismiss="modal">Close</button>
+                            <button type="button" class="delete" data-dismiss="modal" (click)="deleteDeal()">Delete Deal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="title">Tiers</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Deal Price</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let tier of deal.items.deal_tiers; let i = index">
+                    <tr>
+                        <td scope="row">{{i+1}}</td>
+                        <td>{{tier.quantity}}</td>
+                        <td>${{tier.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+-->

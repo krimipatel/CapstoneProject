@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="header">
+        <div class="post-type">
+            <div class="post-info">
+                Issue: An issue reported by a person of the community.
+            </div>
+            <img class="icon" src="../../../../../assets/post-icons/issues.svg">
+            <span class="post-type-text">Issue</span>
+        </div>
+        <div class="poster">
+            <span class="poster-type-text">{{issue.alias}}</span>
+            <img class="profle-picture" src="https://avatars.dicebear.com/api/initials/{{issue.alias}}.svg">
+        </div>
+    </div>
+    <div class="post-content">
+        <span class="title">{{issue.title}}</span><br>
+        <!-- Description Tags Section -->
+        <!-- <div class="tags-container">
+      <div class="description-tags">
+
+        <span class="tag" *ngFor="let tag of issue.description_tags">
+          <div class="dot"></div>
+          {{tag}}
+        </span>
+      </div>
+    </div> -->
+        <span class="category">{{issue.subcategory}}</span><br>
+        <span class="description">{{issue.clarification}}</span><br>
+
+    </div>
+    <div class="post-footer">
+        <div (click)="vote('up',issue.post_id)" *ngIf="issue.user_action=='upvote'" class="action active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+          <path
+              d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+      </svg> {{issue.upvote.length}}
+        </div>
+        <div (click)="vote('up',issue.post_id)" *ngIf="issue.user_action=='downvote'||issue.user_action=='none'" class="action">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+          <path
+              d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+      </svg> {{issue.upvote.length}}
+        </div>
+
+
+        <div (click)="vote('down',issue.post_id)" *ngIf="issue.user_action=='downvote'" class="action active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path
+              d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+      </svg> {{issue.downvote.length}}
+        </div>
+        <div (click)="vote('down',issue.post_id)" class="action" *ngIf="issue.user_action=='upvote'||issue.user_action=='none'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path
+              d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+      </svg> {{issue.downvote.length}}
+        </div>
+    </div>
+</div>

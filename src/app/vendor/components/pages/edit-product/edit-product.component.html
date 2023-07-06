@@ -1,0 +1,268 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+<div class="container {{loadingClass}}">
+  <div>
+    <h4 *ngIf="page1" class="text-main-title">Edit Product</h4>
+    <h4 *ngIf="page2" class="text-main-title">Edit Product > Area Selection</h4>
+    <form [formGroup]="productInfoForm">
+      <div *ngIf="page1" class="first-page-content">
+        <div class="col-l">
+
+          <div class="card">
+            <label class="text-title">Name</label>
+            <input class="form-control" type="text" formControlName="name" required><br>
+            <small *ngIf="productInfoForm.get('name')!.invalid && productInfoForm.get('name')!.touched"
+              class="text-danger">Name Required</small>
+            <br>
+            <label for="description" class="text-title">Description</label>
+            <textarea rows="5" class="form-control" id="description" formControlName="description"
+              name="description"></textarea>
+          </div>
+
+          <div *ngIf="this.product.variants.length==1 && this.product.variants[0].option1=='Default Title'"
+            class="card item">
+            <label class="text-title">Price (CAD)</label>
+            <input class="form-control" (change)="changePrice()" type="number" id="price" formControlName="price"
+              required>
+            <small *ngIf="productInfoForm.get('price')!.invalid && productInfoForm.get('price')!.touched"
+              class="text-danger">Enter minimum required amount, which is 0.01</small>
+            <div class="form-check">
+              <input class="form-check-input" (click)="toggleTaxable()" type="checkbox" formControlName="taxable"  style="display: none;">
+              <label class="form-check-label" for="flexCheckDefault" style="display: none;">Taxable</label>
+            </div>
+            <p class="text-title">Shipping <small>(CAD)</small></p>
+            <input type="number" class="form-control" formControlName="shipping" required>
+            <small *ngIf="productInfoForm.get('shipping')!.invalid && productInfoForm.get('shipping')!.touched" class="text-danger">Enter minimum required amount, which is 0.01</small><br>
+            
+            <div>
+              <p class="text-title">Please select you tax rate:</p>
+                <input type="radio" name="tax_rate" value=0 formControlName="tax_rate">
+                <label for="0">0 %</label><br>
+                <input type="radio" name="tax_rate" value=5 formControlName="tax_rate">
+                <label for="5">5 %</label><br>
+                <input type="radio" name="tax_rate" value=8 formControlName="tax_rate">
+                <label for="8">8 %</label><br>
+                <input type="radio" name="tax_rate" value=13 formControlName="tax_rate">
+                <label for="13">13 %</label><br>
+            </div>            
+          </div>
+
+          <div class="card item">
+            <div *ngIf="loading==true" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                [style.width]="completed +'%'">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+            <label class="text-title">Images</label>
+            <!-- Button to avoid enter key press -->
+              <button type="submit" class="hidden"></button>
+            <!-- Button to avoid enter key press -->
+            <div class="images-display">
+              <div class="imageContainer">
+                <div class="image-view-container" *ngFor="let image of product.images;let index=index">
+                  <button class="deleteImageBtn" (click)="deleteImage(image.id,index)">X</button>
+                  <img class="image-view" src="{{image.src}}">
+                </div>
+
+              </div>
+              <br>
+              <label for="actual-btn" class="label-addImage">Add Images</label>
+              <input type="file" hidden id="actual-btn" style="display:block;" (change)="onFileSelected($event)"
+                accept="image/*" aria-hidden="true" #photos multiple>
+            </div>
+          </div>
+          <div *ngIf="this.product.variants.length!=1 || this.product.variants[0].option1!='Default Title'"
+            class="card">
+            <p class="text-title">Variants</p>
+            <div class="variants">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th *ngFor="let option of product.options" scope="col">{{option.name}}</th>
+                    <th>Price <small>(CAD)</small></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let variant of product.variants; let index = index;">
+                    <td>{{variant.option1}}</td>
+                    <td *ngIf="variant.option2!=null">{{variant.option2}}</td>
+                    <td *ngIf="variant.option3!=null">{{variant.option3}}</td>
+                    <td>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input class="form-control" type="number" (change)="changeVariantPrice($event,index)"
+                          [value]="variant.price">
+                      </div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card ">
+            <label class="text-title">Product Status</label>
+            <label for="active">
+              <input type="radio" id="active" formControlName="status" name="status" value="active">
+              Active
+            </label>
+            <label for="archive">
+              <input type="radio" id="archive" formControlName="status" name="status" value="archived">
+              Archive
+            </label>
+            <label for="draft">
+              <input type="radio" id="draft" formControlName="status" name="status" value="draft">
+              Draft
+            </label>
+
+            <small *ngIf="productInfoForm.get('status')!.invalid && productInfoForm.get('status')!.touched"
+              class="text-danger">One selection is required</small>
+          </div>
+          <div class="card item">
+            <span class="text-title">Tags</span>
+            <label></label>
+            <input placeholder="Add tags here" type="text" class="form-control" formControlName="tags"
+              (change)="getTags()">
+            <div class="tag-list">
+              <div class="tags" *ngFor="let t of allTags; let index = index">{{t}}
+                <div class="remove-tags" (click)="removeTag(index)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card category">
+            <span class="text-title"> Select Product Category</span>
+            <div class="search"><br>
+              <input id='search' autocomplete="off" placeholder="Search for a category"
+                (clickOutside)="toggleDropDownOut()" (click)="toggleDropDown()" class='search-bar form-control'
+                [formControl]="searching" type='text'>
+              <div *ngIf="showDropDown">
+                <div class="list-container-dropdown">
+                  <div class="globalItem" *ngFor="let item of listCategoryALl | itemFilter:searching.value">
+                    <div (click)="itemClicked(item)">
+                      {{item}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="selectedCategory" *ngIf="this.productInfoForm.controls.selectedCategory.value!=''">Selected
+              Category :
+              <div class="cat-tag">{{this.productInfoForm.controls.selectedCategory.value}}
+                <div class="remove-category" (click)="removeCategory()" role="button">
+                  &nbsp;
+                  <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div *ngIf="page1" class="btns">
+
+
+        <button (click)="onCancel()" class="btn">Cancel</button>
+        <div class="btn-grp2">
+          <!--Disabled area selection for testing users-->
+          <!-- <button class="btn" (click)="onNext()">Go To Area Selection</button> -->
+          <button class="btn submit-btn" (click)="onSubmit()">Save</button>
+        </div>
+
+      </div>
+
+
+      <div class="page-two-content" *ngIf="page2">
+        <a class="back" (click)="onBack()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-chevron-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+          </svg> <span class="button-type"><u>Back to Product</u></span>
+        </a>
+
+        <div class="second-page-content">
+          <div class="col-sm">
+            <div class="accordion-flush">
+              <div class="accordion-item">
+                <input class="form-control search-bar" type="text " [(ngModel)]="searchString"
+                  placeholder="Search Regions" autocomplete="off ">
+                <div class="accordion-collapse collapse show">
+                  <div class="accordion-body scrollable">
+                    <p class="region " (click)="getFasForRegion(region)"
+                      *ngFor="let region of regions | filterRegion:searchString">{{region}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-l">
+            <div class="card " *ngFor="let region of regionsWithFsa ">
+              <div class="flex ">
+                <h5>{{region.name}}</h5>
+                <svg (click)="removeRegion(region.name) " xmlns="http://www.w3.org/2000/svg " width="16 " height="16 "
+                  fill="#db5d37 " class="bi bi-x-circle-fill " viewBox="0 0 16 16 ">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z " />
+                </svg>
+              </div>
+
+              <div class="flex-cards ">
+                <div *ngIf="region.fsa.length==0">
+                  <p>All FSA already selected within this region. </p>
+                </div>
+
+                <div *ngFor="let fsa of region.fsa ">
+
+                  <label for="{{fsa}} ">
+                    <input (change)="fasChecked(fsa)" type="checkbox" id="{{fsa}} " #checkboxes checked>&nbsp;
+                    {{fsa}}</label>
+
+                </div>
+              </div>
+              <div class="btns-div">
+                <button type="button" class="next-btn" (click)="selectAll(region.fsa)">Select All</button>
+                <button type="button" class="next-btn" (click)="unselectAll(region.fsa)">Unselect All</button>
+              </div>
+            </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+      </div>
+
+      <div *ngIf="page2" class="btns">
+        <button (click)="onCancel()" class="btn">Cancel</button>
+        <div class="btn-grp2">
+          <button class="btn" (click)="onBack()">Back to Product Page</button>
+          <button class="btn submit-btn" (click)="onSubmit()">Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

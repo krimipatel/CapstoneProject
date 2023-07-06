@@ -1,0 +1,162 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+
+<div class="page-container">
+  <p class="page-title"> Product Preview | <span class="variant-tag smaller" [ngClass]="product.status">{{product.status | titlecase }} </span> </p>
+  <div class=" f-ro section-1">
+    <div class="f-ro pro-con">
+      <div class="pictures">
+        <div class="slides">
+          <div *ngFor="let img of product.images;let index=index">
+            <img (click)="changeImage(index)" src="{{img.src}}" class="slide-images">
+          </div>
+        </div>
+        <div class="main-slide">
+          <img *ngIf="product.images.length>0" src="{{currentImage }}" class="main-product-image">
+          <!-- <img *ngIf="product.images.length>0 && zoomit" src="{{currentImage}}" class="zoom-product-image"> -->
+          <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png"
+            class="main-product-image">
+        </div>
+      </div>
+      <div class="product">
+        <div class="title"><strong> {{product.title}}</strong> </div>
+        <div class="details">
+          <div class="description">
+            <span class="font-500"><strong>Product Details</strong></span><br>
+            <p style="white-space: pre-line">
+              {{product.body_html}}
+            </p>
+          </div>
+          <div *ngIf="product.variants.length==1 && product.variants[0].option1=='Default Title'">
+            <span class="font-500"><strong>Price : </strong></span>{{" $" + product.variants[0].price}}
+          </div>
+          <div class="item">
+            <span class="font-500"><strong>Vendor : </strong></span><a class="link"
+              [href]="'/market/vendor/'+this.product.vendor"> {{product.vendor}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="f-co man-con ">
+      <div class="card man">
+        <p> Manage Product </p>
+        <div><button class="edit" (click)="openEditPage()">Edit</button></div>
+        <div><button class="del" data-toggle="modal" data-target="#exampleModal">Delete</button></div>
+      </div>
+      <span *ngIf="product.status=='active'">
+      <div *ngIf="product.variants.length==1 && product.variants[0].title=='Default Title'" class="card man">
+        <p> Want to create a deal on the product? </p>
+          <div><button class="deal" (click)="createDeal()">Create a Deal</button></div>
+      </div>
+      </span>
+      <div *ngIf="product.variants.length>1 && product.variants[0].title!=='Default Title' " class="card man">
+        <p> Product variants </p>
+        <div class="variants">
+          <div class="variant-tag" *ngFor="let variant of product.variants;let index=index">
+            <span *ngIf="variant.option1!=null">
+              {{variant.option1}}
+            </span>
+            <span *ngIf="variant.option2!=null">
+              {{ "/ " + variant.option2 }}
+            </span>
+            <span *ngIf="variant.option3!=null">
+              {{"/ " + variant.option3}}
+            </span>
+            <span>
+              {{ " - $" + variant.price}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="card man" *ngIf="product.variants.length==1 && product.variants[0].option1=='Default Title'">
+        <p> Manage Stock </p>
+          <div class="f-ro switch-con">
+            <span>Out of Stock</span>
+            <label class="switch">
+              <input type="checkbox" (click)="stockChange(0,product.variants[0].id)"
+                [checked]="product.variants[0].inventory_policy=='continue'">
+              <span class="slider round"></span>
+            </label>
+            <span>In Stock</span>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card man m-1" *ngIf="product.variants.length>1 && product.variants[0].title!=='Default Title' ">
+    <p> Manage Stock </p>
+    <table class="table table-light white
+    ">
+      <thead>
+        <tr>
+          <th *ngFor="let option of product.options" scope="col">{{option.name}}</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let variant of product.variants; let index = index;">
+          <td>{{variant.option1}}</td>
+          <td *ngIf="variant.option2!=null">{{variant.option2}}</td>
+          <td *ngIf="variant.option3!=null">{{variant.option3}}</td>
+          <td>{{variant.price}}</td>
+          <td>
+            <div class="f-ro switch-con">
+              <span>Out</span>
+              <label class="switch ">
+                <input type="checkbox" (click)="stockChange(index,variant.id)"
+                  [checked]="variant.inventory_policy=='continue'">
+                <span class="slider round"></span>
+              </label>
+              <span>In</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="f-ro section-2">
+    <div class="card man">
+      <p> More product Details </p>
+      <span class="info"> Category : <b> {{product.product_type}}</b> </span>
+      <span class="info"> Status : <span class="variant-tag" [ngClass]="product.status">{{product.status | titlecase }} </span> </span>
+      <span class="info"> Taxable : <b>{{product.variants[0].taxable ? 'Yes' : 'No'}} </b> </span>
+    </div>
+    <div class="card man">
+      <p> Delivery Regions</p>
+      {{displayFSA.join(', ')}}
+      <span *ngIf="!showedAllDelivery" (click)="showAll()" style="color:blue; cursor: pointer;">& {{product.delivery_areas.length }} more..</span>
+
+    </div>
+    <div class="card man">
+      <p> Tags </p>
+      <div class="tags" *ngIf="product.tags.length!=0">
+        <div class="variant-tag" *ngFor="let tag of product.tags | slice:0:X;">
+          {{tag}}
+        </div>
+        <span *ngIf="product.tags.length>X"  (click)="showAllTags()" style="color:blue; cursor: pointer;" > ... {{product.tags.length - X}} more </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showToast">
+  <app-toast [toastMessage]="message" (closeEvent)="closeToast()"></app-toast>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+              <b>Delete the product?</b> <br>
+              <small>You will not be able to retrieve it later.</small>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="edit small" data-dismiss="modal">Cancel</button>
+              <button type="button" class="del small" data-dismiss="modal" (click)="deleteProduct()">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>

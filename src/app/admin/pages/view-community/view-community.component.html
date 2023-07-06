@@ -1,0 +1,46 @@
+<app-admin-main-nav></app-admin-main-nav>
+
+<div class="header" *ngIf="dataLoaded">
+    <div class="com-avatar">
+        <img src="../../../../assets/images/grey.jpg" alt="" class="com-photo">
+    </div>
+    <div class="com-info">
+        <h3>{{community.community_name}}</h3><br>
+        <h3>{{community.address}}</h3>
+        <div class="widgets">
+            <div class="info-widgets wid-1">Users : {{community.number_of_residents}}</div>
+            <div class="info-widgets wid-after">Post : X</div>
+            <div class="info-widgets wid-after">Reports : X</div>
+            <div class="info-widgets wid-after">Products : X</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="inpage-nav">
+    <div [ngStyle]="{'background-color': usersActive==true ? 'var(--LogoColor)' : '', 'color': usersActive==true ? 'white' : ''}" (click)="navToggle('users')" class="nav-components">Users</div>
+    <div [ngStyle]="{'background-color': postsActive==true ? 'var(--LogoColor)' : '', 'color': postsActive==true ? 'white' : '' }" (click)="navToggle('posts')" class="nav-components">Posts</div>
+    <div [ngStyle]="{'background-color': contactsActive==true ? 'var(--LogoColor)' : '', 'color': contactsActive==true ? 'white' : '' }" (click)="navToggle('contacts')" class="nav-components">Contacts</div>
+</div>
+
+
+
+<div class="usersComponent" *ngIf="usersActive==true && dataLoaded">
+    <app-user-list [usersList]="community.users"></app-user-list>
+</div>
+
+<div class="usersComponent" *ngIf="postsActive==true">
+    <div class="container soon">
+        <p>Coming Soon</p>
+    </div>
+</div>
+
+<div class="usersComponent" *ngIf="contactsActive==true">
+    <div class="container soon">
+        <p>Coming Soon</p>
+    </div>
+</div>
+
+
+
+<app-fixed-footer></app-fixed-footer>

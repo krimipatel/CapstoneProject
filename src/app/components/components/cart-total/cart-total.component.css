@@ -1,0 +1,27 @@
+.right {
+    float: right;
+}
+
+hr {
+    color: white;
+    border-top: 1px gray solid;
+}
+
+p{
+  margin:0;
+}
+
+.bold{
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.normal-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+@media (max-width: 1000px) {
+
+
+}

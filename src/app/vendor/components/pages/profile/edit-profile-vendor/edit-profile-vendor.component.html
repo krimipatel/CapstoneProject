@@ -1,0 +1,51 @@
+<form  [formGroup]="profileForm">
+<div class="container flex">
+    <div class="cols">
+      <h4>Shop Details</h4>
+      <div class="form-group">
+        <label class="form-label">Shop Name</label>
+        <input type="text" formControlName="sname" class="form-control" readonly>
+        <small class="text-danger" *ngIf="profileForm.get('sname')!.invalid && profileForm.get('sname')!.touched">This feild is required.</small>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Address</label>
+        <input type="text" class="form-control" formControlName="address">
+        <small class="text-danger" *ngIf="profileForm.get('address')!.invalid && profileForm.get('address')!.touched">This feild is required.</small>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Website</label>
+        <input type="text" class="form-control" formControlName="webLink">
+      </div>
+    </div>
+    <div  class="cols">
+      <h4>Vendor Details</h4>
+      <div class="row form-group">
+        <div class="col">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" formControlName="fname" >
+          <small class="text-danger" *ngIf="profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched">This feild is required.</small>
+        </div>
+        <div class="col">
+          <label class="form-label">Last Name</label>
+          <input type="text"  formControlName="lname" class="form-control">
+          <small class="text-danger" *ngIf="profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched">This feild is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="number" class="form-control" formControlName="phone">
+        <small class="text-danger" *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched">This feild is required.</small>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" formControlName="email" readonly><br>
+      </div>
+    </div>
+  </div>
+  <div class="flex btn-grp">
+    <button class="btn discardBtn" [disabled]="profileForm.invalid" (click)="discard()">Discard</button>
+    <button class="btn saveBtn" [disabled]="profileForm.invalid" (click)="saveProfile()">Save Changes</button>
+  </div>
+
+</form>
+

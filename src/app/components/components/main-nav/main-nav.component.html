@@ -1,0 +1,73 @@
+<nav class="nav-container flex-row space-between">
+  <div class="logo-container">
+    <a href="/">
+      <img src="../../../../assets/images/n.png" class="logo" alt="naborino logo">
+    </a>
+  </div>
+  <div class="middle-nav flex-row">
+    <!-- <div [ngClass]="{'highlight':active=='home'}">
+      <a href="/home">
+        <img class="icons" src="../../../../assets/nav-icons/home.svg" alt="home icon" >
+      </a>
+    </div>
+    <div [ngClass]="{'highlight':active=='community'}">
+      <a href="/communityprofile">
+        <img class="icons" src="../../../../assets/nav-icons/community.svg" alt="community icon" >
+      </a>
+    </div> -->
+    <div [ngClass]="{'highlight':active=='market'}">
+      <a href="/market">
+        <img class="icons" src="../../../../assets/nav-icons/market.svg" alt="=market icon" >
+      </a>
+    </div>
+  </div>
+
+
+  <div class="right-nav flex-row">
+<!--     <div (click)="redirectWallet()" class="wallet">
+      <img class="wallet-icon" src="../../../../assets/wallet/icon.png" alt="wallet icon">
+      <p>{{walletBalance}}</p>
+    </div> -->
+    <div class="wallet-toolbox">
+      <app-wallet-toolbox [walletInfo]="walletBalance"></app-wallet-toolbox>
+    </div>
+    <div [ngClass]="{'highlightToggle':showNotification}" class="notification-icon-container" (clickOutside)="openNotification(false)"  >
+      <div *ngIf="showbadge" class="not-badge"></div>
+      <img (click)="openNotification(!showNotification)" class="icons" src="../../../../assets/nav-icons/bell.svg" alt="bell">
+      <div  class="notifications"  *ngIf="showNotification">
+        <app-notification-main></app-notification-main>
+      </div>
+    </div>
+
+    <div [ngClass]="{'highlightToggle':showOptions}" class="option-icon-container" (clickOutside)="openOptions(false)" >
+      <div (click)="openOptions(!showOptions)" class="profile-picture-container">
+        <img [src]="profilePicture" class="icons profile-picture">
+      </div>
+      <div class="options" *ngIf="showOptions">
+        <app-nav-options profilePicture={{profilePicture}}></app-nav-options>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<nav class="middle-nav-small-screen nav-container">
+
+  <div class="flex-row center">
+    <!-- <div   [ngClass]="{'highlight':active=='home'}">
+      <a href="/home">
+        <img class="icons" src="../../../../assets/nav-icons/home.svg" alt="home icon" >
+      </a>
+    </div>
+    <div  [ngClass]="{'highlight':active=='community'}">
+      <a href="/communityprofile">
+        <img class="icons" src="../../../../assets/nav-icons/community.svg" alt="community icon" >
+      </a>
+    </div> -->
+    <div   [ngClass]="{'highlight':active=='market'}">
+      <a href="/market">
+        <img class="icons" src="../../../../assets/nav-icons/market.svg" alt="=market icon" >
+      </a>
+    </div>
+  </div>
+</nav>

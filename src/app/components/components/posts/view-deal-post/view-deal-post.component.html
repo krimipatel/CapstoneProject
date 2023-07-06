@@ -1,0 +1,100 @@
+<div *ngIf="post.deal_completed==false" class="card">
+  <div class="header">
+      <div class="post-type">
+          <div class="post-info">
+              Deal: This is an active deal in your community.  Join in now to get the deal!
+          </div>
+          <img class="icon" src="../../../../../assets/post-icons/deal.png">
+          <span class="post-type-text">Deal</span>
+      </div>
+      <div class="poster">
+          <span class="poster-type-text">{{post.alias}}</span>
+          <img loading="lazy" *ngIf="post.profile_photo!=null" [src]="post.profile_photo" class="icons" alt="">
+          <img loading="lazy" *ngIf="post.profile_photo==null" src="https://avatars.dicebear.com/api/initials/{{post.alias}}.svg" class="profle-picture" alt="">
+      </div>
+  </div>
+  <div class="post-content">
+      <h5><b> Deal Started !!! </b></h5>
+      <div class="deal">
+        <div class="image-container">
+          <img *ngIf="post.deal.product.images[0] !== undefined" class="deal-image" [src]="post.deal.product.images[0].src" alt="product-image">
+          <img *ngIf="post.deal.product.images[0] == undefined" class="deal-image" src="../../../../../assets/images/No Image.png" alt="product-image">
+        </div>
+        <div class="info-container">
+          <p class="deal-title"><b>{{post.deal.deal_title}}</b></p>
+          <p class="deal-description">{{post.deal.deal_description}}</p>
+        </div>
+      </div>
+      <div class="deal-info">
+        <p>Deal Ends on <b> {{post.community_cart.end_date | date:'longDate' }}.</b></p>
+        <p *ngIf="post.deal.deal_tiers[0].quantity>post.community_cart.total_quantity"><b> {{post.deal.deal_tiers[0].quantity - post.community_cart.total_quantity }}</b> more quanitity needed to a minimum discount of<b> $ {{ round(post.deal.product.variants[0].price - post.deal.deal_tiers[0].price)  }}. </b></p>
+        <p *ngIf="post.deal.deal_tiers[0].quantity<=post.community_cart.total_quantity"><b> Deal achieved !! </b> Your community will get a discount of <b> $ {{ round(post.deal.product.variants[0].price - post.deal.deal_tiers[0].price)}}</b> on this deal. </p>
+      </div>
+      <div class="progress-bar" class="outer-bar">
+        <div class="inner-bar" [style]="'width:' + (post.community_cart.total_quantity/post.deal.deal_tiers[0].quantity*100).toString()+'%'">
+        </div>
+        <div *ngIf="post.community_cart.total_quantity<post.deal.deal_tiers[0].quantity" class="pointer" [style]="'left:calc(' + (post.community_cart.total_quantity/post.deal.deal_tiers[0].quantity*100).toString()  + '% - 32px);'">
+          {{post.community_cart.total_quantity}} / {{post.deal.deal_tiers[0].quantity}}
+        </div>
+        <div *ngIf="post.community_cart.total_quantity>=post.deal.deal_tiers[0].quantity" style="left:95%" class="pointer pointer-success" >
+          <img src="../../../../../assets/market/party-popper 2.svg" alt="" class="icon">
+        </div>
+      </div>
+      <div class="action">
+        <button class="viewDeal" (click)="viewDeal(post.deal.deal_id)"> View Deal </button>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="post.deal_completed==true" class="card">
+  <div class="header">
+      <div class="post-type">
+          <div class="post-info">
+            Deal: This is an active deal in your community.  Join in now to get the deal!
+          </div>
+          <img class="icon" src="../../../../../assets/post-icons/deal.png">
+          <span class="post-type-text">Deal</span>
+      </div>
+      <div class="poster">
+          <span class="poster-type-text">{{post.alias}}</span>
+          <img loading="lazy" *ngIf="post.profile_photo!=null" [src]="post.profile_photo" class="icons" alt="">
+          <img loading="lazy" *ngIf="post.profile_photo==null" src="https://avatars.dicebear.com/api/initials/{{post.alias}}.svg" class="profle-picture" alt="">
+      </div>
+  </div>
+  <div class="post-content">
+      <h5 *ngIf="post.deal.deal_tiers[0].quantity<=post.community_cart.total_quantity"><b> Deal Successfull !!! </b></h5>
+      <h5 *ngIf="post.deal.deal_tiers[0].quantity>post.community_cart.total_quantity"><b> Deal Failed !!! </b></h5>
+      <div class="deal">
+        <div class="image-container">
+          <img class="deal-image" [src]="post.deal.product.images[0].src" alt="product-image">
+        </div>
+        <div class="info-container">
+          <p class="deal-title"><b>{{post.deal.deal_title}}</b></p>
+          <p class="deal-description">{{post.deal.deal_description}}</p>
+        </div>
+      </div>
+      <div class="deal-info" *ngIf="post.deal.deal_tiers[0].quantity<=post.community_cart.total_quantity">
+        <p>Congratulations, you were able to achive a group discount.</p>
+        <p>Your community will get a discount of <b> $ {{ round(post.deal.product.variants[0].price - post.deal.deal_tiers[0].price)}}</b> on this deal. </p>
+      </div>
+      <div class="deal-info" *ngIf="post.deal.deal_tiers[0].quantity>post.community_cart.total_quantity">
+        <p>Your community was not able to achieve the discount this time but you can try again in the next deal.</p>
+      </div>
+      <div class="progress-bar" class="outer-bar">
+        <div class="inner-bar" [style]="'width:' + (post.community_cart.total_quantity/post.deal.deal_tiers[0].quantity*100).toString()+'%'">
+        </div>
+        <div *ngIf="post.community_cart.total_quantity<post.deal.deal_tiers[0].quantity" class="pointer" [style]="'left:calc(' + (post.community_cart.total_quantity/post.deal.deal_tiers[0].quantity*100).toString()  + '% - 32px);'">
+          {{post.community_cart.total_quantity}} / {{post.deal.deal_tiers[0].quantity}}
+        </div>
+        <div *ngIf="post.community_cart.total_quantity>=post.deal.deal_tiers[0].quantity" style="left:93%" class="pointer pointer-success" >
+          <img src="../../../../../assets/market/party-popper 2.svg" alt="" class="icon">
+        </div>
+      </div>
+      <div class="action" *ngIf="post.deal.deal_tiers[0].quantity<=post.community_cart.total_quantity">
+        <button class="viewDeal" (click)="viewOrder()"> Check Order </button>
+      </div>
+      <div class="action" *ngIf="post.deal.deal_tiers[0].quantity>post.community_cart.total_quantity">
+        <button class="viewDeal" (click)="viewOtherDeals()"> View other deals </button>
+      </div>
+  </div>
+</div>

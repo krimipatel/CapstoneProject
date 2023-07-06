@@ -1,0 +1,29 @@
+<div class="wallet-container">
+    <div class="wallet-header">
+        <div class="wallet-icon">
+            <img src="../../../../assets/wallet/icon.png" alt="Wallet-icon">
+        </div>
+        <div class="wallet-balance">
+            <span class="balance-title">Balance</span>
+            <p class="balance">{{walletInfo}}</p>
+        </div>
+    </div>
+    <h6>Transactions</h6>
+    <div class="wallet-transactions">
+        
+        <div *ngFor="let transaction of [1,2,3]" class="transaction-container">
+            <div class="transaction-icon-container">
+                <img src="../../../../assets/wallet/in.png" class="transaction-icon" alt="transaction-in" srcset="">
+            </div>
+            <div class="transaction-info">
+                <div class="deal-info">
+                    <p class="deal-name">Deal Information Information Information</p>
+                    <p class="deal-date">12th Feb, 2023</p>
+                </div>
+                <div class="price-container">
+                    -$45.12
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

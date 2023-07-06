@@ -1,0 +1,66 @@
+<section>
+    <div class="{{loadingClass}}">
+        <div class="background">
+            <div class="bg-square-div">
+                <div class="bg-square">
+                </div>
+            </div>
+            <div>
+                <img class="bg-logo" src="../../../../assets/images/logo.png" alt="">
+            </div>
+            <div class="bg-square-div">
+                <div class="bg-square float-right">
+                </div>
+            </div>
+        </div>
+
+        <div class="top">
+            <img (click)="logoClicked()" class="top-logo" src="../../../../assets/images/logo.png" alt="logo">
+
+            <form [formGroup]="loginForm">
+
+                <p class="title-text">Login</p>
+                <p class="title-text-sm">Please sign in to use your account</p>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="email" class="form-control">
+                    <small *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.touched" class="text-danger">Not a Valid Email</small>
+
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input formControlName="password" [type]="showPassword" class="form-control">
+                    <div class="btn-grp">
+                      <button (click)="showPasswordClicked()" class="input-group-addon">
+                        <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                    </div>
+                    <small *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="text-danger">Password must be 8 characters</small>
+                </div>
+
+                <div class="login-div">
+                    <button (click)="login()" [disabled]="loginForm.invalid" class="login" type="submit">Sign In</button><br>
+                    <div class="error-div" *ngIf="loginError">
+                        <small class="text-danger error-box">{{loginError}}</small>
+                    </div>
+                </div>
+
+                <div class="forgot">
+                    <p class="sign-text">Don't have an account? <a href="register">sign up</a></p>
+                    <a href="forgotpassword" id="forgot-link">Forgot Password? </a>
+                </div>
+
+                <p class="or">OR</p>
+
+                <div>
+                    <app-express-sign-in></app-express-sign-in>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+
+</section>

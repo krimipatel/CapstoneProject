@@ -1,0 +1,248 @@
+.vendor-form {
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 var(--black-300);
+    width: 100%;
+}
+
+.light-black {
+    color: #4A4A4A;
+}
+
+.waiting { cursor: wait; }
+
+.text-bold-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.text-bold-large {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.text-light {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.text-bold-medium {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.text-bold-regular {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.text-form {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+input {
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+}
+
+label {
+    padding: 0px 5px;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 7px;
+    width: 100%;
+}
+
+.info-section {
+    min-width: 400px;
+}
+
+.middle-align {
+    margin-top: 40px;
+}
+
+.main-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
+
+.indi {
+    margin-top: 40px;
+}
+
+input {
+    width: 100%;
+}
+
+.registerBtn {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--accent);
+    width: 100%;
+    height: 40px;
+}
+
+.registerBtn:hover {
+    border: none;
+    background-color: var(--LogoColor);
+    color: white;
+    transition: all 0.15s ease-in;
+}
+
+.calculate-btn {
+    border: none;
+    border-radius: 10px;
+    color: #3B204F;
+    background-color: white;
+    width: 150px;
+    height: 40px;
+}
+
+.logo-class {
+    width: auto;
+    text-align: center;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.logo {
+    height: auto;
+    width: 300px;
+    cursor: pointer;
+}
+
+.btn-class {
+    text-align: left;
+    padding-bottom: 30px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.bottom-div {
+    background-color: #3B204F;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 30px;
+    margin-bottom: 30px;
+    max-height: 270px;
+}
+
+.white-color {
+    color: white;
+}
+
+.calculator-text {
+    max-width: 400px;
+}
+
+.image-icon {
+    overflow: visible;
+}
+
+.error-box {
+    padding: 3px;
+    border: 1px red solid;
+    border-radius: 3px;
+    background-color: rgb(255, 241, 241);
+}
+
+.success-box {
+    padding: 3px;
+    border: 1px green solid;
+    border-radius: 3px;
+    background-color: rgb(216, 255, 214);
+    color: green;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.btn-grp{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  transform: translateX(-10px) translateY(-7px);
+}
+
+.input-group-addon{
+  border:none;
+  background-color:rgba(0, 0, 0, 0);
+  position: absolute;
+
+}
+
+
+@media (max-width: 1000px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .middle-align {
+        margin-top: 0px;
+    }
+    .bottom-div {
+        flex-direction: column;
+        max-height: 100%;
+    }
+    .image-div {
+        display: none;
+    }
+    .image-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .flex {
+        flex-direction: column;
+    }
+    .info-section {
+        width: 100%;
+        min-width: 100%;
+    }
+    .vendor-form {
+        padding: 20px 10px;
+    }
+    .indi {
+        margin-top: 20px;
+    }
+    .info-section {
+        padding: 0px;
+    }
+    .bottom-div {
+        background-color: var(--black-100);
+        padding: 0px;
+        width: 100%;
+    }
+    .calculator-text {
+        background-color: #3B204F;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 100%;
+    }
+}

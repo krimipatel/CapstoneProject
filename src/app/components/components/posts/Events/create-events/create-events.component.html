@@ -1,0 +1,140 @@
+<div class="card-body">
+    <form [formGroup]="eventsForm">
+        <!--================== events content start ===================-->
+        <!--================== Page 1 ===================-->
+        <div *ngIf="pageNumber == 1">
+            <div class="page">
+                <div class="form-group">
+                    <label for="topic">*Title :</label>
+                    <input type="text" formControlName="title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="date" class="form-label">*Date :</label>
+                    <input type="date" formControlName="eventsDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="time">*Time :</label>
+                    <input type="time" formControlName="eventsTime" class="form-control">
+                </div>
+            </div>
+
+
+
+        </div>
+        <!--================== Page 2 ===================-->
+        <!-- <div *ngIf="pageNumber == 2" class="page">
+            <div>
+                *Select a Category :
+                <input class="form-control tags-input" (clickOutside)="categorytoggleDropDownClose()" readonly (click)="categorytoggleDropDown()" formControlName="category" type="text">
+                <div class="dropdown" *ngIf="cateogryDropdown">
+                    <div class="globalItem" *ngFor="let item of categories" (click)="selectCategory(item)">
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
+            <div>
+                Requirement Tags :
+                <input class="form-control tags-input" (clickOutside)="requirementtoggleDropDownClose()" readonly (click)="requirementtoggleDropDown()" formControlName="requirements" type="text">
+                <div class="dropdown" *ngIf="requirementDropdown">
+                    <div class="globalItem" *ngFor="let item of requirements;let index = index" (click)="selectRequirements(item,index)">
+                        {{ item }}
+                    </div>
+                </div>
+                <div class="tags-area">
+                    <div class="tags" *ngFor="let r of chosenRequiremnets;let index = index">
+                        {{r}}
+                        <div class="pos" (click)="removeRequirements(index,r)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#db5d37" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+              </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                Description Tags :
+                <input class="form-control tags-input" (clickOutside)="descriptiontoggleDropDownClose()" readonly (click)="descriptiontoggleDropDown()" formControlName="descriptions" type="text">
+                <div class="dropdown" *ngIf="descriptionDropdown">
+                    <div class="globalItem" *ngFor="let item of description;let index = index" (click)="selectedDescriptions(item,index)">
+                        {{ item }}
+                    </div>
+                </div>
+                <div class="tags-area">
+                    <div class="tags" *ngFor="let d of chosenDescriptions;let index=index">
+                        {{d}}
+                        <div class="pos" (click)="removeDescriptions(index,d)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#db5d37" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+              </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div *ngIf="pageNumber == 2">
+            <div>
+                *Select a Category :
+                <input class="form-control tags-input" (clickOutside)="categorytoggleDropDownClose()" readonly (click)="categorytoggleDropDown()" formControlName="category" type="text">
+                <div class="dropdown" *ngIf="cateogryDropdown">
+                    <div class="globalItem" *ngFor="let item of categories" (click)="selectCategory(item)">
+                        {{ item }}
+                    </div>
+                </div>
+            </div>
+            <div>
+                Description :<br>
+                <textarea class="form-control" rows="4" #textarea maxlength="200" formControlName="freeText"></textarea>
+                <p>{{textarea.value.length}}/200</p>
+            </div>
+
+            <div class="form-group">
+                <label for="address">*Address :</label>
+                <input type="text" class="form-control" formControlName="address">
+            </div>
+
+            <!-- <div class="row">
+                <div class="col">
+                    Min People:
+                    <input type="number" class="form-control" formControlName="min">
+                </div>
+                <div class="col">
+                    Max People:
+                    <input type="number" class="form-control" formControlName="max">
+                </div>
+            </div> -->
+        </div>
+        <!--Loading circle-->
+        <div *ngIf="loading==true" class="svg-loader">
+            <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+          <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+          <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+        </svg>
+        </div>
+        <!--Loading circle ends-->
+        <small class="text-danger" *ngIf="err!=''">{{err}}</small>
+    </form>
+</div>
+<!--================== events content end ===================-->
+<!-- Card Footer-->
+<div class="card-footer">
+    <button (click)="prePage()" *ngIf="pageNumber >= 2" class="pre-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle"
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+    </svg>
+    Previous
+  </button>
+    <button (click)="nextPage()" *ngIf="pageNumber < 2" class="next-btn">
+    Next
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle"
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+    </svg>
+  </button>
+    <button *ngIf="pageNumber == 2" (click)="createPost()" class="submit">Post</button>
+</div>

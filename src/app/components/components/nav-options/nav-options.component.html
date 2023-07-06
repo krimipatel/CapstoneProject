@@ -1,0 +1,19 @@
+<div class="options-container">
+  <div class="option flex-row">
+    <img class="profile-picture" [src]="profilePicture" alt="user">
+    <span class="option-text">
+    <a href="profile">  Profile </a>
+    </span>
+  </div>
+  <div class="option flex-row">
+    <img class="icon" src="../../../../assets/images/cart.svg" alt="bag">
+    <span class="option-text">
+      <a href="/cart">Cart </a>
+    </span>
+  </div>
+  <div (click)="logout()" class="option flex-row">
+    <img class="icon" src="../../../../assets/nav-icons/logout.svg" alt="logout">
+    <span class="option-text"> Logout </span>
+  </div>
+
+</div>

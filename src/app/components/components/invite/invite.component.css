@@ -1,0 +1,32 @@
+.modalCustom {
+    border-radius: 10px;
+    padding: 2rem;
+    padding-bottom: 1rem;
+}
+
+.submitInvite {
+    border: 2px var(--accent) solid;
+    border-radius: 5px;
+    color: var(--accent);
+    font-weight: 600;
+    background-color: white;
+    margin: 1rem auto;
+}
+
+.submitInvite:hover {
+    background-color: var(--LogoColor);
+    color: white;
+}
+
+.success-box {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid green;
+    border-radius: 3px;
+    background-color: rgb(216, 255, 214);
+    color: green;
+    font-size: 0.8rem;
+}
+
+.text-danger {
+    margin-bottom: 0px;
+}

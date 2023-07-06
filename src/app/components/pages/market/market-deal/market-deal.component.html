@@ -1,0 +1,245 @@
+<app-main-nav></app-main-nav>
+
+<!-- Skeleton Loader -->
+<!-- <div  class="page-container">
+  <div class="pictures">
+    <div class="slides">
+      <div *ngFor="let i of [0,1,2,3,4]" class="box box-sml"></div>
+    </div>
+    <div class="main-slide">
+      <div class="box"></div>
+    </div>
+  </div>
+</div> -->
+<!-- Skeleton Loader End -->
+
+
+
+<div class="page-container" *ngIf="loading==false && loadingError==false">
+  <div class="sec-sm">
+    <div class="sec-sm-top"> 
+      <div class="title">
+        {{product.title}}
+      </div>
+      <div class="vendor">
+        <span class="font-500"><strong>Vendor : </strong></span><a class="link"
+          [href]="'/market/vendor/'+this.product.vendor"> {{product.vendor}}</a>
+      </div>
+    </div>
+    
+    <div class="pictures">
+      <div class="slides">
+        <div *ngFor="let img of product.images;let index=index">
+          <img (click)="changeImage(index)" src="{{img.src}}" class="slide-images">
+        </div>
+      </div>
+      <div class="main-slide">
+        <img *ngIf="product.images.length>0" src="{{currentImage }}" class="main-product-image">
+        <!-- <img *ngIf="product.images.length>0 && zoomit" src="{{currentImage}}" class="zoom-product-image"> -->
+        <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png" class="main-product-image">
+      </div>
+    </div>
+  </div>
+  <div class="product">
+    
+    <div class="details">
+      <div class="description">
+        <p class="product-detail-title">About this item</p>
+        <p class="product-description" style="white-space: pre-line">
+          {{product.body_html}}
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion" id="accordion">
+      <div class="accordian-card">
+        <div class="header">
+          <button class="collapsed accordion-button custom-accordian
+          font-500" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false"
+            aria-controls="collapsetwo">
+            <strong>View Deal Information</strong>
+          </button>
+        </div>
+        <div id="collapsetwo" aria-expanded="false" class="collapse show" aria-labelledby="headingtwo" data-parent="#accordion">
+          <div class="card-body">
+            <p class="font-500"><strong>{{dealNew.deal_title}}</strong></p>
+            <p>{{dealNew.deal_description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        
+    </div>
+    <div class="third">
+      <div class="price-section">
+        <div class="price-tag">
+          Price
+        </div>
+        <div class="pricing-section">
+          <div class="deal-price">
+            ${{dealNew.deal_tiers[dealNew.deal_tiers.length-1].price.toFixed(2)}}
+            <div class="shipping-container">
+              <img class="no-shipping-icon" src="../../../../../assets/market/shipping.png" alt="truck icon" srcset="">
+              <span class="shipping-tool-tip"> No Extra shipping charges on deal price. </span>
+              <span class="no-shipping-line"></span>
+            </div>
+          </div>
+          
+          <div>
+              <div class="save-price"> Save ${{ (product.variants[0].price - dealNew.deal_tiers[dealNew.deal_tiers.length-1].price).toFixed(2) }} ({{ ((product.variants[0].price - dealNew.deal_tiers[dealNew.deal_tiers.length-1].price) * 100 / product.variants[0].price).toFixed(0)}}%)</div> 
+              <div class="retail-price-container">
+                <span class="retail-price"> {{"$" + round(product.variants[0].price)}}</span> 
+                <div class="shipping-container">
+                 <b> + </b>
+                  <img class="truck-icon" src="../../../../../assets/market/delivery.png" alt="truck icon" srcset="">
+                  <span class="shipping-tool-tip"> Retail Price does not include shipping. </span>
+                </div>
+              </div> 
+          </div>
+        </div>
+      </div>
+
+      <div class="CTA">
+        <div *ngIf="dealEnded">
+          <h4>Deal Ended</h4>
+        </div>
+        <span *ngIf="dealEnded == false" class="font-500 margin-2"><strong>Select Quantity</strong></span>
+        <div *ngIf="dealEnded == false" class="buy-section">
+          <div class="quantity-manager">
+            <button (click)="minusQuantity()">
+              <img class="icon" src="../../../../../assets/market/dash-lg.svg" alt="decrease">
+            </button>
+            <div class="quantity">{{selectedQuantity}}</div>
+            <button (click)="addQuantity()">
+              <img class="icon" src="../../../../../assets/market/plus-lg.svg" alt="increase">
+            </button>
+          </div>
+          
+        </div>
+        <div>
+          <button data-toggle="modal" data-target="#exampleModal" [disabled]="selectedQuantity<=0 || selectedQuantity>10  "
+            class="butn accent">Buy Now</button>
+        </div>
+      </div>
+      
+
+      <div class="deal-timer">
+        <div class="started-timer">
+          <p class="product-detail-title">Deal Ends In</p>
+          <div class="timer-container">
+            <div class="timer-card"> 
+              <span class="timer-values"> <strong>{{daysLeft}}</strong> </span>
+              <span class="timer-units">Days</span>
+            </div>
+            <div class="timer-card"> 
+              <span class="timer-values"> <strong>{{hoursLeft}}</strong> </span>
+              <span class="timer-units">Hours</span>
+            </div>
+            <div class="timer-card"> 
+              <span class="timer-values"> <strong>{{minutesLeft}}</strong> </span>
+              <span class="timer-units">Minutes</span>
+            </div>
+          </div>
+          <br>
+          <p> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2" viewBox="0 0 16 16">
+              <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z"/>
+              <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z"/>
+            </svg>
+            <strong> {{ communityCart.total_quantity }} </strong> bought.
+          </p>
+        </div>
+
+        <!-- <div *ngIf="nonEntered" class="not-started-timer">
+          <p class="date-text"> <strong> Be the first to start this deal. </strong></p>
+          <div class="timer-container">
+            <div class="timer-card">
+              <span class="timer-values"> <strong>{{dealNew.deal_timer}}</strong> </span>
+              <span class="timer-units">Days after deal starts</span> 
+            </div>
+          </div>
+        </div> -->
+    </div>
+
+    
+  </div>
+  
+
+  </div>
+ 
+
+
+<div class="page-container-2" *ngIf="dealEnded==false && loading===false && loadingError==false" >
+  <div class="progress-bar-outer-bar">
+    <div class="progress-start">0</div>
+    <div class="progress-end">
+      <img src="../../../../../assets/market/party-popper 2.svg" alt="" class="icon">
+    </div>
+    <div class="last-tier"
+      [ngStyle]="communityCart.total_quantity>=dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity ? {'box-shadow':'0px 0px 20px limegreen'} : {}">
+      {{"$" + (dealNew.deal_tiers[dealNew.deal_tiers.length-1].price).toFixed(2)}}
+      (saves ${{ (product.variants[0].price - dealNew.deal_tiers[dealNew.deal_tiers.length-1].price).toFixed(2) }})<br>
+      Min quantity : {{dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity}}
+      <br> <span *ngIf="communityCart.total_quantity>=dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity"> Tier
+        Completed </span>
+    </div>
+    <div class="progress-bar-inner-bar" [ngStyle]="{width:dealProgressWidth}"></div>
+    <div class="deal_tier" *ngFor="let tier of dealNew.deal_tiers"
+      [ngStyle]="{left:tier.quantity/dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity*100 + '%' }">
+    </div>
+    <div class="tier_info" *ngFor="let tier of dealNew.deal_tiers" [ngStyle]="communityCart.total_quantity>=tier.quantity ? {'box-shadow':'0px 0px 20px limegreen',
+      left:tier.quantity/dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity*100 + '%'} : {
+        left:tier.quantity/dealNew.deal_tiers[dealNew.deal_tiers.length-1].quantity*100 + '%'
+      }">
+      {{"$" + (tier.price).toFixed(2)}}
+      (saves ${{ (product.variants[0].price - tier.price).toFixed(2) }})<br>
+      Min quantity : {{tier.quantity}}
+      <br> <span *ngIf="communityCart.total_quantity>=tier.quantity"> Tier Completed </span>
+    </div>
+  </div>
+  <p><b>Note:</b> Shipping is included in the price. Tax, if applicable, will be added at checkout.</p>
+</div>
+
+<div *ngIf="error!=''" class="disclaimer">
+  <span>Error</span>
+  <hr>
+  <p *ngIf="error!=''" class="text-danger">{{error}}</p>
+  <button class="button-enter" (click)="error=''">Close</button>
+</div>
+
+<div >
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-head">
+          <p class="head-title">Disclaimer</p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <b><font size="+1">We will authorize your credit card now for the retail price but will only charge your card once the deal closes and only for the deal price.</font></b>
+          <p class="small">*You may only join each deal once. Make sure you choose the right quantity! For support, email us at <b>support@naborino.com</b></p>
+          <div class="btns">
+            <div>
+              <button data-toggle="modal" data-target="#exampleModal" data-dismiss="modal" class="button-enter">Close</button>
+            </div>
+            <div>
+              <button (click)="buy()" class="button-enter">Get Deal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="not-found-container" *ngIf="loadingError==true">
+    <img class="not-found-image" src="../../../../../assets/market/not found.png" alt="Empty Boxes">
+    <h1 class="not-found-text"> Ooops! The deal you are trying to find is either unavailable or has ended! </h1>
+</div>

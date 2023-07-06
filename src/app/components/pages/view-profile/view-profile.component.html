@@ -1,0 +1,99 @@
+<app-main-nav></app-main-nav>
+
+<div class="page-container">
+  <div class="main-profile card">
+    <div class="profile-head flex-row">
+      <div>
+        <img *ngIf="profilePhoto" src="{{profilePhoto}}" class="profile-picture">
+        <img *ngIf="!profilePhoto" src="https://avatars.dicebear.com/api/initials/{{user.alias}}.svg"
+          class="profile-picture">
+      </div>
+      <div class="head-info">
+        <p class="w-700 alias">{{user.alias}}</p>
+        <p *ngIf="user.email" class="email">{{user.email}}</p>
+        <p class="green tag " *ngIf="user.connection_status">Connected</p>
+        <p class="green tag grey" *ngIf="user.unit<0">Experimental/Testing User</p>
+        <p class="red tag " *ngIf="!user.connection_status">Not Connected</p>
+        <div class="btn-area">
+          <button (click)="deleteConnection()" class="btnn" *ngIf="user.connection_status">Remove Connection</button>
+          <button (click)="sendKnockCurrentUser()" class="btnn" *ngIf="!user.connection_status">Send a knock</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="body">
+      <div *ngIf="user.about" class="bio-section">
+        <p class="w-700"> About {{user.alias}}</p><br>
+        <p>{{user.about}}</p>
+      </div>
+      <div *ngIf="!user.about" class="private">
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-lock-fill"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+          </svg>
+        </div>
+        <div>
+          User has kept this about section private.
+        </div>
+      </div>
+      <div *ngIf="user.unit" class="bio-section">
+        <p class="w-700"> Unit </p><br>
+        <p>{{user.unit}}</p>
+      </div>
+      <div *ngIf="!user.unit" class="private">
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-lock-fill"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+          </svg>
+        </div>
+        <div>
+          User has kept this about unit private.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="side-profiles">
+    <h5>Other profiles</h5>
+    <div class="body-profiles ">
+      <div *ngFor="let user of users" class="card-1 profile">
+        <div *ngIf="user.connection_status;" class="connection-status">
+          <button type="button" class="connection-tag" [ngbTooltip]="tipContent">Connected</button>
+          <ng-template class="tipContent" #tipContent>You are connected with <strong>{{user.alias}}</strong>.
+          </ng-template>
+        </div>
+        <div class="profile-info " (click)="viewProfile(user)">
+          <div class="profile-image ">
+            <img loading="lazy" *ngIf="user.profile_photo!=null" [src]="user.profile_photo" class="profile-image"
+              alt="">
+            <img loading="lazy" *ngIf="user.profile_photo==null"
+              src="https://avatars.dicebear.com/api/initials/{{user.alias}}.svg" class="profile-image" alt="">
+          </div>
+          <div class="alias">
+            {{user.alias}}
+          </div>
+        </div>
+        <div class="actions">
+          <div class="action-container" (click)="viewProfile(user)">
+            View Profile
+          </div>
+          <div *ngIf="!user.connection_status;" (click)="sendKnock(user)" class="action-container accent">
+            Send A Knock
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div *ngIf="this.showToast" class="floater">
+  <app-toast [toastMessage]="message" (closeEvent)="closeToast()"></app-toast>
+</div>

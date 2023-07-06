@@ -1,0 +1,79 @@
+<section>
+    <div class="{{loadingClass}}">
+        <div class="background">
+            <div class="bg-square-div">
+                <div class="bg-square">
+                </div>
+            </div>
+            <div>
+                <img class="bg-logo" src="../../../../assets/images/logo.png" alt="">
+            </div>
+            <div class="bg-square-div">
+                <div class="bg-square float-right">
+                </div>
+            </div>
+        </div>
+
+        <div class="top">
+            <img (click)="logoClicked()" class="top-logo" src="../../../../assets/images/logo.png" alt="logo">
+
+            <form [formGroup]="registerForm">
+
+                <p class="title-text">Discover Your Community</p>
+                <p class="title-text-sm">Save while buying together</p>
+
+                <div class="form-group">
+                    <label for="email">Email </label>
+                    <input [(ngModel)]="email" formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <small *ngIf="registerForm.get('email')!.invalid && registerForm.get('email')!.touched" class="text-danger">Not a Valid Email</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password </label>
+                    <input [(ngModel)]="password" formControlName="password" [type]="showPassword1" class="form-control" id="password">
+                    <div class="btn-grp">
+                      <button (click)="togglePassword1()" class="input-group-addon">
+                        <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                    </div>
+                    <small *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" class="text-danger">Password must be 8 characters</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input formControlName="password2" [type]="showPassword2" class="form-control" id="password2">
+                    <div class="btn-grp">
+                      <button (click)="togglePassword2()" class="input-group-addon">
+                        <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                    </div>
+                    <small *ngIf="registerForm.hasError('passwordsNotMatching') && registerForm.get('password2')!.touched" class="text-danger">Password is not matching!!</small>
+                </div>
+
+                <div>
+                    <button (click)="register()" [disabled]="registerForm.invalid" class="signUp" type="submit">Sign Up</button>
+                </div>
+
+                <div class="center-content">
+                    <small *ngIf="userExist == true" class="text-danger bold error-box">User already exist</small>
+                    <small *ngIf="registrationComplete==true" class="text-success bold success-box">Email registered. Check your email for verification.</small>
+                    <small *ngIf="wait==true">Please Wait</small>
+                </div>
+
+
+                <div class="sign-div">
+                    <p class="sign-text">Already have an account? <a href="login">sign in</a></p>
+                </div>
+
+                <p class="or">OR</p>
+
+                <div>
+                    <app-express-sign-in></app-express-sign-in>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</section>

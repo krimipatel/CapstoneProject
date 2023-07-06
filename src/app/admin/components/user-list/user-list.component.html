@@ -1,0 +1,11 @@
+<div class="user-list">
+  <div *ngFor="let user of usersList">
+    <div (click)="openUser(user[0].basic_details_id)" class="card">
+      <img src="https://avatars.dicebear.com/api/initials/{{user[0].alias}}.svg" alt="" class="profile-image">
+      <p class="alias">{{user[0].alias}}</p>
+    </div>
+  </div>
+
+</div>
+
+

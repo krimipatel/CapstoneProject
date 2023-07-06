@@ -1,0 +1,39 @@
+<app-admin-main-nav></app-admin-main-nav>
+
+<div class="container" *ngIf="dataLoaded">
+
+    <div class="search">
+
+        <input class="inputbox" id="search" type="text" [(ngModel)]="search" (keydown.enter)="searchIt()" (ngModelChange)="onValueChange()" placeholder="Enter community name or address">
+        <button class="searchbtn" type="submit" (click)="searchIt()">Search</button>
+
+    </div>
+
+
+    <div *ngIf="(communities | filterCommunity: searchCommunity).length==0">
+        <div class="card">
+            <h3>We couldn't find a match for "{{searchCommunity}}".</h3>
+        </div>
+    </div>
+
+
+    <div *ngFor="let community of communities | filterCommunity : searchCommunity | paginate: { itemsPerPage: 10, currentPage: p } ">
+        <div class="card" (click)="openCommunity(community.community_id)">
+            <div>
+                <p class="name">{{community.community_name}}</p>
+                <p class="address">{{community.address}}</p>
+            </div>
+            <div class="userscol">
+                <p class="users">{{community.number_of_residents}} Users</p>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-control-box">
+
+        <pagination-controls class="ngx-pagination-control" (pageChange)="p = $event"></pagination-controls>
+
+
+    </div>
+</div>
+
+<app-fixed-footer></app-fixed-footer>

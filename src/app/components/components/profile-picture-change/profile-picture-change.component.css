@@ -1,0 +1,46 @@
+.main-container{
+  width:90%;
+  margin: 0px auto;
+}
+
+.image-container{
+  display: flex;
+  justify-content: center;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  height: 180px;
+  aspect-ratio: 1/1;
+  margin: 0px auto;
+  object-fit: cover;
+}
+
+.action-center{
+  margin: 2rem 1rem 1rem 1rem ;
+}
+
+.btns{
+  display: flex;
+  justify-content:space-between ;
+}
+
+
+.bttn:hover{
+  opacity: 0.8;
+}
+
+.bttn{
+  padding: 0.25rem 0.5rem;
+  color: var(--black-900);
+  background-color: white;
+  border: 2px var(--black-900) solid;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.accent{
+  color: white;
+  background-color: var(--black-900);
+  border-radius: 10px;
+}

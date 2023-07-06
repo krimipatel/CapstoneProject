@@ -1,0 +1,50 @@
+<app-main-nav></app-main-nav>
+
+<div class="container">
+  <div class="card">
+    <h5 class="card-title">Change Community</h5>
+    <p class="card-text">By changing the address, the cummunity will be changed !!</p><br>
+    <form [formGroup]="addressChangeForm">
+      <div class="form-floating mb-3">
+
+        <input class="form-control" id="floatingCurrent"  (onAddressChange)="handlecurrentAddressChange($event)"
+        formControlName="currentAddress" ngx-google-places-autocomplete [options] = 'options' #placesRef="ngx-places" type="text" >
+        <label for="floatingInput">Enter Current Address</label>
+        <small class="text-danger" *ngIf="currentAddressError!=null" >{{currentAddressError}}</small>
+      </div>
+
+
+      <div class="form-floating mb-3">
+
+        <input class="form-control" id="floatingNew"
+        formControlName="newAddress" (onAddressChange)="handlenewAddressChange($event)"
+        ngx-google-places-autocomplete [options] = 'options' #placesRef="ngx-places" type="text" >
+        <label for="floatingPassword">Enter New Address</label>
+        <small class="text-danger" *ngIf="newAddressError!=null" >{{newAddressError}}</small>
+      </div>
+
+      <!--
+
+        <div class="form-floating mb-3">
+
+          <input class="form-control" formControlName="newAddress" type="text" placeholder="Enter New Community Name">
+          <label for="floatingPassword">Enter New Community Name</label>
+          <small class="text-danger" *ngIf="newAddressError!=null" >{{newAddressError}}</small>
+        </div>
+
+      -->
+
+
+
+
+      <small class="text-danger" *ngIf="error!=null">{{this.error}}</small>
+  </form>
+
+    <div class="btns">
+      <button class="goBack" type="button" (click)="goBack()">Cancel</button>
+      <button class="submit" type="button" (click)="changeAddress()">Submit</button>
+    </div>
+
+  </div>
+</div>
+<app-fixed-footer></app-fixed-footer>

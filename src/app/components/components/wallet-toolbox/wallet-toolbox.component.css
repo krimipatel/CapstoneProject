@@ -1,0 +1,108 @@
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.wallet-container{
+    width: 350px;
+    height: 460px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow:0 4px 10px 0 rgba(0, 0, 0, 0.4); 
+    position: relative;
+    padding:0rem 1rem;
+}
+
+.wallet-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.wallet-icon>img{
+    width: 75px;
+    aspect-ratio: 1/1;
+}
+
+.wallet-balance{
+    text-align: center;
+}
+
+.balance-title{
+    color: #727272;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+.balance{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.wallet-transactions{
+    
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+}
+
+.transaction-container{
+    display: flex;
+    flex-direction: row;
+    gap:0.5rem;
+    padding:0.5rem;
+    background-color: var(--accent-light);
+    border-radius: 10px;
+}
+
+.transaction-icon-container{
+    background-color: white;
+    padding:0.5rem;
+    border-radius: 10px;
+}
+
+.transaction-icon{
+    width: 35px;
+    aspect-ratio: 1/1;
+}
+
+.transaction-info{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    
+}
+
+.deal-info{
+    padding:0.1rem 0rem;
+}
+
+.deal-name{
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    font-size: 1.07rem;
+}
+
+.deal-date{
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    font-size: 0.8rem;
+    color: rgb(113, 113, 113);
+}
+
+.price-container{
+    font-weight: 600;
+    font-size: 1.2rem;
+    align-self: center;
+    padding:0rem 0.5rem 
+}

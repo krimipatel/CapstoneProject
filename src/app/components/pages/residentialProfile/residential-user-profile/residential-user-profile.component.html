@@ -1,0 +1,157 @@
+<app-main-nav></app-main-nav>
+
+<div class="main-container" *ngIf="dataLoaded">
+    <div class="profile-container">
+        <div class="profile">
+            <div class="card">
+                <div class="image-div">
+                    <div class="image-container">
+                      <img class="image-it" [src]="profilephoto" alt="Profile Image">
+                      <img *ngIf="profilephoto==null" src="https://avatars.dicebear.com/api/initials/{{profileData.alias}}.svg" class="profile-image" alt="">
+                      <button data-toggle="modal" data-target="#exampleModal" class="dp-edit">
+                       <img src="../../../../../assets/nav-icons/pencil-fill.svg" >
+                      </button>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <button type="button" class="close right" data-dismiss="modal" aria-label="Close">
+                              &times;
+                            </button>
+                            <div class="modal-body">
+                              <app-profile-picture-change></app-profile-picture-change>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="name-div">
+                    <p class="bold-text center">{{profileData.first_name}} {{profileData.last_name}}</p>
+                    <p class="light-text center">(Alias : {{profileData.alias}} )</p>
+                </div>
+                <div class="general-info">
+                    <p class="normal-text email">{{profileData.email}}</p>
+                    <p *ngIf="profileData.phone" class="normal-text">Phone - {{profileData.phone}}</p>
+                    <p *ngIf="profileData.unit" class="normal-text">Unit Number - {{profileData.unit}}</p>
+                    <p *ngIf="profileData.about" class="normal-text about">About - <span class="small-text">{{profileData.about}}</span></p>
+                </div>
+                <div class="btn-div">
+                    <button type="button" class="edit" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img src="../../../../../assets/images/Edit-Icon.svg">
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <p class="modal-title bold-text" id="exampleModalLabel">Edit Profile</p>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <app-residential-user-edit-profile></app-residential-user-edit-profile>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--
+            <div class="card">
+                <button (click)="privacySettings()" class="btn">Privacy Settings</button>
+                <button (click)="interestSurvey()" class="btn">Interest Check</button>
+            </div>
+            -->
+        </div>
+        <div class="posts">
+            <div *ngIf="noPost">
+                <h4 class="no-post">No Posts</h4>
+            </div>
+            <div class="feed" *ngFor="let post of posts">
+                <div *ngIf="post.post_type=='event'">
+                    <app-view-events [event]="post"></app-view-events>
+                </div>
+                <div *ngIf="post.post_type=='news'">
+                    <app-view-news [news]="post"></app-view-news>
+                </div>
+                <div *ngIf="post.post_type=='issue'">
+                    <app-view-issues [issue]="post"></app-view-issues>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div *ngIf="dataLoaded" class="container">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 div-col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="image-about card1">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img [src]="profilephoto" alt="Profile Image">
+                            </div>
+                            <h5 class="user-name">{{profileData.first_name}} {{profileData.last_name}} </h5>
+                            <h5>Alias : {{profileData.alias}} </h5>
+
+                            <h6 class="user-email">{{profileData.email}} </h6>
+                        </div>
+                        <div class="about">
+                            <h5>About</h5>
+                            <p>{{profileData.about}}</p>
+                        </div>
+                        <hr>
+                        <div class="about">
+                            <h5>General Information</h5>
+                            <div class="form-group">
+                                <b><label>Phone</label></b> <br>
+                                <label>{{profileData.phone}}  </label>
+                            </div>
+                            <div class="form-group">
+                                <b><label>Unit number</label></b> <br>
+                                <label>{{profileData.unit}}</label>
+                            </div>
+                            <hr>
+                            <a href="/privacy" class="card-link">Privacy Settings</a>
+                            <a href="/editprofile" class="card-link">Edit Info</a>
+                        </div>
+
+                    </div>
+                    <button (click)="interestSurvey()" class="interestBtn">Interest Check</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 div-col">
+            <div class="card h-100 posts">
+                <div class="card-body">
+                    <h5>Your Posts</h5>
+                    <div class="row gutters">
+                        <div class="row gutters">
+                            <div *ngIf="noPost">
+                                <h4 class="no-post">No Posts</h4>
+                            </div>
+                            <div class="feed" *ngFor="let post of posts">
+                                <div *ngIf="post.post_type=='event'">
+                                    <app-view-events [event]="post"></app-view-events>
+                                </div>
+                                <div *ngIf="post.post_type=='news'">
+                                    <app-view-news [news]="post"></app-view-news>
+                                </div>
+                                <div *ngIf="post.post_type=='issue'">
+                                    <app-view-issues [issue]="post"></app-view-issues>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,145 @@
+<!--Navigation Bar-->
+
+<ng-container *ngIf="token!=null; else elseTemplate">
+   <app-main-nav></app-main-nav>
+</ng-container>
+<ng-template #elseTemplate>
+    <app-simple-nav></app-simple-nav>
+</ng-template>
+
+
+<div class="container">
+    <div class="supportIcon"><h3>Support</h3></div>
+    <!-----------------------------Main Two accordion started----------------------------------->
+    <div class="accordion accordion-flush" id="accordionResidential-vendor">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading-residential">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapse-residential" aria-expanded="false"
+                    aria-controls="flush-collapse-residential">
+                   <h3>Residential User</h3>
+                </button>
+            </h2>
+            <div id="flush-collapse-residential" class="accordion-collapse collapse"
+                aria-labelledby="flush-heading-residential" data-bs-parent="#accordionResidential-vendor">
+                <div class="accordion-body">
+
+                    <!-----------------------------content of Residential started----------------------------------->
+                    <div class="accordion accordion-flush" id="accordionFlushResFAQEmail">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingResFAQ">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseResFAQ" aria-expanded="false"
+                                    aria-controls="flush-collapseResFAQ">
+                                    <h5>FAQs</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseResFAQ" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingResFAQ" data-bs-parent="#accordionFlushResFAQEmail">
+                                <div class="accordion-body">
+
+                                    <!-----------------------------content of Res FAQs started----------------------------------->
+
+                                    <div class="card" *ngFor = "let faq of residentialFAQ">
+                                        <div class="card-body">
+                                          <h5 class="card-title">{{faq.question}}</h5>
+                                          <p class="card-text">{{faq.answer}}</p>
+                                        </div>
+                                      </div>
+                                    <!-----------------------------content of Res FAQs ended----------------------------------->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingResEmail">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseResEmail" aria-expanded="false"
+                                    aria-controls="flush-collapseResFAQ">
+                                    <h5>Email</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseResEmail" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingResEmail" data-bs-parent="#accordionFlushResFAQEmail">
+                                <div class="accordion-body">Email : <span style="color: blue;">
+                                  <a href = "mailto: abc@example.com"> abc@example.com</a>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-----------------------------content of Residential ended----------------------------------->
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading-vendor">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapse-vendor" aria-expanded="false" aria-controls="flush-collapse-vendor">
+                    <h3>Vendor User</h3>
+                </button>
+            </h2>
+            <div id="flush-collapse-vendor" class="accordion-collapse collapse" aria-labelledby="flush-heading-vendor"
+                data-bs-parent="#accordionResidential-vendor">
+                <div class="accordion-body">
+                    <!-----------------------------content of Vendor started----------------------------------->
+                    <div class="accordion accordion-flush" id="accordionFlushVenFAQEmail">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingVenFAQ">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseVenFAQ" aria-expanded="false"
+                                    aria-controls="flush-collapseVenFAQ">
+                                    <h5>FAQs</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseVenFAQ" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingVenFAQ" data-bs-parent="#accordionFlushVenFAQEmail">
+                                <div class="accordion-body">
+
+                                    <!-----------------------------content of Ven FAQs started----------------------------------->
+                                    <div class="card" *ngFor = "let faq of vendorFAQ">
+                                        <div class="card-body">
+                                          <h5 class="card-title">{{faq.question}}</h5>
+                                          <p class="card-text">{{faq.answer}}</p>
+                                        </div>
+                                      </div>
+                                    <!-----------------------------content of Ven FAQs ended----------------------------------->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingVenEmail">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseVenEmail" aria-expanded="false"
+                                    aria-controls="flush-collapseVenEmail">
+                                    <h5>Email</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseVenEmail" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingVenEmail" data-bs-parent="#accordionFlushVenFAQEmail">
+                                <div class="accordion-body">Email : <span style="color: blue;">
+                                  <a href = "mailto: abc@example.com"> abc@example.com</a>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-----------------------------content of Vendor ended----------------------------------->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------------Main Two accordion ended----------------------------------->
+
+
+
+
+
+</div>
+
+<!--Footer-->
+<app-footer></app-footer>

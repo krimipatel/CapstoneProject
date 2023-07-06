@@ -1,0 +1,418 @@
+<app-main-nav></app-main-nav>
+
+
+<div class="main-container">
+
+    <div class="filter-container">
+        <div class="filter-content">
+
+            <p class="filter-title"> Filter Products </p>
+
+            <hr>
+            <div class="filter-body">
+                <div class="filter-card">
+                    <p class="filter-sm-header">Price Range</p>
+                    <div class="price-filter">
+                        <input type="number" class="price input-box" placeholder="$ min" [(ngModel)]="min">
+                        <p><b>-</b></p>
+                        <input type="number" class="price input-box" placeholder="$ max" [(ngModel)]="max">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="true"
+                                aria-controls="flush-collapseOne">
+                                <p class="filter-sm-header">Product Category</p>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body scrollable">
+                                <p class="indi-category" *ngFor="let cate of showCategories"> <input
+                                        class="form-check-input" type="checkbox" name="{{cate}}"
+                                        [checked]="selectedCategories.includes(cate)" (change)="addCategories(cate)">
+                                    {{cate}}</p>
+                                <p class="more" *ngIf="allCategories.length!=0" (click)="moreCategories()">...more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <hr>
+
+                <div class="accordion accordion-flush" id="accordionFlush2">
+                    <div class="accordion-item">
+                        <div class="filter-card">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
+                                <p class="filter-sm-header">Filter Deals or Products</p></button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2">
+                                <div class="accordion-body">
+                                    <p class="indi-category"><input type="checkbox" class="check form-check-input" name="onlyDeals" (change)="showOnlyDeals=!showOnlyDeals" [checked]="showOnlyDeals==true">Show deals</p>
+                                    <p class="indi-category"><input type="checkbox" class="check form-check-input" name="onlyproducts" (change)="showOnlyProducts=!showOnlyProducts" [checked]="showOnlyProducts==true">Show products</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <hr>
+
+                <div class="accordion accordion-flush" id="accordionFlush2">
+                    <div class="accordion-item">
+                        <div class="filter-card">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="true" aria-controls="flush-collapseThree">
+                                <p class="filter-sm-header">More Filters</p></button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse show" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample3">
+                                <div class="accordion-body">
+                                    <p class="indi-category"><input type="checkbox" class="check form-check-input" name="endSoon" [checked]="false"  [(ngModel)]="EndSoonToggle" >Ends soon</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <br>
+            <div class="group-buttons">
+                <button class="apply" (click)="clearFilter()">Clear</button>
+                <button class="apply" (click)="applyFilterClicked()">Apply</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="product-container">
+        <div class="p-header">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="mobile-filter" data-toggle="modal" data-target="#exampleModal">
+                <img src="../../../../../assets/images/filter-icon.svg">
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Filter Products</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="filter-body">
+                                <div class="filter-card">
+                                    <p class="filter-sm-header">Price Range</p>
+                                    <div class="price-filter">
+                                        <input type="number" class="price input-box" placeholder="$ min"
+                                            [(ngModel)]="min">
+                                        <p><b>-</b></p>
+                                        <input type="number" class="price input-box" placeholder="$ max"
+                                            [(ngModel)]="max">
+                                    </div>
+                                </div>
+
+                                <!-- ========================= -->
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseOne" aria-expanded="true"
+                                                aria-controls="flush-collapseOne">
+                                                <p class="filter-sm-header">Product Category</p>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                <p class="indi-category" *ngFor="let cate of showCategories"> <input
+                                                        class="form-check-input" type="checkbox" name="{{cate}}"
+                                                        [checked]="selectedCategories.includes(cate)"
+                                                        (change)="addCategories(cate)"> {{cate}}</p>
+                                                <p class="more" *ngIf="allCategories.length!=0"
+                                                    (click)="moreCategories()">...more</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="filter-card">
+                                    <p class="filter-sm-header">Filter Deals or Products</p>
+                                    <div class="accordion-body">
+                                        <p class="indi-category"><input type="checkbox" class="check form-check-input" name="onlyDeals" (change)="showOnlyDeals=!showOnlyDeals" [checked]="showOnlyDeals">Show only deals</p>
+                                        <p class="indi-category"><input type="checkbox" class="check form-check-input" name="onlyproducts" (change)="showOnlyProducts=!showOnlyProducts" [checked]="showOnlyProducts">Show only products</p>
+                                    </div>
+                                </div>
+
+                                <div class="filter-card">
+                                    <p class="filter-sm-header">More Filters</p>
+                                    <div class="accordion-body">
+                                        <p class="indi-category"><input type="checkbox" class="check form-check-input" name="endSoon" [checked]="false">Ends soon</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="group-buttons">
+                                <button class="apply" (click)="clearFilter()">Clear</button>
+                                <button class="apply" (click)="applyFilterClicked()">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="searchbar">
+                <input type="text" (change)="searchClicked()" placeholder=" Search Products" [(ngModel)]="searchString"
+                    class="search-input">
+            </div>
+            <div class="cart-div">
+                <button class="cart-btn" (click)="goToCart()">
+                    <img src="../../../../../assets/images/bag-icon.svg" class="bag" alt="bag">
+                </button>
+            </div>
+
+
+            <button (click)="openOrder()" class="orders">
+                Past Orders
+            </button>
+
+        </div>
+
+        <div class="products-container">
+            <!--Remove later-->
+            <div class="alert alert-primary" role="alert">
+                NOTE: During our Early Access Launch your order will be shipped to our Community at 760 Sheppard Ave
+                West, Toronto. Dan Flatt, the Community Leader, will be in touch to arrange for pick up or, if you
+                prefer, ship your order to you (note that you will need to cover shipping costs if you choose not to
+                pick up the item from 760 Sheppard Ave West).
+            </div>
+            <!--Loading circle-->
+            <div *ngIf="loading==true" class="svg-loader">
+                <svg class="svg-container" height="50" width="50" viewBox="0 0 100 100">
+                    <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                </svg>
+            </div>
+            <!--Loading circle ends-->
+
+            <div class="featured" *ngIf="featuredDeals.length!=0">
+                <img class="featured-label" src="../../../../../assets/market/featured-label.png" alt="featured-label">
+                <div class="products">
+                    <div class="product-card" *ngFor="let deal of featuredDeals">
+                        <div class="product" (click)="openDeal(deal.deal.deal_id)"
+                            [ngStyle]="{display: !deal.end_soon && EndSoonToggle ? 'none' : 'block' }">
+                            <div class="image-container">
+                                <img class="image" loading="lazy" *ngIf="deal.deal.items.product.images.length>0"
+                                    src="{{deal.deal.items.product.images[0].src}}" alt="">
+                                <img class="image" loading="lazy" *ngIf="deal.deal.items.product.images.length==0"
+                                    src="../../../../../assets/images/No Image.png" alt="">
+                                <div class="deal-tags">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white"
+                                            class="bi bi-people-fill group-icon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            <path fill-rule="evenodd"
+                                                d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="endSoon" *ngIf="deal.end_soon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white"
+                                            class="bi bi-clock-fill group-icon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                        </svg>
+                                        <div class="hover-state hover-state-1">
+                                            Ends Soon
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-container">
+                                <div>
+                                    <p class="title">{{deal.deal.items.product.title}}</p>
+                                </div>
+    
+    
+                                <div class="price-section">
+    
+                                    <div class="pricing-section">
+                                        <div class="deal-price">
+                                            ${{deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].price.toFixed(2)}}
+                                        </div>
+                                        <div class="retail-price">
+                                            <span class="retail-price"> {{"$" +
+                                                deal.deal.items.product.variants[0].price}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="pricing-section">
+                                        <div class="save-price">Save upto ${{ (deal.deal.items.product.variants[0].price -
+                                            deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].price).toFixed(2)
+                                            }} </div>
+                                        +
+                                        <div class="no-shipping">
+                                            <img class="no-shipping-icon" src="../../../../../assets/market/shipping.png"
+                                                alt="truck icon" srcset="">
+                                            <span class="shipping-tool-tip"> No Extra shipping charges on deal price.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+    
+    
+    
+    
+                                <div class="bar">
+                                    <div class="outer-bar"></div>
+                                    <div class="inner-bar" *ngIf="!deal.community_cart.hasOwnProperty('total_quantity')"
+                                        [ngStyle]="{width:'0%'}">
+                                        <div class="hover-state hover-state-0">
+                                            Deal not started yet. <br> Be the first one to start the deal.
+                                        </div>
+                                    </div>
+                                    <div class="inner-bar" *ngIf="deal.community_cart.hasOwnProperty('total_quantity')"
+                                        [ngStyle]="{width: deal.community_cart.total_quantity / deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].quantity* 100 + '%' }">
+                                        <div class="hover-state">
+                                            {{deal.community_cart.total_quantity}}/{{deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].quantity}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="vendor-container" *ngFor="let item of deals">
+                <h4>{{ getObjectKey(item) }}</h4>
+                <div class="products">
+                    <div class="product-card" *ngFor="let deal of item[getObjectKey(item)]">
+                        <div class="product" (click)="openDeal(deal.deal.deal_id)"
+                            [ngStyle]="{display: !deal.end_soon && EndSoonToggle ? 'none' : 'block' }">
+                            <div class="image-container">
+                                <img class="image" loading="lazy" *ngIf="deal.deal.items.product.images.length>0"
+                                    src="{{deal.deal.items.product.images[0].src}}" alt="">
+                                <img class="image" loading="lazy" *ngIf="deal.deal.items.product.images.length==0"
+                                    src="../../../../../assets/images/No Image.png" alt="">
+                                <div class="deal-tags">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white"
+                                            class="bi bi-people-fill group-icon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            <path fill-rule="evenodd"
+                                                d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="endSoon" *ngIf="deal.end_soon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white"
+                                            class="bi bi-clock-fill group-icon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                        </svg>
+                                        <div class="hover-state hover-state-1">
+                                            Ends Soon
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-container">
+                                <div>
+                                    <p class="title">{{deal.deal.items.product.title}}</p>
+                                </div>
+    
+    
+                                <div class="price-section">
+    
+                                    <div class="pricing-section">
+                                        <div class="deal-price">
+                                            ${{deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].price.toFixed(2)}}
+                                        </div>
+                                        <div class="retail-price">
+                                            <span class="retail-price"> {{"$" +
+                                                deal.deal.items.product.variants[0].price}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="pricing-section">
+                                        <div class="save-price">Save upto ${{ (deal.deal.items.product.variants[0].price -
+                                            deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].price).toFixed(2)
+                                            }} </div>
+                                        +
+                                        <div class="no-shipping">
+                                            <img class="no-shipping-icon" src="../../../../../assets/market/shipping.png"
+                                                alt="truck icon" srcset="">
+                                            <span class="shipping-tool-tip"> No Extra shipping charges on deal price.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+    
+    
+    
+    
+                                <div class="bar">
+                                    <div class="outer-bar"></div>
+                                    <div class="inner-bar" *ngIf="!deal.community_cart.hasOwnProperty('total_quantity')"
+                                        [ngStyle]="{width:'0%'}">
+                                        <div class="hover-state hover-state-0">
+                                            Deal not started yet. <br> Be the first one to start the deal.
+                                        </div>
+                                    </div>
+                                    <div class="inner-bar" *ngIf="deal.community_cart.hasOwnProperty('total_quantity')"
+                                        [ngStyle]="{width: deal.community_cart.total_quantity / deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].quantity* 100 + '%' }">
+                                        <div class="hover-state">
+                                            {{deal.community_cart.total_quantity}}/{{deal.deal.items.deal_tiers[deal.deal.items.deal_tiers.length-1].quantity}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+               
+                <hr>
+            </div>
+
+
+
+            <!-- <ng-container *ngIf="showOnlyProducts || (showOnlyDeals==false && showOnlyProducts==false)">
+               <div class="product" (click)="openProduct(p.id)" *ngFor="let p of products">
+
+                    <div class="image-container">
+                        <img class="image" *ngIf="p.images.length>0" src="{{p.images[0].src}}" alt="">
+                        <img class="image" *ngIf="p.images.length==0" src="../../../../../assets/images/No Image.png" alt="">
+                    </div>
+                    <div class="info-container">
+                        <div class="title">
+                            {{p.title}}
+                        </div>
+                        <div>
+                            <span class="price">$ {{round(p.variants[0].price)}}</span>
+                        </div>
+                    </div>
+                </div>
+               
+            </ng-container> -->
+
+
+        </div>
+    </div>
+
+
+</div>

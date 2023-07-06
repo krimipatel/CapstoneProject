@@ -1,0 +1,42 @@
+.user-list {
+    width: 80%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-block: auto;
+}
+
+.card {
+    flex-direction: row;
+    padding: 5px;
+    max-width: 260px;
+    height: auto;
+    width: 300px;
+    padding-inline: 10px;
+    border-radius: 5px;
+    justify-content: flex-start;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.alias {
+    font-size: 20px;
+    padding-inline: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 400;
+}

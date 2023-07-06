@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="header">
+        <div class="post-type">
+            <div class="post-info">
+                Event: A virtual or in-person event for your neighbours to join.
+            </div>
+            <img class="icon" src="../../../../../assets/post-icons/events.svg">
+            <span class="post-type-text">Event</span>
+        </div>
+        <div class="poster">
+            <span class="poster-type-text">{{event.alias}}</span>
+            <img loading="lazy" *ngIf="event.profile_photo!=null" [src]="event.profile_photo" class="icons" alt="">
+            <img loading="lazy" *ngIf="event.profile_photo==null" src="https://avatars.dicebear.com/api/initials/{{event.alias}}.svg" class="profle-picture" alt="">
+        </div>
+    </div>
+    <div class="post-content">
+        <span class="title">{{event.title}}</span><br>
+        <span class="dateTime">{{event.Date + "  " + event.Time}}</span> <br>
+        <!-- <div class="tags-container">
+      <div class="description-tags">
+
+        <span class="tag" *ngFor="let tag of event.description_tags">
+          <div class="dot"></div>
+          {{tag}}
+        </span>
+      </div>
+      <div class="requirement-tags">
+        <span class="tag" *ngFor="let tag of event.requirements_tags">
+          <div class="dot"></div>
+          {{tag}}
+        </span>
+      </div>
+    </div> -->
+        <!-- <div class="minmax">
+      <div class="min">
+        <span class="bold-text">Minimum People : </span>{{event.min_people}}
+      </div>
+      <div class="max">
+        <span class="bold-text">Maximum People : </span>{{event.max_people}}
+      </div>
+    </div> -->
+        <div class="address"><b>Address : </b>{{event.address}} </div>
+        <div class="category">{{event.subcategory}}</div>
+        <div class="description">{{event.clarification}}</div>
+    </div>
+    <div class="post-footer">
+
+        <!--Footer Left-->
+        <div class="action-item" (click)="rsvp('attend',event.post_id)">
+            <div [ngClass]="{'post-respond-active':event.user_action=='attend'}" class="action-text">
+                Attending
+            </div>
+        </div>
+        <div class="action-item" (click)="rsvp('not sure',event.post_id)">
+            <div [ngClass]="{'post-respond-active':event.user_action=='not sure'}" class="action-text">
+                Maybe</div>
+        </div>
+        <div class="action-item" (click)="rsvp('not attend',event.post_id)">
+            <div [ngClass]="{'post-respond-active':event.user_action=='not attend'}" class="action-text">
+                Not attending</div>
+        </div>
+    </div>
+</div>

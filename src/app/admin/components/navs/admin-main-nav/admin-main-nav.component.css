@@ -1,0 +1,146 @@
+.navbar-custom {
+    background-color: var(--LightPurple);
+}
+
+
+/*----------hamburger image---------------*/
+
+.navbar-toggler {
+    background-image: url("../../../../../assets/images/square.png");
+    background-position: center;
+    width: 30px;
+    height: 30px;
+}
+
+
+/*---------- logo -------------*/
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+
+/*---------- Links decoration -------------*/
+
+.nav-item-links {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+}
+
+
+/*---------- Profile dropdown -------------*/
+
+.profile {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: solid 2px var(--LogoColor)
+}
+
+.custom-dropdown {
+    padding-top: 10px;
+}
+
+.custom-dropdown:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+/*---------- Notification and profile content -------------*/
+
+.align-right {
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.nav-item-icons {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/*---------- Notification -------------*/
+
+.notification-icon {
+    height: 40px;
+    width: auto;
+}
+
+.notification-wrapper {
+    position: relative;
+    border-radius: 5px;
+}
+
+.notification-btn {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.name {
+    margin-top: 15px;
+    font-weight: 500;
+    background-color: rgb(255, 212, 163);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+/*---------- When screen size is more than 992px -------------*/
+
+@media only screen and (min-width: 992px) {
+    .center-content {
+        margin-left: auto;
+        margin-left: auto;
+    }
+    .nav-item-links {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 20px;
+        margin-left: 20px;
+        color: black;
+    }
+}
+
+
+/*---------- When screen size is less than 991px -------------*/
+
+@media only screen and (max-width: 991px) {
+    li,
+    a {
+        font-weight: 500;
+        font-size: medium;
+    }
+    .logo {
+        height: 30px;
+        width: auto;
+    }
+    .notification-btn {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .notification-btn::before {
+        content: "Notifications";
+        color: black;
+        font-weight: 500;
+        font-size: medium;
+    }
+    .notification-icon {
+        display: none;
+    }
+    .profile {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: solid 2px var(--LogoColor)
+    }
+    .custom-dropdown {
+        padding-top: 0px;
+    }
+}

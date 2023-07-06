@@ -1,0 +1,52 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+<div class="page-container">
+  <div class="f-ro">
+    <h2>Store Profile</h2>
+    <button type="button" class="btn-acc" data-toggle="modal"  data-target=".bd-example-modal-lg">Edit</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <button  type="button" style="display: none;" #modalCloser data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <app-edit-profile-vendor (closeModal)="onEditModalClosed($event)"></app-edit-profile-vendor>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="f-ro main">
+    <div class="card r-small">
+      <b class="font-lg mb-sm">Shop</b>
+      <p>
+        <b class="font-md">{{vendor.shopname}}</b><br>
+        <span class="font-sm">Shop Name</span>
+      </p>
+      <p>
+        <a><b>{{vendor.website}}</b></a><br>
+        <span class="font-sm">Website</span>
+      </p>
+      <p>
+        <b>{{vendor.address}}</b><br>
+        <span class="font-sm">Address</span>
+      </p>
+    </div>
+    <div class="card r-large">
+      <b class="font-lg mb-sm">Vendor</b>
+      <p>
+        <b class="font-md">{{vendor.firstname}} {{vendor.lastname}}</b><br>
+        <span class="font-sm">Name</span>
+      </p>
+      <p >
+       <a> <b>{{vendor.email}}</b></a><br>
+        <span class="font-sm">Email</span>
+      </p>
+      <p >
+        <b>{{vendor.phonenumber}}</b><br>
+        <span class="font-sm">Contact information</span>
+      </p>
+    </div>
+  </div>
+</div>

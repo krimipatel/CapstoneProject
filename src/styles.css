@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root{
+  font-family: poppins;
+  --LogoColor : #9600FE;
+  --LightPink : #FBF6FF;
+  --LightPurple: #CCBCF4 ;
+  --issues : #fad18b ;
+  --news : #cceffc ;
+  --events :#cef8a6;
+  --post-action : #3b3737;
+
+  --accent-light:rgba(131, 0, 228, 0.07);
+
+  --red : #ff3b3b ;
+
+  /* Updated Colors */
+  --accent : #8300E4;
+
+  /* blacks */
+  --black-900:#2C2C2C;
+  --black-800:#3b3b3b;
+  --black-700:#4c4c4c;
+  --black-500:#8E8E8E;
+  --black-400:#A6A6A6;
+  --black-300:#B5B5B5;
+  --black-200:#e4e4e4;
+  --black-100:#F3F3F3;
+  --black-50:#F2F2F2;
+}
+
+.svg-loader {
+    display: flex;
+    position: relative;
+    align-content: space-around;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+body,
+html {
+    background-color: var(--black-100);
+    color: var(--black-900);
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Loader */
+
+.svg-loader {
+    display: flex;
+    position: relative;
+    align-content: space-around;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loader-svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    fill: none;
+    stroke-width: 5px;
+    stroke-linecap: round;
+    stroke: var(--LogoColor);
+}
+
+.loader-svg.bg {
+    stroke-width: 8px;
+    stroke: var(--LightPurple);
+}
+
+.animate {
+    stroke-dasharray: 242.6;
+    animation: fill-animation 1s cubic-bezier(1, 1, 1, 1) 0s infinite;
+}
+
+@keyframes fill-animation {
+    0% {
+        stroke-dasharray: 40 242.6;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 141.3;
+        stroke-dashoffset: 141.3;
+    }
+    100% {
+        stroke-dasharray: 40 242.6;
+        stroke-dashoffset: 282.6;
+    }
+}
+
+
+/* Loader end */
+
+
+
+@keyframes loading{
+  0%{
+    opacity: 0.8;
+  }
+  100%{
+    opacity: 0.4;
+  }
+
+}

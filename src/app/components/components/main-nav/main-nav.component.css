@@ -1,0 +1,203 @@
+a{
+  color: inherit;
+
+}
+
+p{
+  padding:0;
+  margin:0;
+}
+
+.nav-container{
+  position: sticky;
+  top: 0;
+  left:0;
+  z-index: 10;
+  height:60px;
+  background-color: white;
+  border-radius:0px 0px 10px 10px;
+  box-shadow: 0px 8px 20px 0px #00000012;
+  padding:1rem 4rem 1rem 2rem;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction:row ;
+  align-items: center;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.center{
+  justify-content: center;
+}
+
+.logo{
+  width: 60%;
+}
+
+.icons{
+  width: 60%;
+}
+
+.highlight::after {
+  border-top: 5px solid var(--accent);
+  border-radius: 5px;
+  width: 90px;
+  transform: translateX(-65%);
+  bottom: -1px;
+  content: "";
+  position: absolute;
+  animation: 0.1s expand;
+}
+
+.highlightToggle::after {
+  border-top: 5px solid var(--accent);
+  border-radius: 5px;
+  width: 70px;
+  transform: translateX(-31%);
+  bottom: -1px;
+  content: "";
+  position: absolute;
+  animation: 0.1s expand;
+}
+
+@keyframes expand {
+  from {width:20px}
+  to {width:70px}
+}
+
+.icons:hover{
+  opacity: 0.7;
+}
+
+.middle-nav{
+  gap:4rem;
+}
+
+.right-nav{
+  gap:2rem;
+  position: relative;
+}
+
+.profile-picture-container{
+  border-radius: 50%;
+}
+
+.profile-picture{
+  height: 35px;
+  width:35px;
+  border-radius: 50%;
+  border: 0.5px solid var(--black-300);
+  object-fit: cover;
+}
+
+.notification-icon-container{
+  cursor: pointer;
+
+}
+
+.option-icon-container{
+  cursor: pointer;
+}
+
+.wallet{
+  padding:0.4rem 0.75rem;
+  border-radius: 20px;
+  background-color: #E6E6E6;
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  min-width: 80px;
+}
+
+.wallet>p{
+  font-weight: 500;
+
+}
+
+.wallet-icon{
+  width: 25px;
+  aspect-ratio: 1/1;
+}
+
+
+.middle-nav-small-screen{
+  display: none;
+  z-index: 5;
+  position: sticky;
+  top:60px;
+  width:100vw;
+}
+
+.not-badge {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.wallet-toolbox{
+  position: absolute;
+  top: 55px;
+  right:20%;
+  display: none;
+}
+
+.wallet:hover + .wallet-toolbox{
+  display: block;
+  animation: block 0.3s ease-out forwards;
+}
+
+.wallet-toolbox:hover{
+  display: block;
+}
+
+@keyframes block {
+    0%{
+      opacity: 0;
+    }
+    90%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  .middle-nav{
+    gap:2rem;
+  }
+
+  .right-nav{
+    gap:1rem;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+
+  .nav-container{
+    box-shadow: none;
+    padding:1rem 2rem;
+  }
+
+  .middle-nav{
+    display: none;
+  }
+
+  .middle-nav-small-screen{
+    display: block;
+    box-shadow: 0px 8px 20px 0px #00000012;
+  }
+
+  .wallet:hover + .wallet-toolbox{
+    display: none;
+  }
+}

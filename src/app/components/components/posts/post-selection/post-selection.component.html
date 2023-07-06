@@ -1,0 +1,49 @@
+<div class="container">
+
+    <!--================== All Post types start ===================-->
+    <div class="allPostType" *ngIf="postSelectionToggle">
+        <!-- <div class="postType">
+            <h6>Services</h6>
+            <p>Request or Offer Neighbour Services</p>
+        </div>
+        <div class="postType">
+            <h6>Recommendations</h6>
+            <p>Request or Offer local Recommendations</p>
+        </div>
+        <div class="postType">
+            <h6>Buy & Sell</h6>
+            <p>Request or Offer items</p>
+        </div> -->
+        <div class="postType news" (click)="selectType('news')">
+            <h6>Building Info & News</h6>
+            <p>Share updates or ask questions about this building</p>
+        </div>
+        <div class="postType events" (click)="selectType('events')">
+            <h6>Events</h6>
+            <p>Create a virtual or in person event for neighbours to join</p>
+        </div>
+        <div class="postType issues" (click)="selectType('issues')">
+            <h6>Issues</h6>
+            <p>Warn neighbours about safety issues, or gather group support before notifying management</p>
+        </div>
+    </div>
+    <!--================== All Post types end ===================-->
+
+    <!--================== Building Info/News start ===================-->
+    <div class="buildingInfo" *ngIf="newsToggle">
+        <app-building-info-news></app-building-info-news>
+    </div>
+    <!--================== Building Info/News end ===================-->
+
+    <!--================== Events start ===================-->
+    <div class="buildingInfo" *ngIf="eventsToggle">
+        <app-create-events></app-create-events>
+    </div>
+    <!--================== Events end ===================-->
+
+    <!--================== Issues start ===================-->
+    <div class="buildingInfo" *ngIf="issuesToggle">
+        <app-create-issues></app-create-issues>
+    </div>
+    <!--================== Issues end ===================-->
+</div>

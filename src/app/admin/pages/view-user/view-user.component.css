@@ -1,0 +1,123 @@
+.image-about .user-profile {
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.image-about .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+
+.image-about .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    /* border: solid 1px black; */
+}
+
+.image-about .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+
+.image-about .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.image-about .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+
+.image-about .about p {
+    font-size: 0.825rem;
+}
+
+.alias {
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.card1 {
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+
+/*============cards=================*/
+
+.cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media (max-width: 800px) {
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .container {
+        margin: 0px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 800px) {
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    /*write 2 or 3 for multiple cards*/
+    .container {
+        max-width: 600px;
+        margin-top: 20px;
+        padding-bottom: 70px;
+    }
+}
+
+
+/*===============*/
+
+.buttons {
+    max-width: 600px;
+    margin: 10px 0px 10px 10px;
+}
+
+.btnclose {
+    height: 40px;
+    width: 100px;
+    border: 2px var(--LogoColor) solid;
+    border-radius: 3px;
+    color: var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: left;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btnclose:hover {
+    background-color: var(--LogoColor);
+    color: white;
+}
+
+
+/*================== posts ==============*/
+
+.cardheading h3 {
+    font-size: 20px;
+    font-weight: 450;
+    padding-left: 10px;
+}
+
+hr {
+    height: 2px;
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 0;
+}

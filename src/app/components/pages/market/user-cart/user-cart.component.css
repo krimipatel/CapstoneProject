@@ -1,0 +1,148 @@
+.main-container {
+  padding: 2rem 6rem;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 var(--black-300);
+}
+
+.cart-div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  gap:1rem;
+  align-items: flex-start;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
+  flex : 4 1 0;
+}
+
+.product-card {
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 var(--black-300);
+  border-radius: 10px;
+}
+
+.bold-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.normal-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.light-text {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+.update {
+    float: right;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.prices {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.image:hover {
+    cursor: pointer;
+}
+
+.checkout {
+  background-color: var(--accent);
+  color: white;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  padding:0.5rem 1rem;
+}
+
+.product-title:hover {
+    cursor: pointer;
+}
+
+.product-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.remove {
+    padding: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.remove:hover {
+    cursor: pointer;
+}
+
+.lds-ring {
+    margin-inline: auto;
+    width: 40px;
+    height: 40px;
+    animation-name: rotate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+.total{
+  flex:1 1 0;
+  min-width: 300px;
+}
+
+@media (max-width:1000px){
+  .main-container{
+    padding:2rem;
+  }
+  .total{
+    min-width: 250px;
+  }
+}
+
+
+@media (max-width:800px) {
+  .cart-div{
+    flex-direction: column;
+  }
+
+  .products{
+    flex:1 1 0;
+    width: 100%;
+  }
+
+  .total{
+    width: 100%;
+  }
+
+  .checkout{
+    width: max-content;
+    align-self: flex-end;
+
+  }
+}

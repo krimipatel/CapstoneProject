@@ -1,0 +1,23 @@
+
+/*-----toast----------*/
+.outer{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #3DABC6;
+  color:black;
+}
+.toast{
+  position:fixed;
+  margin-right: 30px;
+  padding: 10px;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 50px;
+  background-color: #3DABC6;
+  color:black;
+}
+.toast-header{
+  background-color: #3DABC6;
+  color:black;
+}

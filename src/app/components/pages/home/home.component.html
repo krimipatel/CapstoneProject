@@ -1,0 +1,115 @@
+<app-main-nav></app-main-nav>
+
+<div class="home-container">
+    <div class="col-lg flex-col">
+        <div class="card flex-row post-creation">
+            <!-- <div class="post-action issue-action " (click)="selectType('issues')" data-toggle="modal" data-target="#exampleModalCenter">
+                <div class="issue notation">
+                </div>
+                <div class="post-info">
+                    Warn neighbours about safety issues, or gather group support before notifying management
+                </div>
+                <div class="main-content">
+                    <img class="icon" src="../../../../assets/post-icons/issues.svg" alt="" srcset="">
+                    <span class="post-type">Issues</span>
+                </div>
+            </div> -->
+            <div class="post-action news-action" (click)="selectType('news')" data-toggle="modal" data-target="#exampleModalCenter">
+                <div class="news notation">
+                </div>
+                <div class="post-info">
+                    <p>Share updates or ask questions about this building</p>
+                </div>
+                <div class="main-content">
+                    <img class="icon" src="../../../../assets/post-icons/news.svg" alt="" srcset="">
+                    <span class="post-type">News</span>
+                </div>
+            </div>
+            <div class="post-action events-action" (click)="selectType('events')" data-toggle="modal" data-target="#exampleModalCenter">
+                <div class="events notation">
+                </div>
+                <div class="post-info">
+                    <p>Create a virtual or in person event for neighbours to join</p>
+                </div>
+                <div class="main-content">
+                    <img class="icon" src="../../../../assets/post-icons/events.svg" alt="" srcset="">
+
+                    <span class="post-type">Events</span>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="feed" *ngFor="let post of posts">
+                <div *ngIf="post.post_type=='event'">
+                    <app-view-events [event]="post"></app-view-events>
+                </div>
+                <div *ngIf="post.post_type=='news'">
+                    <app-view-news [news]="post"></app-view-news>
+                </div>
+                <div *ngIf="post.post_type=='deal'">
+                  <app-view-deal-post [post]="post"></app-view-deal-post>
+                </div>
+                <!-- <div *ngIf="post.post_type=='issue'">
+                  <app-view-issues [issue]="post"></app-view-issues>
+                </div> -->
+            </div>
+        </div>
+        <!-- ----------Post skeleton loader--------------- -->
+        <div *ngIf="loading==true" class="skeleton-loader">
+            <div *ngFor="let i of [1,2,3]" class="post-loading-box">
+                <div class="post-loading-dp"></div>
+                <div class="post-loading-line"></div>
+                <div class="post-loading-line"></div>
+                <div class="post-loading-line-sm"></div>
+                <div class="post-loading-line-thick"></div>
+            </div>
+        </div>
+        <!-- --------Post skeleton loader End --------------- -->
+    </div>
+    <div class="col-sm flex-col">
+        <!-- <div class="card">
+            Products
+        </div>
+        <div class="card">
+            deals
+        </div> -->
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLongTitle">New Post {{title}}</h6>
+                <button type="button" (click)="close()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <!--================== Building Info/News start ===================-->
+                <div class="buildingInfo" *ngIf="newsToggle">
+                    <app-building-info-news></app-building-info-news>
+                </div>
+                <!--================== Building Info/News end ===================-->
+
+                <!--================== Events start ===================-->
+                <div class="buildingInfo" *ngIf="eventsToggle">
+                    <app-create-events></app-create-events>
+                </div>
+                <!--================== Events end ===================-->
+
+                <!--================== Issues start ===================-->
+                <div class="buildingInfo" *ngIf="issuesToggle">
+                    <app-create-issues></app-create-issues>
+                </div>
+                <!--================== Issues end ===================-->
+            </div>
+        </div>
+    </div>
+</div>

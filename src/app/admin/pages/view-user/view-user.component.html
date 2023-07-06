@@ -1,0 +1,74 @@
+<app-admin-main-nav></app-admin-main-nav>
+
+
+<div class="container" *ngIf="dataLoaded">
+    <div class="cards">
+        <div class="cardheading">
+            <h3>User Details</h3>
+            <hr>
+        </div>
+        <div class="card1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="image-about">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img [src]="user.profile_photo" alt="Profile Image">
+                            </div>
+                            <h5 class="user-name">{{user.user_first_name}} {{user.user_last_name}} </h5>
+                            <h5 class="alias">Alias - {{user.alias}}</h5>
+
+                        </div>
+                        <div class="about">
+                            <div class="form-group">
+                                <b><label>About</label></b>
+                                <p *ngIf="user.about">{{user.about}}</p>
+                                <p *ngIf="!user.about">No Content</p>
+                            </div>
+                            <div class="form-group">
+                                <b><label>Phone</label></b>
+                                <p *ngIf="user.phone">{{user.phone}}</p>
+                                <p *ngIf="user.phone==null">No Access</p>
+                            </div>
+                            <div class="form-group">
+                                <b><label>Unit number</label></b>
+                                <p *ngIf="user.unit">{{user.unit}}</p>
+                                <p *ngIf="user.phone==null">No Access</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cardheading">
+            <h3>Restriction Section</h3>
+            <hr>
+        </div>
+        <div class="card1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+        </div>
+        <div class="cardheading">
+            <h3>Posts</h3>
+            <hr>
+        </div>
+        <div class="card1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<app-fixed-footer></app-fixed-footer>

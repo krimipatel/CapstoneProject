@@ -1,0 +1,82 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+
+
+<app-offer-notice></app-offer-notice>
+
+<div class="f-row page-container ">
+  <div class="card col-sm filter">
+    <span class="title">Filter by</span>
+      <div (click)="toggleStatus('active')" [ngClass]="{'toggle-active':status=='active'}" class="filter-toggle">
+        Active
+      </div>
+      <div (click)="toggleStatus('completed')" [ngClass]="{'toggle-active':status=='completed'}" class="filter-toggle">
+        Completed
+      </div>
+  </div>
+  <div class="col-l">
+    <div class="text-danger" style="text-align: center;" *ngIf="loadError==true">
+      <h3>Error loading the Data.</h3>
+      <h4>Something went wrong. Try again later.</h4>
+    </div>
+    <div *ngIf="dataLoaded" class="card deals">
+      <div class="f-row action-row">
+        <input type="text" class="search-input" [(ngModel)]="searchString" placeholder="Search deals">
+        <div class="options">
+          <button class="btn" (click)="openSelectedDeals()"> Open Selected </button>
+        </div>
+      </div>
+      <div class="table">
+        <table class="p-table">
+          <thead>
+            <tr>
+              <th class="cb-td">
+              </th>
+              <th></th>
+              <th>Deal</th>
+              <th>Status</th>
+              <th>Category</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let deal of deals | dealSearch:searchString">
+
+              <!-- <ng-container *ngIf="deal.status==status || status=='active'" ;> -->
+
+                <td class="cb-td">
+                  <input class="cb" (click)="selectToggle(deal.deal_id)" type="checkbox">
+                </td>
+                <td (click)="openDeal(deal.deal_id)" class="img-td">
+                    <div *ngIf="deal.items.product.images[0] != undefined" class="td-con">
+                        <img [src]="deal.items.product.images[0].src" class="p-images">
+                    </div>
+                    <div *ngIf="deal.items.product.images[0] == undefined" class="td-con">
+                      <img src="../../../../../assets/images/No Image.png" class="p-images">
+                  </div>
+                </td>
+                <td (click)="openDeal(deal.deal_id)" class="p-title">
+                  <b>{{deal.items.deal_title}}</b>
+                </td>
+                <td (click)="openDeal(deal.deal_id)">
+                  <span [class]="status" class="tag"> {{ status| titlecase }} </span>
+                </td>
+                <td (click)="openDeal(deal.deal_id)">
+                  {{deal.items.product.product_type}}
+                </td>
+                <td (click)="openDeal(deal.deal_id)">
+                    {{deal.items.deal_start_date | date :"longDate"}}
+                </td>
+                <td (click)="openDeal(deal.deal_id)" class="price-td">
+                    {{deal.items.deal_end_date | date :"longDate"}}
+                </td>
+              <!-- </ng-container> -->
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

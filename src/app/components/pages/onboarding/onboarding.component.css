@@ -1,0 +1,136 @@
+.forName {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.infoButon {
+    float: right;
+    height: 22px;
+    width: 22px;
+    font-weight: 700;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    color: var(--LogoColor);
+    text-align: center;
+}
+
+.infoButon:hover {
+    background-color: var(--LogoColor);
+    color: white;
+    border: none;
+}
+
+
+/* ==========  */
+
+.title-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.main-div {
+    left: 50%;
+    transform: translate(-50%, 0);
+    max-width: 400px;
+    position: absolute;
+}
+
+.top-logo {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin: 10px 0px;
+}
+
+.title-text-sm {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.next-done {
+    border: none;
+    border-radius: 3px;
+    padding: 0.3rem 1rem;
+    color: white;
+    background-color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.back {
+    background-color: rgb(225, 225, 225);
+    color: black;
+}
+
+.next-done:disabled:hover {
+    opacity: 0.9;
+    cursor: not-allowed;
+}
+
+.s-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 var(--black-300);
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+.error-box {
+    padding: 3px;
+    border: 1px red solid;
+    border-radius: 3px;
+    background-color: rgb(255, 241, 241);
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.title-text-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.text-general {
+    margin-bottom: 2px;
+}
+
+
+.form-check{
+  padding-left:1.75rem;
+  padding-block:0.5rem;
+}
+
+
+.layout-dummy {
+    color: transparent; /* visually hide; could also use visibility: hidden */
+    visibility: hidden;
+}
+
+@media (max-width:750px) {
+    .main-div {
+        width: 100%;
+        padding: 10px;
+    }
+}

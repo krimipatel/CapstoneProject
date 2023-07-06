@@ -1,0 +1,79 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+
+<div class="f-row page-container ">
+
+    <div class="card col-sm filter">
+        <span class="title">Filter by</span>
+        <div (click)="toggleStatus('all')" class="filter-toggle" [ngClass]="{'toggle-active':statusFilter=='all'}">
+            All
+        </div>
+        <div (click)="toggleStatus('paid')" class="filter-toggle" [ngClass]="{'toggle-active':statusFilter=='paid'}">
+            Paid
+        </div>
+        <div (click)="toggleStatus('pending')" class="filter-toggle" [ngClass]="{'toggle-active':statusFilter=='pending'}">
+            Pending
+        </div>
+    </div>
+    <div class="col-l">
+        <div class="f-row header">
+            <span class="title2"> Orders </span>
+        </div>
+
+        <div class="card orders">
+            <div class="f-row action-row">
+                <input type="text" class="search-input" [(ngModel)]="searchString" placeholder="Search orders">
+                <!-- <div class="options">
+                    <button class="btn" (click)="openSelectedOrders()"> Open Selected </button>
+                </div> -->
+            </div>
+            <div class="table">
+                <table class="p-table">
+                    <thead>
+                        <tr>
+                            <th class="cb-td"></th>
+                            <th>Items</th>
+                            <th>Order Type</th>
+                            <th>Payment Status</th>
+                            <th>Date</th>
+                            <th>Order Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orders | filterProduct:searchString ">
+                          <ng-container *ngIf="statusFilter=='all'||statusFilter==order.payment_status">
+                            <ng-container>
+                                <td class="cb-td">
+                                    <input class="cb"  type="checkbox">
+                                </td>
+                                <td (click)="openOrder(order.order_id)" >
+                                    <b>{{order.ordered_products.length}}</b>
+                                </td>
+                                <td (click)="openOrder(order.order_id)" >
+                                  <ng-container *ngIf="order.order_type=='deal'; else elseTemplate">Group Deal</ng-container>
+                                  <ng-template #elseTemplate>Normal Order</ng-template>
+                                </td>
+                                <td class="center" (click)="openOrder(order.order_id)" >
+                                  <ng-container *ngIf="order.payment_status=='pending'; else elseTemplate2"><span class="tag pending">Pending</span></ng-container>
+                                  <ng-template #elseTemplate2><span class="tag paid">Paid</span></ng-template>
+                                </td>
+                                <td (click)="openOrder(order.order_id)" >
+                                  {{order.created | date :"longDate"}}
+                                </td>
+                                <td (click)="openOrder(order.order_id)" >
+                                 <b> {{order.amount | currency:'CAD'}}</b>
+                                </td>
+
+
+
+                            </ng-container>
+                          </ng-container>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

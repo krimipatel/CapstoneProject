@@ -1,0 +1,30 @@
+.container {
+  padding: 2rem 4rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 var(--black-300);
+  padding: 1rem
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  gap:1rem;
+}
+
+.col-lg{
+  flex : 4 1 0;
+}
+
+.col-sm{
+  flex : 1 1 0;
+}
+
+.mt-1{
+  margin-top: 1rem;
+}
+
+

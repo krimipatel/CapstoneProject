@@ -1,0 +1,48 @@
+<section>
+    <div class="{{loadingClass}}">
+        <app-general-background></app-general-background>
+
+        <div class="top">
+            <img (click)="logoClicked()" class="top-logo" src="../../../../assets/images/logo.png" alt="logo">
+
+            <form [formGroup]="loginForm">
+
+                <p class="title-text">Vendor Login</p>
+                <p class="title-text-sm">Please sign in to use your account</p>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="email" class="form-control">
+                    <small *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.touched" class="text-danger">Not a valid email</small>
+
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input formControlName="password" [type]="showPassword" class="form-control">
+                    <div class="btn-grp">
+                      <button (click)="showPasswordClicked()" class="input-group-addon">
+                        <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                    </div>
+                    <small *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="text-danger">Password must be 8 characters</small>
+                  </div>
+
+                <div class="center-content">
+                    <small *ngIf="loginError!=''" class="text-danger bold error-box">{{loginError}}</small>
+                    <small *ngIf="successMessage!=''" class="text-success bold success-box">{{successMessage}}</small>
+                </div>
+
+                <div class="login-div">
+                    <button (click)="login()" [disabled]="loginForm.invalid" class="login" type="submit">Login</button><br>
+                </div>
+
+                <div class="forgot">
+                    <p class="sign-text">Don't have an account? <a href="vendor">Sign Up</a></p>
+                    <p class="sign-text">Forgot Password? <a href="vendor/forgotpassword">Reset Password</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,151 @@
+.modal-header {
+    padding: 0px;
+}
+
+.card-body {
+    min-height: 400px;
+    width: auto;
+}
+
+
+/*======== footer ============*/
+
+.card-footer {
+    padding: 5px;
+    bottom: 0;
+    background-color: white;
+}
+
+.card-footer-inModel {
+    padding: 10px;
+}
+
+.next-btn {
+    padding-bottom: 5px;
+    border: none;
+    float: right;
+    background-color: white;
+}
+
+.pre-btn {
+    padding-bottom: 5px;
+    border: none;
+    float: left;
+    background-color: white;
+}
+
+.submit {
+    border: none;
+    border-radius: 3px;
+    color: white;
+    background-color: var(--LogoColor);
+    width: 80px;
+    margin-left: auto;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 1;
+    height: 200px;
+    width: 90%;
+    overflow-y: auto;
+    /* left: 155px; */
+    /* transform: translateX(-27%); */
+    background-color: white;
+    border: 1px solid #646464;
+}
+
+.globalItem {
+    padding: 2px;
+    cursor: pointer;
+    color: black;
+    font-size: 15px;
+    transition: all 0.25s;
+}
+
+.globalItem:hover {
+    background-color: var(--LogoColor);
+    color: white;
+}
+
+
+/* .drop-pos-2 {
+    left: 158px
+}
+
+.drop-pos-3 {
+    left: 148px
+} */
+
+.bi-x-circle-fill {
+    cursor: pointer;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.tags-area {
+    display: flex;
+    direction: row;
+    justify-content: start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tags-input {
+    width: 100%;
+    background-color: white;
+    margin-top: 8px;
+}
+
+.tags {
+    padding: 3px 5px;
+    background-color: #e6e1e1;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border-radius: 5px;
+    justify-items: center;
+    font-weight: 500;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+    margin-top: 8px;
+}
+
+@media (max-width:600px) {
+    .dropdown {
+        position: absolute;
+        z-index: 1;
+        height: 180px;
+        width: 90%;
+        overflow-y: auto;
+        /* transform: translateX(-29%); */
+        background-color: white;
+        border: 1px solid #646464;
+    }
+    .globalItem {
+        padding: 2px;
+        cursor: pointer;
+        color: black;
+        font-size: 15px;
+        transition: all 0.25s;
+        border-bottom: 1px solid rgb(206, 206, 206);
+    }
+    /* .drop-pos-2 {
+        left: 132px;
+    } */
+    /* .drop-pos-3 {
+        left: 124px;
+        height: 150px
+    } */
+}

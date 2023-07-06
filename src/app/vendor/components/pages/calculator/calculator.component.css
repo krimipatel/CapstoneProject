@@ -1,0 +1,252 @@
+.main-container {
+    padding: 2rem 12rem;
+}
+
+.waiting { cursor: wait; }
+
+.top-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.signin-btn {
+    border-radius: 5px;
+    background-color: var(--accent);
+    color: white;
+    border: 2px var(--accent) solid;
+    width: 100px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
+.signup-btn {
+    border-radius: 5px;
+    background-color: none;
+    color: var(--accent);
+    border: 2px var(--accent) solid;
+    width: 100px;
+    vertical-align: middle;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+.text-bold-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.text-bold-large {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(76, 76, 76);
+}
+
+.text-bold-medium {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgb(76, 76, 76);
+}
+
+.text-bold-regular {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.text-light-small {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.design-div {
+    background-color: #3B204F;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    column-gap: 30px;
+    margin-bottom: 2rem;
+    max-height: 200px;
+    margin-top: 20px;
+}
+
+.calculator-text {
+    max-width: 400px;
+}
+
+.white-color {
+    color: white;
+}
+
+.bi {
+    float:right;
+}
+
+.bi-x-circle-fill {
+    cursor: pointer;
+}
+
+.calculate-btn {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #3B204F;
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    float: right;
+}
+
+.cta {
+    width: 100%;
+}
+
+.cta-btn {
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    background-color: #3B204F;
+    margin-top: 20px;
+    padding: 0.5rem 0.5rem;
+}
+
+.image-icon {
+    width: 100%;
+    height: 130%;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px 0 var(--black-300);
+}
+
+.col-l {
+    flex: 3 1 0;
+}
+
+.col-sm {
+    flex: 2 1 0;
+}
+
+.results-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 90vh;
+    overflow-y: scroll;
+}
+
+.result {
+    flex: 1 1 0;
+    border: 1px solid var(--black-300);
+    background-color: var(--black-100);
+    color: var(--black-900);
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+}
+
+.p-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.center-content {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.error-box {
+    padding: 3px;
+    border: 1px red solid;
+    border-radius: 3px;
+    background-color: rgb(255, 241, 241);
+}
+
+.success-box {
+    padding: 3px;
+    border: 1px green solid;
+    border-radius: 3px;
+    background-color: rgb(216, 255, 214);
+    color: green;
+}
+
+@media(max-width:1200px) {
+    .main-container {
+        padding: 2rem 6rem;
+    }
+    .card {
+        padding: 1rem;
+    }
+}
+
+@media(max-width:1000px) {
+    .main-container {
+        padding: 1rem 4rem;
+    }
+    .design-div {
+        flex-direction: column;
+        max-height: 100%;
+    }
+    .image-div {
+        display: none;
+    }
+    .image-icon {
+        display: none;
+    }
+    .cards {
+        flex-direction: column;
+    }
+}
+
+@media(max-width:600px) {
+    .main-container {
+        padding: 10px;
+    }
+    .logo {
+        width: 150px;
+    }
+    .signin-btn {
+        width: auto;
+    }
+    .signup-btn {
+        width: auto;
+    }
+    .design-div {
+        background-color: var(--black-100);
+        padding: 0px;
+        width: 100%;
+    }
+    .calculator-text {
+        background-color: #3B204F;
+        margin: 0px;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 100%;
+    }
+    .card {
+        border-radius: 10px;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,47 @@
+.wid-container{
+  width: 100%;
+  padding:0.5rem 1rem;
+  background-color:  rgb(168, 255, 146);
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap:0.5rem;
+  animation : dropin 1s ease-out forwards;
+}
+
+@keyframes dropin {
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0%);
+  }
+}
+
+.info span{
+  background-color: var(--black-900);
+  color:white;
+  padding:0.15rem 0.3rem;
+  border-radius: 5px;
+}
+
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  gap:1rem;
+  flex-wrap: wrap;
+}
+
+.buttons button{
+  padding:0.25rem 0.5rem;
+  min-width: 100px;
+  color: white;
+  border-radius: 10px;
+  background-color: var(--black-900);
+  border: none;
+}

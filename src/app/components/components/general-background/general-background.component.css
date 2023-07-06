@@ -1,0 +1,43 @@
+.background {
+    padding: 0px 10vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    justify-content: space-around;
+    position: fixed;
+    z-index: -1;
+}
+
+.bg-square {
+    height: 20vw;
+    width: 20vw;
+    background-color: var(--LogoColor);
+    opacity: 0.05;
+}
+
+.float-right {
+    float: right;
+    margin-left: auto;
+}
+
+.bg-logo {
+    display: block;
+    margin: 0px auto;
+    width: 50vw;
+    height: auto;
+    opacity: 0.15;
+}
+
+@media (max-width:700px) {
+    .background {
+        padding: 0px 0px;
+    }
+    .bg-square {
+        height: 40vw;
+        width: 40vw;
+    }
+    .bg-logo {
+        width: 100vw;
+    }
+}

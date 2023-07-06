@@ -1,0 +1,88 @@
+<app-main-nav></app-main-nav>
+
+
+<!--============== Test ==================-->
+<div class="container">
+
+    
+    <div class="topContainer">
+        <p>Do you want to suggest an important contact, which can be helpful to your community ? <button class="openToggle" (click)="openToggel()">Add Contact</button> </p> 
+
+        <div [formGroup]="contactInfoForm" class="form" *ngIf="ischecked">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" id="name">
+               <br> &nbsp;<small *ngIf="contactInfoForm.get('name')!.invalid && contactInfoForm.get('name')!.touched" class="text-danger">Name is Required</small>
+            </div>
+
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input formControlName="position" type="text" id="position">
+               <br> &nbsp;<small *ngIf="contactInfoForm.get('position')!.invalid && contactInfoForm.get('position')!.touched" class="text-danger">Position is Required</small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input formControlName="email" type="text" id="email">
+               <br> &nbsp;<small *ngIf="contactInfoForm.get('email')!.invalid" class="text-danger">Valid Email Address Required</small>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input formControlName="phone" type="text" id="phone">
+              <br>  &nbsp;<small *ngIf="contactInfoForm.get('phone')!.invalid && contactInfoForm.get('phone')!.touched" class="text-danger">Valid Phone Number Required</small>
+            </div>
+
+            <button class="cancelBtn" (click)="closeToggle()">Cancle</button>
+            <button [disabled]="contactInfoForm.invalid" class="submitBtn" (click)="submitContact()">Submit</button>
+            <br><br>  &nbsp;<small *ngIf="contactInfoForm.hasError('noEmailNoPhone') && (contactInfoForm.get('phone')!.touched || contactInfoForm.get('email')!.touched)" class="text-danger">Email or Phone is Required</small>
+        </div>
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card" *ngFor="let contact of contactsFromBack;let index=index">
+            <h5 class="user-name">{{contact.name}}</h5>
+            <h6 class="user-email">{{contact.email}}</h6>
+            <label>{{contact.position}}</label>
+            <label>{{contact.phone}}</label>  
+            <hr>
+            <div class="bottom-card">
+                <div class="upvote" 
+                    (click)="upvote(contact.id)"
+                    [ngStyle]="{'background-color': contact.vote=='up' ? '#CBDEFF' : '','border-radius': contact.vote=='up' ? '5px' : ''}" >
+                    <img class="upvote-image" src="../../../../../assets/images/up.png" alt="up vote">
+                    <p class="upvote-text">{{contact.upvotes}}</p>
+                </div>
+                <div class="downvote"
+                    (click)="downvote(contact.id)"
+                    [ngStyle]="{'background-color': contact.vote=='down' ? '#FFD3C8' : '','border-radius': contact.vote=='down' ? '5px' : ''}" >
+                    <img class="downvote-image" src="../../../../../assets/images/down.png" alt="down vote">
+                    <p class="downvote-text">{{contact.downvotes}}</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--============== Test End ==================-->
+
+<div class="container">
+
+    <div class="cards">
+
+        <div class="card" *ngFor="let item of contacts">
+            <h5 class="user-name">{{item.name}}</h5>
+            <h6 class="user-email">{{item.email}}</h6>
+            <label>{{item.position}}</label>
+            <label>{{item.phone}}</label>
+        </div>
+    </div>
+
+
+</div>
+
+
+<app-fixed-footer></app-fixed-footer>

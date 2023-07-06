@@ -1,0 +1,75 @@
+<div class="card-body">
+
+    <form [formGroup]="issuesForm">
+        <!--================== Issues content start ===================-->
+        <div *ngIf="pageNumber==1">
+            <div class="page">
+                <div class="form-group">
+                    <label for="topic">*Title :</label>
+                    <input type="text" formControlName="title" class="form-control">
+                </div>
+                <div>
+                    *Select a Category :
+                    <input class="form-control tags-input" (clickOutside)="categorytoggleDropDownClose()" readonly (click)="categorytoggleDropDown()" formControlName="category" type="text">
+                    <div class="dropdown" *ngIf="cateogryDropdown">
+                        <div class="globalItem" *ngFor="let item of categories" (click)="selectCategory(item)">
+                            {{ item }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description Tags Section -->
+                <!-- <div>
+                    Description Tags :
+                    <input class="form-control tags-input" (clickOutside)="descriptiontoggleDropDownClose()" readonly (click)="descriptiontoggleDropDown()" formControlName="descriptions" type="text">
+                    <div class="dropdown drop-pos-3" *ngIf="descriptionDropdown">
+                        <div class="globalItem" *ngFor="let item of description;let index = index" (click)="selectedDescriptions(item,index)">
+                            {{ item }}
+                        </div>
+                    </div>
+                    <div class="tags-area">
+                        <div class="tags" *ngFor="let d of chosenDescriptions;let index=index">
+                            {{d}}
+                            <div class="pos" (click)="removeDescriptions(index,d)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#db5d37" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div>
+                    Description :<br>
+                    <textarea class="form-control" rows="4" #textarea maxlength="200" formControlName="freeText"></textarea>
+                    <p>{{textarea.value.length}}/200</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="pageNumber==2">
+            <div class="page">
+                <label for="categoryText">Page 2</label>
+            </div>
+        </div>
+        <div *ngIf="pageNumber==3">
+            <div class="category">
+                <label class="categoryText" for="categoryText">Page 3</label> &nbsp;
+            </div>
+        </div>
+        <!--Loading circle-->
+        <div *ngIf="loading==true;" class="svg-loader">
+            <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+              <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+              <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+            </svg>
+        </div>
+        <!--Loading circle ends-->
+        <small class="text-danger" *ngIf="err!=''">{{err}}</small>
+    </form>
+</div>
+<!--================== Issues content end ===================-->
+<!-- Card Footer-->
+<div class="card-footer">
+    <button *ngIf="pageNumber==1" class="submit" [disabled]="loading==true" (click)="createPost()">Post</button>
+</div>

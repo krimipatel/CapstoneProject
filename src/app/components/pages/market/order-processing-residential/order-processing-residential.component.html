@@ -1,0 +1,20 @@
+
+  <div class="header">
+    <img src="../../../../../assets/images/logo.png" alt="">
+  </div>
+
+
+  <!--Loading circle-->
+  <div *ngIf="loading==true" class="svg-loader">
+    <svg class="svg-container" height="50" width="50" viewBox="0 0 100 100">
+      <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+      <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+    </svg>
+  </div>
+  <!--Loading circle ends-->
+
+  <div class="loadingText">
+    <h2 *ngIf="placingOrder==true">Placing your Order...</h2>
+    <h2 *ngIf="redirecting==true">Redirecting Now...</h2>
+
+  </div>

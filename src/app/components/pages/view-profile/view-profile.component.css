@@ -1,0 +1,309 @@
+.page-container {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 4rem;
+  gap:2rem;
+}
+
+p{
+  margin: 0;
+  padding:0;
+}
+
+.email{
+  text-overflow: ellipsis;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 var(--black-300);
+  padding: 1rem 2rem 0rem 2rem ;
+}
+
+.main-profile{
+  width: 40vw;
+  height: max-content;
+}
+.profile-head{
+  gap:2rem;
+  align-items: center ;
+  padding:0rem 2rem 1rem 2rem;
+  border-bottom: 1px solid var(--black-200) ;
+}
+
+.profile-picture{
+  width: 120px;
+  height: 120px;
+  object-fit:cover;
+  border-radius: 50%;
+}
+
+.grey{
+  background-color: lightblue !important;
+}
+
+.w-700{
+  font-weight: 700;
+}
+
+.alias{
+  font-size: 1.75rem;
+}
+
+.email{
+  font-size: 0.9rem;
+  color: var(--black-600);
+}
+
+.head-info{
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem;
+  margin-top:2rem;
+
+}
+
+.tag{
+  font-weight: 600;
+  padding:0.25rem 0.5rem;
+  border-radius: 10px;
+  width: max-content;
+  font-size: 0.8rem;
+}
+
+.green{
+  background-color: greenyellow;
+}
+
+.red{
+  background-color: rgb(255, 95, 47);
+
+}
+
+.body{
+  padding:2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap:2rem;
+}
+
+.btn-area{
+  margin-top: 0.5rem;
+}
+
+.btnn{
+  background-color: white;
+  border : 2px solid var(--black-900);
+  font-weight: 600;
+  padding:0.25rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+}
+
+.private{
+  display:flex ;
+  direction: row;
+  gap:1rem;
+  align-items: center;
+}
+
+
+.icon{
+  border: 2px solid black;
+  border-radius: 50%;
+  padding:0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.side-profiles{
+  width: 750px;
+}
+
+
+.body-profiles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: max-content;
+}
+
+.profile {
+  width: 300px;
+}
+
+.connection-status {
+  position: absolute;
+}
+
+.alias{
+font-size: 1.5rem;
+font-weight: 700;
+max-width:160px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.connection-tag {
+  border: none;
+  font-size: 0.8rem;
+  background-color: greenyellow;
+  font-weight: 600;
+  border-radius: 5px;
+  transform: translateX(235%) translateY(-30%);
+
+}
+
+.profile-info {
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-image {
+  height: 100px;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+.alias {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  ;
+}
+
+.actions {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.action-container {
+  flex-grow: 1;
+  margin-block: 1rem 0rem;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid var(--black-900);
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.accent {
+  background-color: var(--black-900);
+  color: var(--black-100);
+}
+
+.card-1 {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 var(--black-300);
+  padding: 1rem 2rem;
+  background-color: white;
+}
+
+@media only screen and (max-width: 1300px) {
+  .profile-head{
+    padding:0;
+    padding-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .profile {
+    width: 310px;
+  }
+  .connection-tag {
+    transform: translateX(240%);
+  }
+  .main-profile{
+    width: 70vw;
+  }
+  .page-container{
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap:1rem;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .main-profile{
+    width: 80vw;
+  }
+
+  .body-profiles {
+    width: 80vw;
+    justify-content: center;
+  }
+
+  .email{
+    max-width: 160px
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .body-profile {
+      justify-content: space-evenly;
+      gap: 0.5rem;
+  }
+  .profile {
+      width: 290px;
+  }
+  .profile-info {
+      flex-direction: column;
+  }
+  .connection-tag {
+      transform: translateX(230%) translateY(10%);
+  }
+  .actions {
+      flex-direction: column;
+      gap: 0rem;
+  }
+  .card{
+    padding:1.5rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .profile {
+      width: 100%;
+      margin: 0;
+  }
+  .connection-status {
+      display: none;
+  }
+  .page-container {
+    padding: 1rem;
+  }
+
+  .main-profile{
+    width: 90vw;
+  }
+
+  .body-profiles {
+    width: 90vw;
+    justify-content: center;
+  }
+
+
+}

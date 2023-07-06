@@ -1,0 +1,274 @@
+
+.container{
+    margin-top: 20px;
+    align-content: center;
+    padding-bottom: 70px;
+}
+
+.card {
+  background-color: none;
+  max-width: 350px;
+  color: black;
+  padding: 1rem;
+  transition: all 0.5s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+
+.card:hover{
+  /*
+  background-color: var(--LogoColor);
+  background-image: linear-gradient(to right, var(--LogoColor) , #C57AFF);
+  color: white;
+  */
+
+  transform: scale(1.04);
+}
+
+/*921dff*/
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.user-email {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/*============= top part ===============*/
+.topContainer{
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  color: var(--LogoColor);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.topContainer p{
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.topContainer label{
+  font-size: 18px;
+  font-weight: 700px;
+}
+
+.openToggle{
+  background-color: var(--LogoColor);
+  color: white;
+  font-size: 17px;
+  border: 2px solid white;
+  transition: all 0.25s ease-in-out;
+
+  border-radius: 5px;
+}
+.openToggle:hover{
+  background-color: var(--LightPink);
+  color: var(--LogoColor);
+  border: 2px solid var(--LogoColor);
+}
+
+.form{
+  margin: 10px;
+  max-width: 300px;
+}
+
+input[type="text"]{
+  float: right;
+  left: auto;
+  color: var(--LogoColor);
+  border-color: var(--LogoColor);
+  border-radius: 5px;
+}
+
+.submitBtn{
+  width: 120px;
+  height: 40px;
+
+  border:2px solid white;
+  border-radius: 5px;
+
+  background-color: var(--LogoColor);
+  color: white;
+  transition: all 0.25s ease-in-out;
+
+  float: right;
+  margin-left: auto;
+}
+
+.submitBtn:disabled{
+  cursor: not-allowed;
+}
+
+.submitBtn:hover{
+  border:2px solid var(--LogoColor);
+  background-color: var(--LightPink);
+  color: var(--LogoColor);
+}
+
+.cancelBtn{
+  width: 120px;
+  height: 40px;
+
+  border:2px solid white;
+  border-radius: 5px;
+
+  background-color: var(--LogoColor);
+  color: white;
+  transition: all 0.25s ease-in-out;
+
+  float: left;
+  margin-right: auto;
+}
+
+.cancelBtn:hover{
+  border:2px solid var(--LogoColor);
+  background-color: var(--LightPink);
+  color: var(--LogoColor);
+}
+
+
+
+/*============= top part end ===============*/
+
+/*============== vote contacts ================*/
+
+.bottom-card{
+}
+
+.upvote{
+  float: left;
+  margin-right: auto;
+  padding: 3px;
+  display: flex;
+
+  cursor: pointer;
+
+}
+
+.upvote:hover{
+  border-radius: 5px;
+  background-color: #e1ecff;
+}
+
+.upvote-image{
+  height: 20px;
+  width: 20px;
+
+  margin: auto;
+}
+
+.upvote-text{
+  margin: auto;
+}
+
+.downvote{
+  float: right;
+  margin-left: auto;
+  padding: 3px;
+  display: flex;
+
+  cursor: pointer;
+}
+
+.downvote:hover{
+  border-radius: 5px;
+  background-color: #ffeae4;
+}
+
+.downvote-image{
+  height: 20px;
+  width: 20px;
+
+  margin: auto;
+}
+
+.downvote-text{
+  margin: auto;
+}
+
+hr{
+  margin-top: 0px;
+  margin-bottom: 4px;
+  border-top: 1px solid black;
+
+  color: var(--LightPink);
+
+}
+
+
+
+@media (min-width: 600px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+
+    .form{
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .topContainer p{
+      padding: 5px;
+      font-size: 22px;
+      font-weight: 400;
+    }
+
+
+    .card:hover{
+      /*
+      background-color: var(--LogoColor);
+      background-image: linear-gradient(to right, var(--LogoColor) , #C57AFF);
+      color: white;
+      */
+
+      transform: scale(1.04);
+    }
+
+    .container{
+      margin-top: 70px;
+      align-content: center;
+    }
+
+  }
+
+  @media (min-width: 900px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+
+    .form{
+      margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .topContainer{
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+    }
+
+
+    .card:hover{
+      /*
+      background-color: var(--LogoColor);
+      background-image: linear-gradient(to right, var(--LogoColor) , #C57AFF);
+      color: white;
+      */
+
+      transform: scale(1.04);
+    }
+
+    .container{
+      margin-top: 70px;
+      align-content: center;
+    }
+  }
+
+

@@ -1,0 +1,416 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+
+
+
+<div class="container {{loadingClass}}">
+
+    <div *ngIf="productDetails">
+
+        <h4 class="text-main-title">Add A Product</h4>
+        <form [formGroup]="productInfoForm">
+            <div class="first-page-content">
+                <div class="col-l">
+
+                    <!--Title, description and price-->
+                    <div class="">
+
+                        <div class="card item">
+                            <p class="text-title">Name</p>
+                            <input type="text" class="form-control" formControlName="name" required>
+                            <small *ngIf="productInfoForm.get('name')!.invalid && productInfoForm.get('name')!.touched" class="text-danger">Name required</small><br>
+                            <br>
+                            <p class="text-title">Description</p>
+                            <textarea id="description" class="form-control" formControlName="description" name="description"></textarea>
+                        </div>
+                        <div class="card item">
+                            <p class="text-title">Price <small>(CAD)</small></p>
+
+                            <input type="number" class="form-control" id="price" formControlName="price" required>
+                            <small *ngIf="productInfoForm.get('price')!.invalid && productInfoForm.get('price')!.touched" class="text-danger">Enter minimum required amount, which is 0.01</small><br>
+                            <br>
+
+                            <p class="text-title">Shipping <small>(CAD)</small></p>
+                            <input type="number" class="form-control" formControlName="shipping" required>
+                            <small *ngIf="productInfoForm.get('shipping')!.invalid && productInfoForm.get('shipping')!.touched" class="text-danger">Enter minimum required amount, which is 0.01</small><br>
+
+                            <div>
+                                <label class="form-check-label" for="flexCheckDefault" style="display: none;">
+                                    <input class="form-check-input" type="checkbox" formControlName="taxable" style="display: none;">
+                                    Taxable Product
+                                </label>
+                                <p class="text-title">Please select you tax rate:</p>
+                                  <input type="radio" name="tax_rate" value=0 formControlName="tax_rate">
+                                  <label for="0">0 %</label><br>
+                                  <input type="radio" name="tax_rate" value=5 formControlName="tax_rate">
+                                  <label for="5">5 %</label><br>
+                                  <input type="radio" name="tax_rate" value=8 formControlName="tax_rate">
+                                  <label for="8">8 %</label><br>
+                                  <input type="radio" name="tax_rate" value=13 formControlName="tax_rate">
+                                  <label for="13">13 %</label><br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Images-->
+                    <div class="card images">
+                        <p class="text-title">Images</p>
+                        <div class="images-display">
+                            <!-- Button to avoid enter key press -->
+                              <button type="submit" class="hidden"></button>
+                            <!-- Button to avoid enter key press -->
+                          <div class="imageContainer" *ngFor="let image of imagesURLs;let index = index">
+                                <img src={{image}} class="product-images">
+                                <button class="btn" (click)="removeImage(index)">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-x" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </button>
+                            </div>
+
+                        </div>
+
+
+                        <label class="upload text-title-sm" for="actual-btn">Upload Images</label>
+                        <input type="file" id="actual-btn" (change)="onFileSelected($event)" accept="image/*" #photos multiple hidden>
+                    </div>
+
+
+                    <!-- variants -->
+                    <!-- 
+                    <div class="card item ">
+                        <div>
+                            <p class="text-title-info">Product Variants</p><button type="button" class="infoButon" [ngbTooltip]="tipContent1"><i>i</i></button>
+                        </div>
+                        <ng-template class="infoBox" #tipContent1>If your product has different variants (e.g. colour, flavour, etc) you may add them here. <b>Please Note:</b> all product variants must have the same price/unit in order to be counted towards the same group buy offer.</ng-template>
+                        <div class="options-cards">
+                            <div>
+                                <input class="form-check-input" type="checkbox" (click)="createOptions()" [(ngModel)]="optionsToggle" [ngModelOptions]="{standalone: true}">
+                                <label class="form-check-label"> &nbsp;Does this product have variants?</label>
+                                
+                            </div>
+                            <div *ngIf="optionsToggle" class="flex-options">
+                                <hr>
+                                <div class="option-back">
+                                    <p class="text-title-sm">Option 1</p>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="option1"> Option Name :</label>
+                                            <input type="text" name="option1" [(ngModel)]="option1Name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Ex : Color">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Option Values :</label>
+                                            <div class="flex-values" *ngFor="let i of option1ValuesTrack;let index = index">
+                                                <input type="text" name="option1Values{{index}}" [(ngModel)]="option1Values[index]" [ngModelOptions]="{standalone: true}" class="form-control mb-5-cus">
+                                                <button class="btn-values remove" (click)="removeValues('option1',index)">
+                                                <b>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                    </svg>
+                                                </b>
+                                            </button>
+                                            </div>
+                                            <button class="btn-values add" (click)="addValues('option1')"><b>+</b></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div *ngIf="addOptions.length>=2" class="option-back">
+                                    <p class="text-title-sm">Option 2</p>
+                                    <button [hidden]="addOptions.length==3" class="options-remove remove" (click)="removeOptions()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                        </svg></button>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="option2"> Option Name :</label>
+                                            <input type="text" name="option2" [(ngModel)]="option2Name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Ex : Size">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Option Description :</label>
+                                            <div class="flex-values" *ngFor="let i of option2ValuesTrack;let index = index">
+                                                <input type="text" name="option2Values{{index}}" [(ngModel)]="option2Values[index]" [ngModelOptions]="{standalone: true}" class="form-control mb-5-cus">
+                                                <button class="btn-values remove" (click)="removeValues('option2',index)"><b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                    </svg></b></button>
+                                            </div>
+                                            <button class="btn-values add" (click)="addValues('option2')"><b>+</b></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="addOptions.length==3" class="option-back">
+                                    <p class="text-title-sm">Option 3</p>
+                                    <button class="options-remove remove" (click)="removeOptions()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                        </svg></button>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="option2"> Option Name :</label>
+                                            <input type="text" name="option3" [(ngModel)]="option3Name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Ex : Material">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Option Values :</label>
+                                            <div class="flex-values" *ngFor="let i of option3ValuesTrack;let index = index">
+                                                <input type="text" name="option3Values{{index}}" [(ngModel)]="option3Values[index]" [ngModelOptions]="{standalone: true}" class="form-control mb-5-cus">
+                                                <button class="btn-values remove" (click)="removeValues('option3',index)"><b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                    </svg></b></button>
+                                            </div>
+                                            <button class="btn-values add" (click)="addValues('option3')"><b>+</b></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="addOptions" [hidden]="addOptions.length==3" (click)="addOption()">Add
+                                    Options</button>
+                                <small class="text-danger" *ngIf="optionsError!=''"> {{optionsError}}</small>
+                                <hr>
+                                <button class="done" (click)="makeVaraints()">Done</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    -->
+                    <!-- variants -->
+                    <!--
+                    <div *ngIf="availableVaraints.length>0" class="card item ">
+                        <p class="text-title">Confirm Your Options</p>
+
+                        <div class="options-display">
+                            <div>
+                                Options Added :
+                            </div>
+                            <div class="options-display">
+                                <div *ngFor="let options of allOptions">
+                                    <div class="options-tag"> {{options.name}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-title-sm">Please confirm your options below</p>
+                        <div class="variants" *ngFor="let v of availableVaraints;let index=index">
+
+                            <div class="v-title">
+                                <div><input class="form-check-input" type="checkbox" (change)="variantSelection(index)" [(ngModel)]="selectedVariantsIndex[index]" [ngModelOptions]="{standalone: true}"></div>
+                                <div *ngIf="v.option1" class ="d-inline-block text-truncate options-variants">{{ v.option1 }}</div>
+                                <div *ngIf="v.option2" class ="d-inline-block text-truncate options-variants">{{ "/ " +v.option2 }}</div>
+                                <div *ngIf="v.option3" class ="d-inline-block text-truncate options-variants">{{ "/ " +v.option3 }}</div>
+                            </div>
+                            <div>
+                                Price: (CAD)&nbsp;
+                                <input class="price-input" type="number" (change)="getPrice()" [(ngModel)]="availableVaraints[index].price" [ngModelOptions]="{standalone: true}">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    -->
+                </div>
+
+                <div class="col-sm">
+                    <!--Active / Draft/ Archived-->
+                    <div class="card isProduct flex">
+                        <div>
+                            <p class="text-title">Product</p>
+                            <label for="active"><input type="radio" id="active" formControlName="status" name="status"
+                                        value="active">
+                                    Active</label><br>
+                            <label for="draft"><input type="radio" id="draft" formControlName="status" name="status"
+                                        value="draft">
+
+                                    Draft</label>
+                            <br><small *ngIf="productInfoForm.get('status')!.invalid && productInfoForm.get('status')!.touched" class="text-danger">One selection is required</small>
+
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="card item">
+                        <p class="text-title">Tags</p>
+                        <input type="text" formControlName="tags" class="form-control" placeholder="Enter Tags" (change)="getTags()">
+
+                        <div class="SizeList">
+                            <div class="SizeBackground" *ngFor="let t of allTags; let index = index">{{t}}
+                                <div class="pos" (click)="removeTag(index)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#db5d37" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                        </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Category-->
+                    <div class="card category">
+                        <!-- Search category Bar Start-->
+                        <p class="text-title">Category</p>
+                        <div class="search">
+                            <input id='search' placeholder="Search for a category..." (clickOutside)="toggleDropDownOut()" (click)="toggleDropDown()" class='search-bar form-control' [formControl]="searching" autocomplete="off" type='text'>
+
+                            <div *ngIf="showDropDown">
+                                <div class="list-container-dropdown">
+                                    <div class="globalItem" *ngFor="let item of listCategoryALl | itemFilter:searching.value">
+                                        <div (click)="itemClicked(item)">
+                                            {{item}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Search category Bar End -->
+                            <p class="selectedCategory" *ngIf="selectedCategory!=''">Selected Category:
+                                <span class="cat-tag">{{selectedCategory}} &nbsp;
+                                <span class="remove-category" (click)="removeCategory()" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                   </svg>
+                                </span>
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="btns-div">
+            <!-- Button trigger modal -->
+            <button type="button" class="discard-btn text-title" data-toggle="modal" data-target="#exampleModal">
+                Discard
+            </button>
+            <button class="next-btn text-title" (click)="onNext()">Next</button>
+        </div>
+    </div>
+
+
+
+    <!-- ======================================== Location ============================================= -->
+    <div [hidden]="!addLocation">
+
+        <div class="second-page-header">
+            <a (click)="onBack()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="currentColor" class="bi bi-arrow-left back" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+            </a>
+            <p class="text-main-title">Add delivery regions</p>
+        </div>
+
+        <div class="second-page-content">
+
+            <div class="col-sm-p2">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                    <div class="accordion-item">
+                      <p>
+                        Naborino deals must currently be available for delivery across the Greater Toronto Area. We will introduce more targeted geographic selection in the near future.
+                      </p>
+                        <!-- <input class="form-control search-bar" id="search" type="text " [(ngModel)]="searchString " data-bs-toggle="collapse " placeholder="Search Regions" autocomplete="off ">
+
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body scrollable">
+                                <p class="region " (click)="getFasForRegion(region)" *ngFor="let region of regions | filterRegion:searchString">{{region}}</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-l-p2">
+                <div class="card">
+                    Greater Toronto Area (GTA)
+                    <p>
+
+                    </p>
+                </div>
+                <!--
+                <div class="card">
+                  Downtown toronto
+                  <p>
+
+                  </p>
+                  Downtown Toronto
+                </div>
+                <div class="card">
+                  Mississauga
+                </div>
+                <div class="card">
+                  North York
+                </div>
+                <div class="card">
+                  Etobicoke
+                </div>
+
+               <div class="card">
+                  Brampton
+                </div>
+                -->
+                <!-- <div class="card " *ngFor="let r of regionsWithFsa ">
+                    <div class="flex ">
+                        <h5>{{r.name}}</h5>
+                        <svg (click)="removeRegion(r.name) " xmlns="http://www.w3.org/2000/svg " width="16 " height="16 " fill="#db5d37 " class="bi bi-x-circle-fill " viewBox="0 0 16 16 ">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z " />
+                        </svg>
+                    </div>
+
+                    <div class="flex-cards ">
+                        <div *ngFor="let fsa of r.fsa ">
+                            <label for="{{fsa}} ">
+                                <input (change)="fasChecked(fsa)" type="checkbox" id="{{fsa}}" #checkboxes checked>&nbsp; {{fsa}}</label>
+                        </div>
+                    </div>
+
+                    <div class="btns-div">
+                        <button type="button" class="next-btn" (click)="selectAll(r.fsa)">Select All</button>
+                        <button type="button" class="next-btn" (click)="unselectAll(r.fsa)">Unselect All</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+        <div class="btns-div">
+            <!-- Button trigger modal -->
+            <button type="button" class="discard-btn text-title" data-toggle="modal" data-target="#exampleModal">
+                Discard
+            </button>
+            <button [disabled]="requestPending " class="next-btn text-title submit" (click)="onSubmit() ">
+              <div *ngIf="!requestPending">Create Product</div>
+              <div *ngIf="requestPending">
+                <img src="../../../../../assets/button-icons/load.png" class="loading">
+                Creating Product...
+              </div>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Discard the product? <small>(changes will not be saved)</small>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="next-btn text-title submit" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="discard-btn text-title" data-dismiss="modal" (click)="discard()">Discard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

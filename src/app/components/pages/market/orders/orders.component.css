@@ -1,0 +1,133 @@
+.container {
+    margin-top: 30px;
+    padding-bottom: 100px;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card {
+    margin-top: 20px;
+    width: 800px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 8px 0 var(--black-300);
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-header {
+    background-color: white;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.medium-bold-text {
+    font-size: 1.02rem;
+    font-weight: 600;
+}
+
+.over-price {
+    text-decoration: line-through;
+    color: rgb(255, 60, 60);
+    font-size: 0.9rem;
+}
+
+.saved {
+    color: white;
+    font-size: 0.9rem;
+    background-color:limegreen;
+    border-radius: 10px;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    float: right;
+    font-weight: 500;
+}
+
+.price {
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.light {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.pending-tag {
+    background: yellow;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.back-btn {
+    border-radius: 5px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+/* .sortBtn {
+    background-color: rgb(194, 194, 194);
+    color: black;
+    border: none;
+}
+
+.months {
+    padding-left: 10px;
+    cursor: pointer;
+}*/
+
+.head {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.group-icon {
+    float: right;
+    margin-left: auto;
+}
+
+@media (max-width:1000px) {
+    .card {
+        margin-top: 15px;
+        width: 100%;
+    }
+    .content {
+        padding: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    /* .months {
+        margin-bottom: 8px;
+    } */
+    .group-icon {
+        font-size: 80%;
+    }
+    .medium-bold-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    .card-header {
+        padding: 10px;
+    }
+}

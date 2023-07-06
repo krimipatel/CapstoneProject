@@ -1,0 +1,171 @@
+
+  /*------------------------*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .container{
+    margin-top: 70px;
+    max-width: 1000;
+    padding-bottom: 140px;
+}
+
+  input[type=checkbox] {
+    position: absolute;
+    left: -9999px; /*to remove or change the location of checkbox*/
+  }
+
+  label {
+    min-width: 250px;
+    display: block;
+    position: relative;
+    margin: 20px;
+    padding: 15px 0px 15px 15px;
+
+    /* Border and Background*/
+    border: 3px solid #fff;
+    border-radius: 100px;
+    background-color: var(--LightPurple);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+
+    /*Font color on interests*/
+    color: black;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+
+    transition: background-color .2s, box-shadow .2s;
+  }
+
+  label::before {
+    content: none;
+    display: block;
+    position: absolute;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+  }
+
+  input:checked + label {
+    background-color: var(--LogoColor);
+    color: #fff
+  }
+
+  input:checked + label::before {
+    background-color: var(--LogoColor);
+    color: #fff
+  }
+
+  /*=--------------Let's make it Responsive--------------*/
+
+  .cards {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+  }
+
+  /*------------buttons-----------------*/
+
+  .buttons{
+      max-width: 500px;
+      margin-top: 40px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .btnclose{
+    height:40px;
+    width: 150px;
+
+    border:2px var(--LogoColor) solid ;
+    border-radius: 3px;
+    color:var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: left;
+  }
+
+  .btnsubmit{
+    height:40px;
+    width: 150px;
+
+    border:2px var(--LogoColor) solid ;
+    border-radius: 3px;
+    color:var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: right;
+  }
+
+
+.btnclose:hover{
+  background-color: var(--LogoColor);
+  color:white;
+}
+
+.btnsubmit:hover{
+    background-color: var(--LogoColor);
+    color:white;
+}
+
+/*-------------Search-------------*/
+
+.search{
+   width: 300px;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 30px;
+}
+
+.search-bar{
+  margin-left: 10px;
+  border: 0;
+  border-bottom: 2px gray solid;
+  outline: 0;
+  font-size: 1.2rem;
+
+  color: black;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.search-bar::placeholder{
+  padding-left: 15px;
+}
+
+.state-container-dropdown{
+  position:absolute;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+  z-index: 1;
+  width: 240px;
+  height: 200px;
+  max-height: 300px;
+  margin-left: 50px;
+  margin-right: auto;
+  background: var(--LightPink);
+  overflow-y: auto;
+}
+
+.globalItem{
+  padding:10px;
+  color: blue;
+  cursor: pointer;
+
+  /*Font color on interests*/
+  color: black;
+  font-size: 15px;
+  font-weight: 650;
+  transition: all 0.3s;
+}
+
+.globalItem:hover{
+  background-color: var(--LogoColor);
+  color:white;
+
+}

@@ -1,0 +1,33 @@
+<app-admin-simple-nav></app-admin-simple-nav>
+
+<section>
+
+<div class="login-box">
+
+  <h3 class="title"> Login to Naborino Admin Account</h3>
+
+  <form [formGroup]="loginForm">
+    <div class="form-group">
+      <label for="email">Email : </label>
+      <input formControlName="email" name="email" class="form-control" type="email">
+      &nbsp;<small *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.touched" class="text-danger">Not a Valid Email</small>
+    </div>
+    <div class="form-group">
+      <label for="password">Password : </label>
+      <input type="password" class="form-control" name="password" formControlName="password">
+      &nbsp;<small *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="text-danger">Password must be 8 characters</small>
+    </div>
+
+
+    <small class="text-danger" *ngIf="loginError!=null">{{loginError}}</small><br>
+
+
+    <button (click)="Login()" [disabled]="loginForm.invalid" class="btnLogin">Login</button>
+
+
+  </form>
+
+
+</div>
+
+</section>

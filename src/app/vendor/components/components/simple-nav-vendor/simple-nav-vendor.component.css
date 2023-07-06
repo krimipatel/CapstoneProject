@@ -1,0 +1,30 @@
+
+
+.Btn{
+    border: var(--LogoColor) 2px solid ;
+    border-radius: 5px;
+    color:var(--LogoColor);
+    font-size: auto;
+    height:auto;
+    width: auto;
+  }
+  
+  
+  .navbar{
+    border-bottom:2px solid var(--LogoColor);
+    background-color: var(--LightPurple);
+  
+  
+  }
+  
+  .logo{
+    height:auto;
+    width:40%;
+  
+  }
+  
+  hr{
+    width: 4px;
+    color:var(--LogoColor);
+  }
+  

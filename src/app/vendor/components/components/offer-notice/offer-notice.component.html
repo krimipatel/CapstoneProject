@@ -1,0 +1,10 @@
+<div *ngIf="recordExist" class="wid-container">
+    <div class="info">
+      We found a deal for - <span> <b>{{ record.productName }}</b> </span> that you created using the calculator.
+      Would you like to offer it to the community?
+    </div>
+    <div class="buttons">
+      <button (click)="createProduct()"> Yes </button>
+      <button (click)="deleteOffer()"> No </button>
+    </div>
+</div>

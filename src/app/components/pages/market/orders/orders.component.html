@@ -1,0 +1,59 @@
+<app-main-nav></app-main-nav>
+
+
+<div class="container">
+    <div *ngIf="orders.length == 0" class="text-center">
+        <h1>No Orders</h1>
+        <button class="btn back-btn" (click)="goBack()">Go Back</button>
+    </div>
+    <!-- <div class="btn-group">
+        <button class="btn btn-secondary btn-sm dropdown-toggle sortBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort by Months
+    </button>
+        <div class="dropdown-menu scroll">
+            <p class="months" (click)="setMonth(1)">last month</p>
+            <p class="months" (click)="setMonth(3)">past 3 months</p>
+            <p class="months" (click)="setMonth(6)">past 6 months</p>
+            <p class="months" (click)="setMonth(12)">past 12 months</p>
+        </div>
+    </div> -->
+
+    <div class="card" (click)="openOrder(o.order_id)" *ngFor="let o of orders ;let i =index">
+        <div class="card-header medium-bold-text">
+            Placed on {{o.created | date:'longDate'}} <span *ngIf="o.payment_status=='pending' && o.order_type=='deal'" class="pending-tag">Pending</span>
+            <span *ngIf="o.order_type=='deal'" class="light group-icon"> (Group Deal)
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                  </svg>
+            </span>
+        </div>
+
+        <div *ngIf="o.order_type!='deal'" class="content">
+            <div class="head">
+                <div class="medium-bold-text">
+                    {{o.ordered_products[0].product.name}} <span *ngIf="o.ordered_products.length>1">+ {{o.ordered_products.length-1}} more...</span><br>
+                    <span class="light"> Billed to {{o.billing_details.name}}</span>
+                </div>
+            </div>
+            <div class="medium-bold-text"> ${{o.amount.toFixed(2)}}</div>
+        </div>
+
+        <div *ngIf="o.order_type=='deal'" class="content">
+            <div class="head">
+                <div class="medium-bold-text">
+                    {{o.ordered_products[0].product.metadata.variant_title}} <span *ngIf="o.ordered_products.length>1">+ {{o.ordered_products.length-1}} more...</span><br>
+                    <span class="light"> Billed to {{o.billing_details.name}}</span>
+                </div>
+            </div>
+            <div *ngIf="o.payment_status=='paid'" class="text">
+                <span class="over-price">$ {{o.amount.toFixed(2)}}</span> <span class="price">$ {{o.price_collected}}</span> <br>
+                <span class="saved">saved ${{o.amount - o.price_collected}}</span>
+            </div>
+            <div *ngIf="o.payment_status=='pending'" class="light">
+                Authorized Amount <span class="medium-bold-text">${{o.amount.toFixed(2)}}</span>
+            </div>
+        </div>
+    </div>
+</div>

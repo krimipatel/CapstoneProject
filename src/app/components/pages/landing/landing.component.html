@@ -1,0 +1,91 @@
+<div>
+
+    <div class="top">
+        <div class="sign-btns">
+            <button class="small-btn small-btn-text" (click)="register()">Sign Up</button>
+            <button class="small-btn small-btn-text" onclick="location.href='/login'">Sign In</button>
+        </div>
+        <div>
+            <img class="logo" src="../../../../assets/images/logo.png" alt="logo">
+            <p class="header-text-main">LOCAL COMMUNITY GROUP<br>BUYING FOR NEIGHBOURS</p>
+        </div>
+        <div class="address-div">
+            <form class="address-input-btn-div">
+                <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" class="address-in" [(ngModel)]="communityAddress" type="text" placeholder=" Enter Street Address" name="Address">
+                <button (click)="findCommunity()" type="button" class="address-button small-btn-text">Find my community</button>
+
+            </form>
+            <div>
+                <p class="response-no text-danger" *ngIf="errorMessage!=''">{{errorMessage}}</p>
+                <div class="response-no" *ngIf="responseMessage!=''">
+                    <p class="general-text-sm" *ngIf="responseMessage!=''">{{responseMessage}}</p>
+                    <p class="general-text-sm" *ngIf="responseMessage!=''">Let's start your community <span (click)="registerWithSearchedCommunity()" class="link">here</span></p>
+                    <!-- <button (click)="registerWithSearchedCommunity()" class="loginBtn" *ngIf="responseMessage!=''">Start A Community</button> -->
+                </div>
+
+                <div class="com-card" *ngIf="communityData">
+                    <p class="general-text">Community found at this address</p>
+                    <!--
+                    <p class="general-text-sm">
+                        Community Name: {{communityData.community_name}} <br> Community Type: {{communityData.community_types}} <br> There are {{communityData.community_residents}} users registered at this address. <br>
+                    </p>
+                    <p class="general-text-sm">Want to enter into this community? register <span class="link" (click)="registerWithSearchedCommunity()">here</span></p>
+                    -->
+                    <p class="general-text-sm">Good news! There are {{communityData.community_residents}} other naborinos already registered in the community at this address!</p>
+                    <p class="general-text-sm">Want to join them? Register <span class="link" (click)="registerWithSearchedCommunity()">here!</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="description-div">
+
+        <div class="indiv-description">
+            <div class="pair">
+                <img class="indiv-image" src='../../../../assets/images/guylookingdown.png'>
+                <div class="texts-div">
+                    <div>
+                        <img src="../../../../assets/images/landing-dashes-icon.svg" class="dashes-icon" alt="">
+                        <p class="header-text">HEY NABORINOS!</p>
+                        <p class="general-text"> It's easier than ever to connect with anyone in the world, while missing out on the potential for local community that is literally all around us.</p>
+                        <p class="general-text"> We make it easy, fun and safe for naborinos (yup, we call our users that too) to unlock the many benefits of local community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="indiv-description">
+            <div class="pair reverse-flex">
+                <div class="texts-div">
+                    <div>
+                        <img src="../../../../assets/images/landing-dashes-icon.svg" class="dashes-icon" alt="">
+                        <p class="header-text">BUY TOGETHER. SAVE TOGETHER.</p>
+                        <p class="general-text">Bulk discounts are out of reach on most products and services, when you're just one person (or family) shopping on your own.</p>
+                        <p class="general-text">We connect you with your community of naborinos and with group buying discounts from local businesses, you won't find anywhere else.</p>
+                    </div>
+                </div>
+                <img class="indiv-image" src='../../../../assets/images/ladyonphone.png'>
+            </div>
+        </div>
+
+        <div class="indiv-description">
+            <div class="pair">
+                <img class="indiv-image" src='../../../../assets/images/guyandhispet.png'>
+                <div class="texts-div">
+                    <div>
+                        <img src="../../../../assets/images/landing-dashes-icon.svg" class="dashes-icon" alt="">
+                        <p class="header-text">WE ACTUALLY SUPPORT LOCAL BUSINESSES</p>
+                        <p class="general-text">Naborino makes it easy for local businesses to create compelling group buying offers for their local communities of naborinos.</p>
+                        <p class="general-text">And it's absolutely free to share an offer with our users. We only make money when you do.</p>
+                        <button (click)="signUpVendor()" class="address-button small-btn-text">Sign Up As a Vendor</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer></app-footer>

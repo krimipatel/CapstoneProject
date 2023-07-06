@@ -1,0 +1,26 @@
+
+<div class="notification-container">
+  <div class="svg-loader loading" *ngIf="loading==true">
+      <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+      <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+      <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+    </svg>
+  </div>
+  <div class="view" *ngIf="notifications.length>0 && loading==false">
+    <div *ngIf="notifications.length>0">
+      <div  *ngFor="let noti of notifications;let i= index" >
+        <ng-container *ngIf="!(noti.dealStatus=='completed')" >
+          <app-indiv-notification  (knockActionEvent)="getNotification()" [notification] = "noti"></app-indiv-notification>
+          <hr *ngIf="i!=notifications.length-1">
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="no-content" *ngIf="notifications.length==0 && loading==false" >
+    <p>No Notification Right Now. Start interacting with member of your community to get notifications. </p>
+  </div>
+</div>
+
+
+
+

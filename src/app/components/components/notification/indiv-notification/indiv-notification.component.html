@@ -1,0 +1,47 @@
+<!-- Notification container for a Knock-->
+<div *ngIf = "notification.notification_type=='knock'"  class="Notification" >
+  <button type="button"  (click)="deleteNotification(notification.notification_id)" class="btn-close" aria-label="Close"></button>
+  <p> <strong>{{notification.sender_alias}}</strong> sent you a knock. </p>
+  <div class="action-container">
+    <button class="btnKnock" (click)="acceptKnock(notification.object_id)" >Accept</button>
+    <button class="btnKnock" (click)="ignoreKnock(notification.object_id)">Ignore</button>
+  </div>
+  <span class="time"><small >{{ getDate(notification.created_on)  }}</small></span>
+</div>
+
+<div *ngIf = "notification.notification_type=='knock_accept_reciever'"  class="Notification">
+  <p>You accepted the knock of <strong>{{notification.sender_alias}}</strong></p>
+  <span class="time"><small >{{   getDate(notification.created_on)  }}</small></span>
+</div>
+
+<div *ngIf = "notification.notification_type=='knock_accept_sender'"  class="Notification">
+  <p><strong> {{notification.receiver_alias}}</strong> has accepted your Knock</p>
+  <span class="time"><small >{{   getDate(notification.created_on)  }}</small></span>
+</div>
+
+<div *ngIf = "notification.notification_type=='knock_ignore'"  class="Notification">
+  <p>  You ignored the knock of<strong> {{notification.sender_alias}}</strong>   </p>
+  <span class="time"><small >{{   getDate(notification.created_on)  }}</small></span>
+</div>
+
+
+<div (click)="viewDeal(notification.deal.deal_id)" *ngIf ="notification.notification_type == 'deal'"  class="Notification deal-container">
+  <div class="image-container">
+    <img [src]='notification.deal.deal_thumbnail' class="deal_thumbnail">
+  </div>
+  <div *ngIf ="notification.dealStatus == 'notStarted'" class="info-container">
+    New deal available in your community starting on <b>{{notification.deal.deal_start_date | date :"longDate"}}</b>.
+    We will notify you when it starts.
+  </div>
+  <div *ngIf ="notification.dealStatus == 'started'" class="info-container">
+    New deal started in your community. Deal ends on <b>{{notification.deal.deal_end_date | date :"longDate"}}</b>.
+    Grab it before it disappears.
+    <div class="action-container">
+      <button class="btnKnock" (click)="viewDeal(notification.object_id)" >View Deal</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!--===========toast===========-->

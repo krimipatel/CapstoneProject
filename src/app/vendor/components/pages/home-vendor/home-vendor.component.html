@@ -1,0 +1,89 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+<div class="text-danger" *ngIf="loadError==true">
+    <h3>Session Timed Out. Log out and log in again.</h3>
+</div>
+
+<app-offer-notice></app-offer-notice>
+
+
+
+<div *ngIf="dataLoaded" class="f-row page-container ">
+
+    <div class="card col-sm filter">
+        <span class="title">Filter by</span>
+        <div (click)="toggleStatus('all')" [ngClass]="{'toggle-active':status=='all'}" class="filter-toggle">
+            All
+        </div>
+        <div (click)="toggleStatus('active')" [ngClass]="{'toggle-active':status=='active'}" class="filter-toggle">
+            Active
+        </div>
+        <div (click)="toggleStatus('draft')" [ngClass]="{'toggle-active':status=='draft'}" class="filter-toggle">
+            Draft
+        </div>
+        <div (click)="toggleStatus('archived')" [ngClass]="{'toggle-active':status=='archived'}" class="filter-toggle">
+            Archived
+        </div>
+    </div>
+    <div class="col-l">
+        <div class="f-row header">
+            <span class="title2"> Products </span>
+            <a class="btn-style" href="/vendor/addproduct">Create a product</a>
+        </div>
+
+        <div class="card products">
+            <div class="f-row action-row">
+                <input type="text" class="search-input" [(ngModel)]="searchString" placeholder="Search products">
+                <div class="options">
+                    <button class="btn" (click)="openSelectedProducts()"> Open Selected </button>
+                </div>
+            </div>
+            <div class="table">
+                <table class="p-table">
+                    <thead>
+                        <tr>
+                            <th class="cb-td">
+                            </th>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Status</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products | productSearch:searchString">
+                            <ng-container *ngIf="product.status==status || status=='all'" ;>
+                                <td class="cb-td">
+                                    <input class="cb" (click)="selectToggle(product.id)" type="checkbox">
+                                </td>
+                                <td (click)="openProduct(product.id)" class="img-td">
+                                    <div *ngIf="product.images[0] != undefined" class="td-con">
+                                        <img [src]="product.images[0].src" class="p-images">
+                                    </div>
+                                    <div *ngIf="product.images[0] == undefined" class="td-con">
+                                        <img src="../../../../../assets/images/No Image.png" class="p-images">
+                                    </div>
+                                </td>
+                                <td (click)="openProduct(product.id)" class="p-title">
+                                    <b>{{product.title}}</b>
+                                </td>
+                                <td (click)="openProduct(product.id)">
+                                    <span [class]="product.status" class="tag"> {{ product.status| titlecase }} </span>
+                                </td>
+                                <td (click)="openProduct(product.id)">
+                                    {{product.product_type}}
+                                </td>
+                                <td (click)="openProduct(product.id)" class="price-td">
+                                    <b>$ {{product.variants[0].price}}</b>
+                                </td>
+                            </ng-container>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

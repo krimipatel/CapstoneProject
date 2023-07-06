@@ -1,0 +1,132 @@
+<app-main-nav></app-main-nav>
+
+<div class="container">
+    <div class="heading"><h5 class="">Privacy Settings</h5> <hr></div>
+
+
+    <form [formGroup]="privacyFormGroup">
+        <!--============== first Card with editable settings =======================-->
+        <div class="card">
+            <!--=================== card heading with i button ============================-->
+            <h6 class="">Change your settings here
+               <button type="button" class="infoButon" [ngbTooltip]="tipContent"><i>i</i></button>
+                <ng-template #tipContent>Everyone: everyone in your community will be able to see this information.<br><br>
+                    Connections: Community members who are connected to you via knocks will be able to see this information<br><br>
+                    No-one: No one in your community will be able to see this information.
+                    </ng-template></h6> <hr>
+                <!--================= Email ===================-->
+                <span id="radios" class="individual-control">
+                    <label>Email : </label>
+                    <div class="group">
+                    <label for="Email-Everyone" >
+                      <input type="radio"   id="Email-Everyone" value="everyone" formControlName="email" />
+                      <p class="text">Everyone</p>
+                    </label>
+                    <label for="Email-Connections">
+                      <input type="radio" id="Email-Connections" formControlName="email" value='connections'  />
+                      <p class="text">Connections</p>
+                    </label>
+                    <label for="Email No One">
+                      <input type="radio"  id="Email No One" formControlName="email" value='none' checked />
+                      <p class="text">No One</p>
+                    </label>
+                </div>
+                </span>
+
+                <!--================= Unit Number ===================-->
+                  <span id="radios" class="individual-control">
+                    <label>Unit Number : </label>
+                    <div class="group">
+                    <label for="Unit-Everyone" >
+                      <input type="radio" id="Unit-Everyone" value="everyone" formControlName="unit" (click)="Warning()" />
+                      <p class="text">Everyone</p>
+                    </label>
+                    <label for="Unit-Connections">
+                      <input type="radio"  id="Unit-Connections" formControlName="unit" value='connections' (click)="Warning()" />
+                      <p class="text">Connections</p>
+                    </label>
+                    <label for="Unit No One" >
+                      <input type="radio"  id="Unit No One" formControlName="unit" value='none'  checked />
+                      <p class="text">No One</p>
+                    </label>
+                    </div>
+                  </span>
+                  <!-- Warning Alert -->
+                  <div *ngIf="alerted==0"class="alert alert-warning alert-dismissible d-flex align-items-center fade show">
+                    <i class="bi-exclamation-triangle-fill"></i>
+                    <strong class="mx-2">Warning!</strong> We want to ensure your safety. Please be careful about who you show your unit number to.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+
+                  <!--================= Profile Image ===================-->
+                  <span id="radios" class="individual-control">
+                    <label>Profile Image : </label>
+                    <div class="group">
+                    <label for="Image-Everyone" >
+                      <input type="radio"  id="Image-Everyone" value="everyone" formControlName="image"/>
+                      <p class="text">Everyone</p>
+                    </label>
+                    <label for="Image-Connections" >
+                      <input type="radio"  id="Image-Connections" formControlName="image" value='connections' checked />
+                      <p class="text">Connections</p>
+                    </label>
+                    <label for="Image No One" >
+                      <input type="radio"  id="Image No One" formControlName="image" value='none'  />
+                      <p class="text">No One</p>
+                    </label>
+                    </div>
+                  </span>
+
+                  <!--================= About ===================-->
+                  <span id="radios" class="individual-control">
+                    <label>About : </label>
+                    <div class="group">
+                    <label for="About-Everyone" >
+                      <input type="radio"  id="About-Everyone"  value="everyone" formControlName="about"/>
+                      <p class="text">Everyone</p>
+                    </label>
+                    <label for="About-Connections">
+                      <input type="radio" id="About-Connections"  formControlName="about" value='connections' checked />
+                      <p class="text">Connections</p>
+                    </label>
+                    <label for="About No One" >
+                      <input type="radio"  id="About No One"  formControlName="about" value='none'  />
+                      <p class="text">No One</p>
+                    </label>
+                    </div>
+                </span>
+        </div>
+
+        <!--============== Second Card with non-editable settings =======================-->
+        <div class="card">
+            <h6 class="">We always keep your phone number private. Your phone number will never be displayed on Naborino</h6> <hr>
+                  <span id="radios" class="individual-control disabled">
+                    <label disabled>Phone : </label>
+                    <div class="group">
+                        <label for="Phone-Everyone"  disabled >
+                            <input type="radio" name="Phone" id="Phone-Everyone" disabled />
+                            <p class="text">Everyone</p>
+                          </label>
+                          <label for="Phone-Connections"  disabled>
+                            <input type="radio" name="Phone" id="Phone-Connections" disabled />
+                            <p class="text">Connections</p>
+                          </label>
+                          <label for="Phone No One"  disabled>
+                            <input type="radio" name="Phone" id="Phone No One" disabled checked />
+                            <p class="text">No One</p>
+                          </label>
+                          </div>
+                  </span>
+        </div>
+
+        <div class="buttons">
+        <button class="btnsubmit" (click)="submit()">Save</button>
+        <button class="btnclose" (click)="Cancel()">Cancel</button>
+    </div>
+
+</form>
+
+</div>
+
+
+<app-fixed-footer></app-fixed-footer>

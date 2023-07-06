@@ -1,0 +1,123 @@
+<app-main-nav-vendor *ngIf="authorized==true"></app-main-nav-vendor>
+<app-offer-notice *ngIf="authorized==true"></app-offer-notice>
+
+<div class="main-container {{loadingClass}}">
+    <div *ngIf="authorized==false" class="top-div">
+        <img class="logo" src="../../../../../assets/images/logo.png" alt="logo">
+        <div class="sign-btns">
+            <button class="signup-btn text-bold-regular" (click)="signup()">Sign Up</button>
+            <button class="signin-btn text-bold-regular" (click)="signin()">Sign In</button>
+        </div>
+    </div>
+
+    <div *ngIf="authorized==false" class="design-div">
+        <div class="calculator-text">
+            <p class="text-bold-large white-color">Let’s calculate how much you can earn with a Naborino group buy.</p>
+            <p class="text-light white-color">Start by entering your information below.</p>
+        </div>
+        <div class="image-div">
+            <img class="image-icon" src="../../../../../assets/images/calculator-icon.svg" alt="">
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card col-l">
+
+            <form [formGroup]="calculateForm">
+
+                <div class="form-group">
+                    <label class="text-bold-medium" for="email">Email</label>
+                    <input formControlName="email" type="email" class="form-control">
+                    <small *ngIf="calculateForm.get('email')!.invalid && calculateForm.get('email')!.touched" class="text-danger">Not a valid email</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-bold-medium" for="productName">Product Name</label>
+                    <input formControlName="productName" type="text" class="form-control">
+                    <small *ngIf="calculateForm.get('productName')!.invalid && calculateForm.get('productName')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-bold-medium" for="productDescription">Product Description</label>
+                    <textarea class="form-control" formControlName="productDescription"></textarea>
+                    <small *ngIf="calculateForm.get('productDescription')!.invalid && calculateForm.get('productDescription')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-bold-medium">MSRP <small>(in CAD)</small> <span class="text-light-small"><br> What is the suggested retail price of your product?</span></label>
+                    <input formControlName="msrp" type="number" class="form-control" placeholder="$">
+                    <small *ngIf="calculateForm.get('msrp')!.invalid && calculateForm.get('msrp')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-bold-medium">Group Buy Discount <small>(in percentage)</small>
+
+                        <span class="text-light-small">
+                            <br>What discount can you offer for a group purchase?</span></label>
+                    <input formControlName="gpBuyDiscount" type="number" class="form-control" placeholder="%">
+                    <small *ngIf="calculateForm.get('gpBuyDiscount')!.invalid && calculateForm.get('gpBuyDiscount')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="text-bold-medium">Group Buy Minimum Size
+                        <span class="text-light-small"><br> What is the minimum group buy needed for a group buy discount (this is either number of unit or customers)?</span>
+                    </label>
+                    <input formControlName="gpBuyMinSize" type="number" class="form-control">
+                    <small *ngIf="calculateForm.get('gpBuyMinSize')!.invalid && calculateForm.get('gpBuyMinSize')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <!--
+                <div class="form-check">
+                    <input formControlName="canDeliver" type="checkbox" class="form-check-input">
+                    <label class="text-bold-medium" for="productName">Can you deliver the Items within Toronto?</label>
+                </div>
+                -->
+                <div class="form-group">
+                    <label class="text-bold-medium" for="shippingCost">Regular Shipping Cost <small>(in CAD)</small>
+                        <span class="text-light-small"><br> How much it would normally cost to ship one unit to a customer in Toronto ?</span>
+                    </label>
+                    <input formControlName="shippingCost" type="number" class="form-control" placeholder="$">
+                    <small *ngIf="calculateForm.get('shippingCost')!.invalid && calculateForm.get('shippingCost')!.touched" class="text-danger">Not a valid input</small>
+                </div>
+
+                <div class="calculate-btn-div">
+                    <button class="calculate-btn text-bold-medium" (click)="submit()">Calculate Now</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="card col-sm">
+            <p class="text-bold-large">Results</p>
+            <div *ngIf="results.length==0">No Results yet.</div>
+            <div>        
+                <div class="result" *ngFor="let result of results">
+                    <div>
+                        <svg (click)="deleteResult(results.indexOf(result))" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#db5d37" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z " />
+                        </svg>
+                    </div>
+                    <span class="p-title"> <b>Product Name: </b> {{result.pName}} </span>
+                    <span> <b>Discounted Customer Price: </b> ${{result.discounted_customer_price}} </span>        
+                    <span> <b>Shipping Savings: </b> ${{result.shipping_savings}}</span>
+                    <span> <b>Credit Card Saving: </b> ${{result.creditcard_savings}}</span>
+                    <span> <b>Naborino Commission: </b> ${{result.naborino_commission}}</span>
+                    <span> <b>Total Payout: </b> ${{result.total_payout}}</span>
+                </div>
+            </div>
+
+            <div class="center-content">
+                <small *ngIf="errorMessage!=''" class="text-danger bold error-box">{{errorMessage}}</small>
+                <small *ngIf="successMessage!=''" class="text-success bold success-box">{{successMessage}}</small>
+            </div>
+
+            <div *ngIf="authorized==false" class="cta">
+                <!-- <button class="cta-btn text-bold-medium" *ngIf="results.length!=0" (click)="goToRegisterPage()">Sell this offer on naborino</button> -->
+                <button class="cta-btn text-bold-medium" (click)="earlyVendorSignUp()">Early Vendor Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>

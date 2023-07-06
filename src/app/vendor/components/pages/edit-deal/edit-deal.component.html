@@ -1,0 +1,118 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+<!--Loading circle-->
+<div *ngIf="loading==true" class="svg-loader">
+    <svg class="svg-container" height="50" width="50" viewBox="0 0 100 100">
+      <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+      <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+    </svg>
+</div>
+<!--Loading circle ends-->
+
+<div *ngIf="loading==false" class="main-container {{loadingClass}}">
+
+    <p class="text-main-title">Edit Deal</p>
+    <div class="top-div">
+        <div class="main-slide">
+            <img src="{{deal.product.images[0].src}}" class="main-product-image">
+        </div>
+        <div class="details">
+            <h3>{{deal.product.title}}</h3>
+            <b>About this Item:</b>
+            <p>{{deal.product.body_html}}</p>
+            <b *ngIf="deal.product.variants.length==1">Price: ${{deal.product.variants[0].price}}</b>
+        </div>
+    </div>
+
+    <div class="bottom-div">
+        <div class="col-l">
+            <div class="card">
+                <label for="title" class="text-bold-large">Deal Title
+                    <input class="form-control" [(ngModel)]="title" type="text"></label>
+                <label for="description">
+                    <h3 class="text-bold-large">Description</h3>
+                    <textarea class="form-control" id="description" cols="75" rows="6" [(ngModel)]="description"></textarea>
+                </label>
+            </div>
+
+            <div class="card">
+                <p class="text-bold-large">Deal Tiers</p>
+                <div class="allTiers">
+                    <div>
+                        <p class="text-bold-medium">Minimum Deal Quantity</p>
+        
+                        <div *ngFor="let i of tierCount ">
+                            <div class="numbers">
+                                {{i+1}}
+                                <input type="number" (change)="tierChange()" [(ngModel)]="quantity[i]" min="0" oninput="this.value = Math.abs(this.value)" class="form-control tier-input">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-bold-medium">Discounted Price Per Unit ($)</p>
+                        <div *ngFor="let i of tierCount ">
+                            <div class="numbers">
+                                <input type="number" (change)="tierChange()" [(ngModel)]="price[i]" min="0" oninput="this.value = Math.abs(this.value)" class="form-control tier-input">
+                                <button class="remove" (click)="removeTier(i)">-</button>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+                <button class="add text-bold-medium" (click)="addTier()">Add Tier</button>
+                <p><small>Enter in the price ($) per unit once the minimum quantity for each tier is met.</small></p>
+        
+            </div>
+
+        </div>
+
+        <div class="col-sm">
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal Start Date</label><button type="button" class="infoButon" [ngbTooltip]="tipContent1"><i>i</i></button>
+                    <p><small>Note: All deals start on a Friday and end the following Thursday. Select the Friday that your deal will begin.</small></p>
+                </div>
+                <ng-template class="infoBox" #tipContent1>Kindly specify the earliest date you'd like to make your offer accessible to customers, bearing in mind that all deals will conclude on the following Thursday.</ng-template>
+                <!--<input [(ngModel)]="start_date" class="form-control" type="date" [min]="todayDate" id="datepicker">-->
+                
+                <mat-form-field appearance="fill">
+                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [(ngModel)]="start_date" [min]="todayDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                <div class="renewDealDiv">
+                    <input class="form-check-input" type="checkbox" id="renewDeal" name="renew" [(ngModel)]="renewDeal"/>
+                    <label class="form-check-label" for="renewDeal" id="renewDealLabel">Deals will auto-renew every week </label>
+                </div>
+            </div>
+            <!-- <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal Start Date</label><button type="button" class="infoButon" [ngbTooltip]="tipContent1"><i>i</i></button>
+                </div>
+                <ng-template class="infoBox" #tipContent1>Set the earliest date that you would like your offer to be available to customers.</ng-template>
+                <input [(ngModel)]="start_date" class="form-control" type="date" [min]="todayDate">
+            </div>
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal End Date</label><button type="button" class="infoButon" [ngbTooltip]="tipContent2"><i>i</i></button>
+                </div>
+                <ng-template class="infoBox" #tipContent2>The date on which the deal will no longer be visible to customers.</ng-template>
+                <input [(ngModel)]="end_date" class="form-control" type="date" [min]="start_date">
+            </div>
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal Duration <small>(max 6 days)</small></label><button type="button" class="infoButon" [ngbTooltip]="tipContent3"><i>i</i></button>
+                </div>
+                <ng-template class="infoBox" #tipContent3>After the first naborino in a community joins your deal, the <b>Deal Duration</b> is the number of days that your deal will be available for other members to join the deal and meet the minimum group size before it expires!</ng-template>
+                <input [(ngModel)]="timer" class="form-control" type="number" min="0" oninput="this.value = Math.abs(this.value)">
+            </div> -->
+        </div>
+    </div>
+
+    <div class="btns-div">
+        <button type="button" (click)="discard()" class="discard-btn">Discard</button>
+        <button (click)="submit()" class="submit">Submit</button>
+    </div>
+    
+</div>

@@ -1,0 +1,101 @@
+.container {
+    margin-top: 50px;
+    padding-bottom: 70px;
+}
+
+.card {
+    padding: 20px;
+    margin: 20px 0px;
+    border-radius: 5px;
+    background-color: var(--LightPurple);
+    transition: all 0.25s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.pagination-control-box {
+    text-align: center;
+}
+
+.ngx-pagination-control /deep/ .ngx-pagination .current {
+    background: var(--LogoColor);
+    color: white;
+    border-radius: 50px;
+}
+
+.ngx-pagination-control /deep/ .ngx-pagination a:hover {
+    background-color: var(--LightPurple);
+    border-radius: 50px;
+}
+
+.userscol {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+
+/*========== search ==============*/
+
+.search {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.inputbox {
+    border: var(--LogoColor) 2px solid;
+    border-radius: 5px 0px 0px 5px;
+    color: black;
+    font-size: auto;
+    height: auto;
+    width: 100%;
+    background-color: white;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.inputbox:focus {
+    outline: none;
+}
+
+.searchbtn {
+    border: var(--LogoColor) 2px solid;
+    border-radius: 0px 5px 5px 0px;
+    color: white;
+    font-size: auto;
+    background-color: var(--LogoColor);
+    max-width: 150px;
+    font-weight: 600;
+    transition: all 0.25s ease-in-out;
+}
+
+.searchbtn:hover {
+    background-color: var(--LogoColor);
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/*========== search end ==============*/
+
+.name {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.address {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.users {
+    font-size: 20px;
+    font-weight: 450;
+}

@@ -1,0 +1,122 @@
+<app-main-nav></app-main-nav>
+
+<div *ngIf="isLoaded" class="order-container">
+
+    <p class="bold-text">Order Details
+        <span *ngIf="order.order_type!='cart'" class="light group-icon">Group Deal&nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+              </svg>
+            </span>
+    </p>
+
+    <div class="card">
+        <div *ngIf="orderType!='deal'" class="product-details">
+
+            <!-- <p class="normal-text orderid">#{{order.order_id}}</p> -->
+            <p class="normal-text orderdate">Placed on {{order.created | date:'longDate'}}</p>
+
+            <div *ngFor="let p of order.ordered_products">
+                <div>
+                    <b>Vendor: </b>{{p.product.metadata.vendor}}
+                </div>
+                <div class="medium-bold-text product">
+                    <div>
+                        {{p.product.name}} <span *ngIf="p.product.metadata.variant_title != 'Default Title'">({{p.product.metadata.variant_title}})</span> ({{p.quantity}})
+                    </div>
+                    <div class="medium-bold-text amount">
+                        $ {{ price(p.amount_subtotal)}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="medium-bold-text product">
+                <div>
+                    Total
+                </div>
+                <div class="amount">
+                    $ {{totalPrice}}
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="orderType=='deal'" class="product-details">
+
+            <p class="normal-text orderid">#{{order.order_id}}</p>
+            <p class="normal-text orderdate">Placed on {{order.created | date:'longDate'}}</p>
+
+
+            <div *ngFor="let p of order.ordered_products">
+                <div>
+                    <b>Vendor: </b>{{p.product.metadata.vendor}}
+                </div>
+                <div class="product medium-bold-text">
+                    <div>
+                        {{p.product.metadata.variant_title}} ({{p.quantity}})
+                    </div>
+                    <div *ngIf="order.payment_status!='paid'" class="amount">
+                        $ {{ price(p.amount_subtotal)}}
+                    </div>
+                    <div *ngIf="order.payment_status=='paid'" class="amount">
+                        <span class="over-price">$ {{ price(p.amount_subtotal)}}</span> &nbsp; $ {{order.price_collected}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+            <div class="product medium-bold-text">
+                <div>
+                    Total
+                </div>
+                <div *ngIf="order.payment_status!='paid'" class="amount">
+                    <button type="button" class="infoButon" [ngbTooltip]="tipContent"><i>i</i></button> $ {{totalPrice}}
+                    <ng-template class="infoBox" #tipContent>This is the authorized amount and is not charged to your credit card.  You will only be charged once the deal closes successfully and at the deal price.  If the deal does not end successfully (not enough quantities sold) then you will not be charged anything.</ng-template>
+                </div>
+                <div *ngIf="order.payment_status=='paid'" class="amount">
+                    <span class="saved">saved ${{order.amount - order.price_collected}}</span> &nbsp; $ {{order.price_collected}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="more-details">
+        <div *ngIf="orderType!='deal'" class="card s-card span1">
+
+            <h6 class="header-bold-text">Card Details</h6>
+            <p class="normal-text">
+                xxxx-xxxx-xxxx-{{order.card.card.last4}}
+                <br> {{order.billing_details.name}}
+                <br> Email: {{order.billing_details.email}}
+            </p>
+
+            <a class="header-bold-text" [href]="order.receipt_url" target="_blank">View receipt</a>
+        </div>
+
+        <div *ngIf="orderType=='deal'" class="card s-card span1">
+            <h6 class="header-bold-text">Card Details</h6>
+            <p class="normal-text">
+                xxxx-xxxx-xxxx-{{order.card.card.last4}}
+                <br>{{order.billing_details.name}}
+                <br>Email : {{order.billing_details.email}}<br>
+                <span>Payment Status: <span *ngIf="order.payment_status=='pending'" class="pending-tag">{{order.payment_status}}</span></span><br>
+                <small class="pending-tag" *ngIf="order.payment_status=='pending'">(We will not charge you until you get the deal)</small>
+            </p>
+
+            <a class="header-bold-text" [href]="order.receipt_url" target="_blank">View receipt</a>
+        </div>
+
+        <div class="card s-card span1">
+            <h6 class="header-bold-text">Shipping Details</h6>
+            <p class="normal-text">
+                Unit {{order.shipping.line2}},
+                <span *ngIf="order.shipping.line1!=null"><br>{{order.shipping.line1}}</span>
+                <br>{{order.shipping.city}},&nbsp;{{order.shipping.state}},&nbsp;{{order.shipping.postal_code}}
+            </p>
+
+        </div>
+    </div>
+
+</div>

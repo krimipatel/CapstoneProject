@@ -1,0 +1,58 @@
+.container {
+    width: 80%;
+    margin-inline: auto;
+    margin-top: 50px;
+    padding-bottom: 70px;
+}
+
+.card {
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.product-deatails {
+    width: max-content;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.more-details {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.span1 {
+    flex: 1 0 0;
+}
+
+.actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.action {
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: var(--LogoColor);
+    border: 2px solid var(--LogoColor);
+    font-weight: 600;
+}
+
+.action:hover {
+    color: white;
+    background-color: var(--LogoColor);
+}
+
+.orderid {
+    margin-bottom: 2px;
+}

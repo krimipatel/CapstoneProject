@@ -1,0 +1,68 @@
+<nav class="nav-container flex-row space-between">
+  <div class="logo-container">
+    <a href="/vendor/home">
+      <img src="../../../../../assets/vendor/Logo.png" class="logo" alt="naborino logo">
+    </a>
+  </div>
+  <div class="middle-nav flex-row">
+    <div [ngClass]="{'highlight':active=='home'}">
+      <a href="/vendor/home">
+        <img class="icons" src="../../../../assets/vendor/product.png" alt="home icon" [ngbTooltip]="tipContent">
+        <ng-template class="infoBox" #tipContent>Products</ng-template>
+      </a>
+    </div>
+    <div [ngClass]="{'highlight':active=='deals'}">
+      <a href="vendor/deals">
+        <img class="icons" src="../../../../assets/vendor/deals.png" alt="community icon" [ngbTooltip]="tipContent1">
+        <ng-template class="infoBox" #tipContent1>Deals</ng-template>
+      </a>
+    </div>
+    <div [ngClass]="{'highlight':active=='orders'}">
+      <a href="vendor/orders">
+        <img class="icons" src="../../../../assets/vendor/orders.png" alt="=market icon" [ngbTooltip]="tipContent2">
+        <ng-template class="infoBox" #tipContent2>Orders</ng-template>
+      </a>
+    </div>
+    <div [ngClass]="{'highlight':active=='calculator'}">
+      <a href="vendor/calculate">
+        <img class="icons" src="../../../../assets/vendor/calculator.png" alt="=market icon" [ngbTooltip]="tipContent3">
+        <ng-template class="infoBox" #tipContent3>Calculator</ng-template>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="right-nav flex-row">
+
+    <div [ngClass]="{'highlightToggle':showOptions}" class="option-icon-container" (clickOutside)="openOptions(false)" >
+      <div (click)="openOptions(!showOptions)" class="profile-picture-container">
+        <img src="../../../../assets/vendor/store.png" class="icons profile-picture">
+      </div>
+      <div class="options" *ngIf="showOptions">
+        <app-vendor-nav-options></app-vendor-nav-options>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- <nav class="middle-nav-small-screen nav-container">
+
+  <div class="flex-row space-between">
+    <div   [ngClass]="{'highlight':active=='home'}">
+      <a href="/home">
+        <img class="icons" src="../../../../assets/nav-icons/home.svg" alt="home icon" >
+      </a>
+    </div>
+    <div  [ngClass]="{'highlight':active=='community'}">
+      <a href="/communityprofile">
+        <img class="icons" src="../../../../assets/nav-icons/community.svg" alt="community icon" >
+      </a>
+    </div>
+    <div   [ngClass]="{'highlight':active=='market'}">
+      <a href="/market">
+        <img class="icons" src="../../../../assets/nav-icons/market.svg" alt="=market icon" >
+      </a>
+    </div>
+  </div>
+</nav> -->

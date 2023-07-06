@@ -1,0 +1,159 @@
+<div class="logo-class">
+    <img class="logo" (click)="landing()" src="../../../../assets/images/logo.png" alt="logo">
+</div>
+
+
+<div class="container main-container {{loadingClass}}">
+    <div class="col-sm indi info-section">
+        <div class="middle-align">
+            <br>
+            <p class="text-bold-header light-black">REGISTER AS A VENDOR BY COMPLETING THIS FORM</p> <br>
+            <p class="text-bold-medium light-black">WE ACTUALLY SUPPORT LOCAL BUSINESSES</p>
+            <p class="text-bold-regular light-black">Naborino makes it easy for local businesses to create compelling group buying offers for their local communities of naborinos.
+                <br>And it's absolutely free to share an offer with our users. We only make money when you do.
+            </p>
+            <a href="/vendor/login">
+                <p class="text-bold-regular">Already have an account (Sign in) ?</p>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-l indi vendor-form">
+        <form [formGroup]="VendorRegisterForm">
+
+            <div class="form-group">
+                <label class="text-form" for="email"> Email<small>*</small>
+                  <input name="email" type="email" class="form-control" id="email" formControlName="email">
+                  &nbsp;<small *ngIf="VendorRegisterForm.get('email')!.invalid && VendorRegisterForm.get('email')!.touched"
+                    class="text-danger">Not a Valid Email</small>
+                </label>
+            </div>
+
+            <div class="flex">
+                <div class="form-group">
+                    <label class="text-form" for="fname"> First Name<small>*</small>
+                  <input name="fname" type="text" class="form-control" formControlName="fname">
+                  &nbsp;<small *ngIf="VendorRegisterForm.get('fname')!.invalid && VendorRegisterForm.get('fname')!.touched"
+                    class="text-danger">This
+                    feild is required.</small>
+                </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-form" for="lname"> Last Name<small>*</small>
+                    <input name="lname" type="text" class="form-control" formControlName="lname">
+                    &nbsp;<small *ngIf="VendorRegisterForm.get('lname')!.invalid && VendorRegisterForm.get('lname')!.touched"
+                      class="text-danger">This
+                      feild is required.</small>
+                  </label>
+                </div>
+            </div>
+
+
+            <div class="flex">
+                <div class="form-group">
+                    <label class="text-form" for="shopName"> Shop Name<small>*</small>
+                  <input name="shopName" type="text" id="shopName" class="form-control" formControlName="shopName">
+                  &nbsp;<small class="text-danger"
+                    *ngIf="VendorRegisterForm.get('shopName')!.invalid && VendorRegisterForm.get('shopName')!.touched">This
+                    feild is required.</small>
+                </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-form" for="address">Address<small>*</small>
+                    <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+                      (onAddressChange)="handleAddressChange($event)" class="form-control" type="text"
+                      formControlName="address" placeholder="Enter your street address">
+                    &nbsp;<small class="text-danger"
+                      *ngIf="VendorRegisterForm.get('address')!.invalid && VendorRegisterForm.get('address')!.touched">This feild
+                      is required.</small>
+                    &nbsp;<small class="text-danger" *ngIf="addressError!=null">{{addressError}}</small>
+                  </label>
+                </div>
+            </div>
+
+
+            <div class="flex">
+                <div class="form-group">
+                    <label class="text-form" for="website"> Website
+                      <input name="website" type="text" class="form-control" formControlName="website" placeholder="http://">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-form" for="phone"> Phone<small>*</small>
+                    <input name="phone" type="tel" class="form-control" id="phone" formControlName="phone" placeholder="2505555555">
+                    &nbsp;<small class="text-danger"
+                      *ngIf="VendorRegisterForm.get('phone')!.invalid && VendorRegisterForm.get('phone')!.touched">This feild is
+                      required.</small>
+                  </label>
+                </div>
+            </div>
+
+
+            <div class="flex">
+                <div class="form-group">
+                  <label class="text-form" for="password">Password<small>*</small>
+                  <input name="password" [type]="showPassword1" class="form-control" formControlName="password">
+                  <div class="btn-grp">
+                    <button (click)="togglePassword1()" class="input-group-addon">
+                      <img src="../../../../assets/button-icons/eye.svg">
+                    </button>
+                  </div>
+                  <small
+                    *ngIf="VendorRegisterForm.get('password')!.invalid && VendorRegisterForm.get('password')!.touched"
+                    class="text-danger">Password must be 8 characters</small>
+                </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-form" for="password2">Confirm Password<small>*</small>
+                    <input name="password2" [type]="showPassword2" class="form-control" formControlName="password2">
+                    <div class="btn-grp">
+                      <button (click)="togglePassword2()" class="input-group-addon">
+                        <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                    </div>
+                    <small
+                      *ngIf="VendorRegisterForm.hasError('passwordsNotMatching') && VendorRegisterForm.get('password2')!.touched"
+                      class="text-danger">Password is not matching!!</small>
+                  </label>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="center-text">
+                <small class="text-danger error-box" *ngIf="errorMessage=='email'">User already exist with this email. Please select another email or sign in <a href="/vendor/login">here</a></small>
+                <small class="text-danger error-box" *ngIf="errorMessage=='shopname'">There exists a shop with the shopname. Please choose a different one.</small>
+                <small class="text-danger error-box" *ngIf="errorMessage=='phone'">Enter a valid phone number</small>
+                <small class="text-danger error-box" *ngIf="errorMessage=='error'">Failed. Please try again later</small>
+                <small class="success success-box" *ngIf="successMessage!=''">{{successMessage}}</small>
+            </div>
+
+
+            <br>
+            <button class="registerBtn text-bold-medium" (click)=" register() " [disabled]="VendorRegisterForm.invalid ">Sign Up</button>
+
+        </form>
+    </div>
+</div>
+
+<div class="container bottom-div">
+    <div class="calculator-text">
+        <p class="text-bold-large white-color">Unsure about how you can use Naborino?</p>
+        <p class="text-light white-color">Use this calculator to calculate how you can use Naborino to start earning by posting products and group buy offers.</p>
+
+        <button class="calculate-btn text-bold-medium" (click)="calculate()">Calculate Now</button>
+    </div>
+
+    <div class="image-div">
+        <img class="image-icon" src="../../../../../assets/images/personOnChair.svg" alt="">
+    </div>
+</div>

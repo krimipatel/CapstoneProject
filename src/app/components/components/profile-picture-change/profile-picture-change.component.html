@@ -1,0 +1,16 @@
+<div class="main-container">
+  <div class="image-container">
+    <img [src]="Image" class="profile-picture" alt="profile image">
+  </div>
+  <div class="action-center">
+    <form [formGroup]="uploadForm">
+      <div class="btns">
+        <input style="display: none;" name="profile" type="file" (change)="onFileSelected($event)" #imageUpload>
+        <button *ngIf="!imageUploaded" (click)="cancel()" class="bttn">Cancel</button>
+        <button *ngIf="!imageUploaded" (click)="imageUpload.click()" class="bttn accent">Select New Image</button>
+        <button *ngIf="imageUploaded" (click)="imageUpload.click()" class="bttn">Select another Image</button>
+        <button *ngIf="imageUploaded" (click)="onUpload()" class="bttn accent">Save Image</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div>
+    <form class="main-container" [formGroup]="profileForm">
+        <div>
+            <p class="semi-bold-text">Personal Details</p>
+
+            <div class="indi-div">
+                <div class="indi-col">
+                    <div class="form-group">
+                        <label for="FirstName" class="light-text">First Name <small>*</small></label>
+                        <input type="text" class="form-control input-text" formControlName="fname">
+                        <small class="text-danger" *ngIf="profileForm.get('fname')!.invalid && profileForm.get('fname')!.touched">This feild is required.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LastName" class="light-text">Alias <small>*</small></label>
+                        <input type="text" class="form-control input-text" formControlName="alias">
+                        <small class="text-danger" *ngIf="profileForm.get('alias')!.invalid && profileForm.get('alias')!.touched">This feild is required.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="light-text">Phone</label>
+                        <input type="tel" class="form-control input-text" formControlName="phone">
+                        <small class="text-danger" *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched">This feild is required.</small>
+
+                    </div>
+                </div>
+
+                <div class="indi-col">
+                    <div class="form-group">
+                        <label for="LastName" class="light-text">Last Name <small>*</small></label>
+                        <input type="text" class="form-control input-text" formControlName="lname">
+                        <small class="text-danger" *ngIf="profileForm.get('lname')!.invalid && profileForm.get('lname')!.touched">This feild is required.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="light-text">Email</label>
+                        <input type="email" class="form-control input-text" formControlName="email" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="about" class="light-text">About</label>
+                        <textarea class="form-control input-text small-text" formControlName="about" rows="4" cols="48"> </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p class="semi-bold-text">Address</p>
+            <div class="indi-div">
+                <div class="form-group">
+                    <label for="unit" class="light-text">Unit Number <small>*</small></label>
+                    <input class="form-control input-text" formControlName="unit">
+                    <small class="text-danger" *ngIf="profileForm.get('unit')!.invalid && profileForm.get('unit')!.touched">This feild is required.</small>
+                </div>
+
+                <div class="form-group address">
+                    <label for="address" class="light-text">Address</label>
+                    <input class="form-control input-text" id="address" formControlName="address" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-div" *ngIf="errorMessage">
+            <span class="error" *ngIf="errorMessage">{{errorMessage}}</span>
+        </div>
+
+        <div>
+            <button class="save-btn" [disabled]="profileForm.invalid" (click)="setProfileInfo()">Save</button>
+        </div>
+    </form>
+
+</div>

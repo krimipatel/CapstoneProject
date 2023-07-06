@@ -1,0 +1,21 @@
+<div class="modal-body modalCustom">
+    <form [formGroup]="inviteForm">
+        <div class="form-group">
+            <label for="email"> Please enter the friend's email and we will send an invite to them. </label>
+            <input class="form-control" type="email" placeholder="tom@email.com" formControlName="email">
+            <p *ngIf="inviteForm.get('email')!.invalid && inviteForm.get('email')!.touched" class="text-danger small">Not a Valid Email</p>
+            <br>
+            <div>
+                <label><input type="checkbox" formControlName="community_address" /> Ask them to join your community? </label> <br>
+                <!-- <small>(If not checked, your friend can enter into any community)</small> -->
+            </div>
+
+            <button class="submitInvite" (click)="invite()" [disabled]="inviteForm.invalid"> Send Invite</button>
+
+            <div>
+                <p *ngIf="message!=''" class="text-success bold success-box">{{message}}</p>
+            </div>
+        </div>
+    </form>
+
+</div>

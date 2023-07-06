@@ -1,0 +1,65 @@
+
+.container{
+    margin-top: 70px;
+    max-width: 600px;
+}
+
+.content{
+    margin: 20px;
+    min-height: 300px;
+    text-align: center;
+}
+
+.title{
+    font-weight: 700;
+    text-align: center;
+}
+
+.card-footer{
+    background-color: white;
+}
+
+.next-btn{
+    border:none;
+    float: right;
+    background-color: white;
+}
+
+.pre-btn{
+    border:none;
+    float: left;
+    background-color: white;
+}
+
+.submit{
+  border:none;
+  border-radius: 3px;
+  color:white;
+  background-color:var(--LogoColor);
+  width: 80px;
+  margin-left: 222px;
+
+  float:right;
+}
+
+
+.btnclose{
+    margin-top:20px ;
+    border:2px var(--LogoColor) solid ;
+    border-radius: 3px;
+    color:var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: right;
+}
+
+.btnclose:hover{
+  background-color: var(--LogoColor);
+  color:white;
+}
+
+.progress{
+    margin: 20px ;
+    height: 15px;
+}
+

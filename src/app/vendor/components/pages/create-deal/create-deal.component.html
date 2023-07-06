@@ -1,0 +1,149 @@
+<app-main-nav-vendor></app-main-nav-vendor>
+
+<div class="main-container {{loadingClass}}" *ngIf="dataLoaded">
+    
+    <p class="text-main-title">Create Deal</p>
+    <div class="top-div">
+        <div>
+            <img *ngIf="product.images.length>0" src="{{ this.product.images[0].src}}" class="main-product-image">
+            <img *ngIf="product.images.length==0" src="../../../../../assets/images/No Image.png" class="main-product-image">
+        </div>
+        <div>
+            <p class="text-main-title">{{product.title}}</p>
+            <hr>
+            <p class="text-bold-medium">Product Details</p>
+            <p class="text-title-sm" style="white-space: pre-line">{{product.body_html}}</p>
+            <p class="text-bold-medium" *ngIf="product.variants.length==1">Price: <span class="text-title-sm">${{product.variants[0].price}}</span></p>
+        </div>
+    </div>
+    <form [formGroup]="dealForm">
+    <div class="bottom-div">
+        <div class="col-l">
+            <div class="card">
+                <label for="title" class="text-bold-large">Deal Title
+                  <input class="form-control" [(ngModel)]="title" type="text" formControlName="dealTitle"></label>
+                <label for="description">
+                    <h3 class="text-bold-large">Description</h3>
+                    <textarea class="form-control" [(ngModel)]="description"  rows="6" cols="75" formControlName="description"></textarea>
+                </label>
+            </div>
+
+           
+
+
+        </div>
+
+        <div class="col-sm">
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal Start Date</label><button type="button" class="infoButon" [ngbTooltip]="tipContent1"><i>i</i></button>
+                    <p><small>Note: All deals start on a Friday and end the following Thursday. Select the Friday that your deal will begin.</small></p>
+                </div>
+                <ng-template class="infoBox" #tipContent1>Kindly specify the earliest date you'd like to make your offer accessible to customers, bearing in mind that all deals will conclude on the following Thursday.</ng-template>
+                <!--<input [(ngModel)]="start_date" class="form-control" type="date" [min]="todayDate" id="datepicker">-->
+                
+                <mat-form-field appearance="fill">
+                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" [(ngModel)]="start_date" [min]="todayDate" formControlName="dealStartDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                <div id="renewDealDiv">
+                    <input class="form-check-input" type="checkbox" id="renewDeal" name="renew" [(ngModel)]="renewDeal" value="true" formControlName="renewDeal" checked="true" />
+                    <label class="form-check-label" for="renewDeal" id="renewDealLabel">Deals will auto-renew every week </label>
+                </div>
+            </div>
+            
+            <!--
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal End Date</label><button type="button" class="infoButon" [ngbTooltip]="tipContent2"><i>i</i></button>
+                </div>
+                <ng-template class="infoBox" #tipContent2>The date on which the deal will no longer be visible to customers.</ng-template>
+                <input [(ngModel)]="end_date" class="form-control" type="date" [min]="start_date">
+            </div>
+            -->
+
+            <!--
+            <div class="card">
+                <div>
+                    <label for="title" class="text-bold-large">Deal Duration <small>(max 6 days)</small> </label><button type="button" class="infoButon" [ngbTooltip]="tipContent3"><i>i</i></button>
+                </div>
+                <ng-template class="infoBox" #tipContent3>After the first naborino in a community joins your deal, the <b>Deal Duration</b> is the number of days that your deal will be available for other members to join the deal and meet the minimum group size before it expires!</ng-template>
+                <input [(ngModel)]="timer" (change)="checkTimer()" class="form-control" type="number" pattern="[0-9]+">
+            </div>
+            -->
+        </div>
+
+
+    </div>
+    </form>
+
+    <div class="card">
+        <p class="text-bold-large">Deal Tiers</p>
+        <p>Please remember:<br>
+        1) Customers love deals and the Naborino Marketplace is a great way to attract new customers--so the better the deal price the more new customers you'll likely attract.<br>
+        2) Communities take time to build an active customer base--please consider smaller minimum order quantities to increase the deal success rate.<br>
+        3) Shipping costs are included in the deal price.<br>
+        4) Consider the Naborino Success Fee which is taken off the final transaction amount.</p>
+        <div class="allTiers">
+            <div>
+                <p class="text-bold-medium">Minimum Deal Quantity</p>
+
+                <div *ngFor="let i of tierCount ">
+                    <div class="numbers">
+                        {{i+1}}
+                        <input type="number" [(ngModel)]="quantity[i]" (change)="tierChange()"   class="form-control tier-input">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="text-bold-medium">Discounted Price Per Unit ($)</p>
+                <div *ngFor="let i of tierCount ">
+                    <div class="numbers">
+                        <input type="number"  [(ngModel)]="price[i]" (change)="tierChange()"  class="form-control tier-input">
+                        <button class="remove" (click)="removeTier(i)">	&#8211;</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <p class="text-danger small" *ngIf="tierError">Please complete previous tiers before adding new one.</p>
+        <button class="add text-bold-medium" (click)="addTier()">Add Tier</button>
+        <p><small>Enter in the price ($) per unit once the minimum quantity for each tier is met.</small></p>
+    </div>
+
+
+    <div class="btns-div">
+        <button type="button" [disabled]="responsePending"  type="button" class="discard-btn text-title" data-toggle="modal" data-target="#exampleModal">Discard</button>
+        <button class="submit" [disabled]="dealForm.invalid" (click)="submit()">
+          <div *ngIf="!responsePending">Create Deal</div>
+          <div *ngIf="responsePending">
+            <img src="../../../../../assets/button-icons/load.png" class="loading">
+            Creating Deal...
+          </div>
+        </button>
+    </div>
+    
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Discard the deal? <small>(changes will not be saved)</small>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="next-btn text-title submit" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="discard-btn text-title" data-dismiss="modal" (click)="discard()">Discard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

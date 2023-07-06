@@ -1,0 +1,99 @@
+<app-main-nav></app-main-nav>
+
+
+
+
+<!------------Main Community---------------->
+<div class="community-container">
+    <div class="header-mobile">
+        <div class="card">
+            <ul><b>
+        <li>{{com_Address}}</li>
+      </b> </ul>
+        </div>
+    </div>
+
+    <div class="header">
+        <div #map id="map" class="maps">
+        </div>
+        <div *ngIf="loading==false" class="card com-info">
+            <ul>
+                <li>{{com_Address}}</li>
+                <li>{{com_Name}}</li>
+                <li>{{com_type}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div *ngIf="loading==false" class="body">
+        <div class="body-header flex-row">
+            <div class="header-title">Your Neighbours</div>
+            <div>
+                <button (click)="open(content,'friend')" class="accent-button">
+          <img class="icon" src="../../../../../assets/button-icons/add-person.svg" alt="add person">
+          Invite a friend
+        </button>
+            </div>
+            <ng-template #content let-modal>
+                <app-invite [communityAddress]='com_Address'></app-invite>
+            </ng-template>
+        </div>
+
+        <div *ngIf="users.length==0" class="community-container empty">
+          <img src="../../../../../assets/vectors/alone.png" alt="alone lady" class="vector">
+          <p class="CTA">It's pretty lonely in here! Naborino is better with your neighbours!</p>
+          <br>
+          <button (click)="open(content,'neighbour')" class="accent-button">
+            <img class="icon" src="../../../../../assets/button-icons/add-person.svg" alt="add person">
+            Invite your neighbours.
+          </button>
+        </div>
+
+        <div *ngIf="users.length!=0" class="body-profiles flex-row">
+            <div *ngFor="let user of users" class="card profile">
+                <div *ngIf="user.connection_status;" class="connection-status">
+                    <button type="button" class="connection-tag" [ngbTooltip]="tipContent">Connected</button>
+                    <ng-template class="tipContent" #tipContent>You are connected with <strong>{{user.alias}}</strong>.
+                    </ng-template>
+                </div>
+                <div class="profile-info " (click)="viewProfile(user)">
+                    <div class="profile-image ">
+                        <img loading="lazy" *ngIf="user.profile_photo!=null" [src]="user.profile_photo" class="profile-image" alt="">
+                        <img loading="lazy" *ngIf="user.profile_photo==null" src="https://avatars.dicebear.com/api/initials/{{user.alias}}.svg" class="profile-image" alt="">
+                    </div>
+                    <div class="alias">
+                        {{user.alias}}
+                    </div>
+                </div>
+                <div class="actions">
+                    <div class="action-container" (click)="viewProfile(user)">
+                        View Profile
+                    </div>
+                    <div *ngIf="!user.connection_status;" (click)="sendKnock(user)" class="action-container accent">
+                        Send A Knock
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="this.showToast" class="floater">
+    <app-toast [toastMessage]="message" (closeEvent)="closeToast()"></app-toast>
+</div>
+
+
+
+<!------------Skeleton Loader---------------->
+<div *ngIf="loading" class="skeleton-loader">
+
+    <div class="flex-row-skeleton">
+        <div *ngFor="let i of [0,1,2,3,4,5,6,7]" class="post-loading-box-profile">
+            <div class="post-loading-dp"></div>
+            <div class="post-loading-line-thick"></div>
+        </div>
+    </div>
+</div>
+<!------------Skeleton Loader Ends---------------->

@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="header">
+        <div class="post-type">
+            <div class="post-info">
+                News: Updates in your community.
+            </div>
+            <img class="icon" src="../../../../../assets/post-icons/news.svg">
+            <span class="post-type-text">News</span>
+        </div>
+        <div class="poster">
+            <span class="poster-type-text">{{news.alias}}</span>
+            <img loading="lazy" *ngIf="news.profile_photo!=null" [src]="news.profile_photo" class="icons" alt="">
+            <img loading="lazy" *ngIf="news.profile_photo==null" src="https://avatars.dicebear.com/api/initials/{{news.alias}}.svg" class="profle-picture" alt="">
+        </div>
+    </div>
+    <div class="post-content">
+        <span class="title">{{news.title}}</span><br>
+        <span class="dateTime">{{news.Date + "  " + news.Time}}</span> <br>
+        <!-- Description and Requirements Tags -->
+        <!-- <div class="tags-container">
+            <div class="description-tags">
+
+                <span class="tag" *ngFor="let tag of news.description_tags">
+          <div class="dot"></div>
+          {{tag}}
+        </span>
+            </div>
+            <div class="requirement-tags">
+                <span class="tag" *ngFor="let tag of news.requirements_tags">
+          <div class="dot"></div>
+          {{tag}}
+        </span>
+            </div>
+        </div> -->
+        <span class="category">{{news.subcategory}}</span><br>
+        <span class="description">{{news.clarification}}</span><br>
+        <div class="file">
+          <a [href]="news.files" target="_blank">
+            <img class="photo" [src]="news.files">
+          </a>
+        </div>
+    </div>
+    <div class="post-footer">
+        <div (click)="vote('up',news.post_id)" *ngIf="news.user_action=='upvote'" class="action active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+          <path
+              d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+      </svg> {{news.upvote.length}}
+        </div>
+        <div (click)="vote('up',news.post_id)" *ngIf="news.user_action=='downvote'||news.user_action=='none'" class="action">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+          <path
+              d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+      </svg> {{news.upvote.length}}
+        </div>
+
+
+        <div (click)="vote('down',news.post_id)" *ngIf="news.user_action=='downvote'" class="action active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path
+              d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+      </svg> {{news.downvote.length}}
+        </div>
+        <div (click)="vote('down',news.post_id)" class="action" *ngIf="news.user_action=='upvote'||news.user_action=='none'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path
+              d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+      </svg> {{news.downvote.length}}
+        </div>
+    </div>
+</div>

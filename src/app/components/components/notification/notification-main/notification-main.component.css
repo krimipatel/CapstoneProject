@@ -1,0 +1,53 @@
+.notification-container {
+  position: absolute;
+  top:105%;
+  right:50px;
+  width: 350px;
+  background-color:white;
+  border: 2px rgb(206, 206, 206) solid  ;
+  z-index: 300;
+  border-radius: 10px;
+}
+
+
+.view{
+  max-height: 400px;
+  overflow-y: scroll;
+
+  padding: 1rem;
+}
+
+.view::-webkit-scrollbar{
+  display: none;
+  scrollbar-width: 10px;
+}
+
+.no-content{
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+hr{
+  height: 0.1px;
+}
+
+.loading{
+  padding:1rem;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .notification-container {
+    position: absolute;
+    top:105%;
+    right:10px;
+    width: 90vw;
+    background-color:white;
+    border: 2px rgb(206, 206, 206) solid  ;
+    z-index: 300;
+    border-radius: 10px;
+  }
+}
+

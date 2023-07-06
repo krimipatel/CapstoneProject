@@ -1,0 +1,175 @@
+
+
+
+
+/*============basic==========*/
+.container{
+    margin-top: 70px;
+    padding-bottom: 100px;
+}
+
+.card{
+    margin: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.heading{
+    max-width: 650px;
+    margin-left: 10px;
+}
+
+.individual-control{
+    margin: 10px;
+}
+
+.disabled{
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
+
+/*============ small button in the first card ========================== */
+.infoButon{
+    float: right;
+    height:22px;
+    width:22px;
+    font-weight: 700;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 50%;
+    border:none;
+
+    background-color: #EDCDFF;
+    color: var(--LogoColor);
+  }
+  
+  .infoButon:hover{
+    background-color: var(--LogoColor);
+    color: white;
+    border: none;
+  }
+
+/* ========= RADIO BUTTONS ============= */
+  #radios label  {
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+  }
+  
+  #radios label + label {
+    margin-left: 10px;
+    
+  }
+
+  input[type="radio"] {
+    opacity: 0; /* hidden but still tabable */
+    position: absolute;
+  }
+  
+  .group{
+      float: right;
+  }
+  
+
+  input[type="radio"] + .text {
+    color: black;
+    border-radius:3px;
+    background-color: var(--LightPink);
+    padding: 8px;
+    font-weight: 700;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+  }
+  
+  input[type="radio"]:checked + .text {
+    color: white;
+    background-color: var(--LogoColor);
+  }
+  
+  input[type="radio"]:focus + .text {
+    color: #fff;
+  }
+
+  /*============= to make responsive =================*/
+  @media (max-width: 550px) {
+    input[type="radio"] + .text {
+        color: black;
+        border-radius:2px;
+        background-color: var(--LightPink);
+        padding: 2px;
+        font-weight: 500;
+        transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+      }
+
+      .card{
+        margin-top: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 8px;
+        border-radius: 5px;
+        max-width: 600px;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    }
+
+    .container{
+        margin-top: 30px;
+        padding-bottom: 100px;
+    }
+
+    #radios label {
+      cursor: pointer;
+      position: relative;
+      font-weight: 500;
+    }
+  }
+  
+/*==================== buttons (close and save) ================*/
+
+.buttons{
+    max-width: 600px;
+    margin: 10px;
+}
+
+.btnclose{
+    height:40px;
+    width: 120px;
+
+    border:2px var(--LogoColor) solid ;
+    border-radius: 3px;
+    color:var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: left;
+  }
+
+  .btnsubmit{
+    height:40px;
+    width: 120px;
+
+    border:2px var(--LogoColor) solid ;
+    border-radius: 3px;
+    color:var(--LogoColor);
+    font-weight: 600;
+    background-color: white;
+    float: right;
+  }
+
+
+.btnclose:hover{
+  background-color: var(--LogoColor);
+  color:white;
+}
+
+.btnsubmit:hover{
+    background-color: var(--LogoColor);
+    color:white;
+}
+
+
+  
+
+  

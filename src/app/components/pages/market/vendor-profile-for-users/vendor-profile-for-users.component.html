@@ -1,0 +1,49 @@
+<app-main-nav></app-main-nav>
+
+<div class="container">
+    <div class="content">
+        <h3 class="main-title">Vendor Details</h3>
+        <div *ngIf="gotInfo" class="card">
+            <div class="flex-row">
+                <div class="indi">
+                    <h3 class="title">Shop Name</h3>
+                    <h3 class="ans">{{vendorDetails.Vendor}}</h3>
+                </div>
+                <div class="indi">
+                    <h3 class="title">Vendor Name</h3>
+                    <h3 class="ans">{{vendorDetails.Firstname}} {{vendorDetails.Lastname}}</h3>
+                </div>
+            </div>
+
+            <button class="follow" (click)="followVendor()" *ngIf="vendorDetails.is_following=='False' || vendorDetails.is_following=='None'">Follow Vendor</button>
+
+            <div class="flex-row" *ngIf="vendorDetails.is_following=='True'">
+                <h3 class="following">Following
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                      </svg>
+                </h3>
+                <button class="follow" (click)="followVendor()">Unfollow</button>
+            </div>
+
+            <hr>
+
+            <div *ngIf="vendorDetails.Website" class="indi">
+                <h3 class="title">Website</h3>
+                <a class="ans" target="_" [href]="vendorDetails.Website">{{vendorDetails.Website}}</a>
+            </div>
+            <div *ngIf="vendorDetails.Phone" class="indi">
+                <h3 class="title">Contact Number</h3>
+                <h3 class="ans">{{vendorDetails.Phone}}</h3>
+            </div>
+            <div class="indi">
+                <h3 class="title">Store Location</h3>
+                <h3 class="ans">{{vendorDetails.Address}}</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

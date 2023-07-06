@@ -1,0 +1,99 @@
+<app-main-nav></app-main-nav>
+
+<div *ngIf="isLoaded" class="container">
+    <h4 class="text-success">Order Confirmed</h4>
+    <div class="card">
+        <h5>Order Details</h5>
+        <div *ngIf="orderType!='deal'" class="product-details">
+
+            <p class="orderid">#{{order.order_id}}</p>
+            <p class="orderdate">order placed on {{order.created | date:'longDate'}}</p>
+
+            <div *ngFor="let p of order.ordered_products">
+                <div class="product">
+                    <div>
+                        {{p.product.name}} <span *ngIf="p.product.metadata.variant_title != 'Default Title'">({{p.product.metadata.variant_title}})</span> x {{p.quantity}}
+                    </div>
+                    <div class="amount">
+                        $ {{ price(p.amount_subtotal)}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="product">
+                <div>
+                    Total :
+                </div>
+                <div class="amount">
+                  $ {{order.amount}}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="orderType=='deal'" class="product-details">
+
+            <p class="orderid">#{{order.order_id}}</p>
+            <span class="light group-icon">Group Deal
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+          </svg>
+    </span>
+            <p class="orderdate">order placed on {{order.created | date:'longDate'}}</p>
+
+
+            <div *ngFor="let p of order.ordered_products">
+                <div class="product">
+                    <div>
+                        {{p.product.metadata.variant_title}} x {{p.quantity}}
+                    </div>
+                    <div class="amount">
+                        CAD {{ price(p.amount_subtotal)}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="product">
+                <div>
+                    Total :
+                </div>
+                <div class="amount">
+                    CAD {{order.amount}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="more-details">
+        <div *ngIf="orderType!='deal'" class="card span1">
+            <h6>Card Details</h6>
+            Paid from : <br> xxxx-xxxx-xxxx-{{order.card.card.last4}} <br> Name : {{order.billing_details.name}}<br> Email : {{order.billing_details.email}}<br>
+
+            <a [href]="order.receipt_url" target="_blank">View Receipt</a>
+        </div>
+        <div *ngIf="orderType=='deal'" class="card span1">
+            <h6>Card Details</h6>
+            xxxx-xxxx-xxxx-{{order.card.card.last4}} <br> Name : {{order.billing_details.name}}<br> Email : {{order.billing_details.email}}<br>
+            <span>Payment Status: {{order.payment_status}}</span>
+            <small>(Note: This is the amount authorized on your selected payment method. We will charge you for the discounted amount if and when the deal successfully closes.)</small>
+
+            <a [href]="order.receipt_url" target="_blank">View Receipt</a>
+        </div>
+        <div class="card span1">
+            <h6>Shipping Details</h6>
+            Address <br> Unit: {{order.shipping.line2}},
+            <span *ngIf="order.shipping.line1!=null">{{order.shipping.line1}}</span> {{order.shipping.city}},{{order.shipping.state}},{{order.shipping.postal_code}}
+        </div>
+    </div>
+
+    <div class="actions">
+        <button (click)="shop()" class='action'>Continue Shopping</button>
+        <button (click)="orders()" class='action'>All Orders</button>
+    </div>
+</div>
+
+
+
+
+
+<app-fixed-footer></app-fixed-footer>

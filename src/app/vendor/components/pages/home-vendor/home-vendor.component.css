@@ -1,0 +1,271 @@
+.page-container {
+    padding: 2rem 4rem;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.f-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.f-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-l {
+    flex: 6 1 0;
+}
+
+.col-sm {
+    flex: 1 1 0;
+}
+
+.header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 var(--black-300);
+    padding: 1rem
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.title2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.products {
+    margin-top: 0.75rem;
+}
+
+.filter {
+    min-width: 200px;
+    height: max-content;
+}
+
+.filter-toggle {
+    width: 100%;
+    text-align: center;
+    background-color: var(--black-50);
+    font-weight: 700;
+    padding: 0.5rem 0rem;
+    margin: 0.25rem 0rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.toggle-active {
+    background-color: var(--black-700);
+    color: white;
+}
+
+.products {
+    padding: 0rem;
+}
+
+.action-row {
+    border-bottom: 1px solid var(--black-700);
+    padding: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.action-row input {
+    min-width: 300px;
+    max-width: 500px;
+    min-height: 1rem;
+    border-radius: 10px;
+    border: 1px var(--black-400) solid;
+    background-image: url("../../../../../assets/images/search.svg");
+    background-size: 1.25rem;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-X: 0.5rem;
+    padding: 0.5rem 2.25rem;
+}
+
+.action-row input::placeholder {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--black-500);
+}
+
+.action-row input:focus {
+    outline: none !important;
+    border: 1px var(--black-400) solid;
+}
+
+
+
+.btn {
+    border: 1px solid var(--black-900);
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    color: var(--black-900);
+    background-color: white;
+}
+
+.p-table {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+}
+
+table,
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
+
+table thead th {
+    border-bottom: 1px solid var(--black-300);
+    box-shadow: 0 0 2px 10 var(--black-300);
+}
+
+tbody tr {
+    border-bottom: 0.5px solid var(--black-300);
+    cursor: pointer;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 0px solid var(--black-700);
+}
+
+tbody tr {
+    transition: 0.3s ease-in-out;
+}
+
+tbody tr:hover {
+    background-color: var(--black-100);
+}
+
+.p-table thead {
+    border: 0;
+}
+
+td {
+    padding: 0.5rem;
+    padding-right: 0rem;
+    vertical-align: middle;
+}
+
+.p-title {
+    max-width: 14vw;
+    min-width: 200px;
+}
+
+.p-title:hover {
+    text-decoration: underline;
+}
+
+.cb-td,
+.img-td {
+    text-align: center;
+}
+
+.price-td {
+    max-width: 14vw;
+    min-width: 50px;
+}
+
+.cb {
+    width: 15px;
+    height: 15px;
+}
+
+.p-images {
+    width: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 3px;
+    border: 1px solid var(--black-300);
+    background-color: var(--black-200);
+    object-fit: contain;
+}
+
+.btn-style {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: var(--accent);
+    font-weight: 600;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-style:hover {
+    opacity: 0.9;
+}
+
+.tag {
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.archived {
+    background-color: aquamarine;
+}
+
+.active {
+    background-color: greenyellow;
+}
+
+.draft {
+    background-color: lightcoral;
+}
+
+@media only screen and (max-width: 768px) {
+    .page-container {
+        padding: 1rem;
+        flex-direction: column;
+    }
+    .p-table {
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .table {
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .filter {
+        flex-direction: row;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .filter-toggle {
+        height: max-content;
+        max-width: 45%;
+    }
+    .title {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .action-row input {
+        width: 90vw;
+    }
+}

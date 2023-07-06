@@ -1,0 +1,31 @@
+
+.container{
+  margin-top: 100px;
+  margin-bottom: 70px;
+
+}
+
+.supportIcon{
+  text-align: center;
+  padding: 8px;
+  width:200px;
+  margin-left: auto;
+  margin-right: auto;
+  border:none;
+  border-radius: 3px;
+  color:var(--LogoColor);
+  background-color: var(--LightPink);
+  margin-bottom: 20px;
+}
+
+.card{
+  margin-bottom: 20px;
+  transition: all .3s ease-in-out;
+  min-height: 100px;
+}
+
+.card:hover {
+  background-color: #E0DAE7;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
