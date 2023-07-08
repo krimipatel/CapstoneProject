@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CommunityMemberRegService {
-  private apiUrl = 'http://localhost:4200/registration'; // Replace with your actual API URL
+  private apiUrl = 'http://127.0.0.1:8000/community_member_reg/api/register';
 
   constructor(private http: HttpClient) {}
 
   register(data: any) {
-    return this.http.post<any>(this.apiUrl, data);
+    return this.http.post(this.apiUrl, data);
   }
 }

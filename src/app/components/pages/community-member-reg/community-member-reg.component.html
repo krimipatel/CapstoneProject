@@ -1,59 +1,67 @@
 <section>
-    <div class="{{loadingClass}}">
-        <div class="background">
-            <div class="bg-square-div">
-                <div class="bg-square"></div>
-            </div>
-            <div>
-                <img class="bg-logo" src="../../../../assets/images/logo.png" alt="">
-            </div>
-            <div class="bg-square-div">
-                <div class="bg-square float-right"></div>
-            </div>
-        </div>
+  <div class="{{loadingClass}}">
+      <div class="background">
+          <div class="bg-square-div">
+              <div class="bg-square"></div>
+          </div>
+          <div>
+              <img class="bg-logo" src="../../../../assets/images/logo.png" alt="">
+          </div>
+          <div class="bg-square-div">
+              <div class="bg-square float-right"></div>
+          </div>
+      </div>
 
-        <div class="top">
-            <img (click)="logoClicked()" class="top-logo" src="../../../../assets/images/logo.png" alt="logo">
+      <div class="top">
+          <img (click)="logoClicked()" class="top-logo" src="../../../../assets/images/logo.png" alt="logo">
 
-            <form [formGroup]="communityMemberRegForm">
-                <p class="title-text">Community Member Registration</p>
-                <p class="title-text-sm">Please Register</p>
+          <form [formGroup]="communityMemberRegForm">
+              <p class="title-text">Community Member Registration</p>
+              <p class="title-text-sm">Please Register</p>
 
-                <div class="form-group">
-                    <label for="email">Email Address*</label>
-                    <input formControlName="email" type="email" class="form-control" name="email">
-                </div>
+              <div class="form-group">
+                  <label for="email">Email Address*</label>
+                  <input formControlName="email" type="email" class="form-control" name="email">
+              </div>
 
-                <div class="form-group">
-                    <label for="field2">Field 2</label>
-                    <input formControlName="field2" type="field2" class="form-control" name="field2">
-                </div>
-                
-                <div class="form-group">
-                    <label for="field3">Field 3</label>
-                    <input formControlName="field3" type="field3" class="form-control" name="field3">
-                </div>
+              <div class="form-group">
+                  <label for="password">Password</label>
+                  <input formControlName="password" [type]="showPassword" class="form-control">
 
-                <div class="form-group">
-                    <label for="field4">Field 4</label>
-                    <input formControlName="field4" type="field4" class="form-control" name="field4">
-                </div><br>
+                  <!-- toggle to show/hide password -->
+                  <div class="btn-grp">
+                      <button (click)="showPasswordClicked()" class="input-group-addon">
+                          <img src="../../../../assets/button-icons/eye.svg">
+                      </button>
+                  </div>
+              </div>
 
-                <!-- Add additional fields as needed -->
+              <div class="form-group">
+                  <label for="field3">Field 3</label>
+                  <input formControlName="field3" type="field3" class="form-control" name="field3">
+              </div>
 
-                <div class="reg-div">
-                    <button (click)="Register()" [disabled]="communityMemberRegForm.invalid" class="register"
-                        type="submit">Register</button><br>
-                    <div class="error-div" *ngIf="regError">
-                        <small class="text-danger error-box">{{regError}}</small>
-                    </div>
-                </div><br>
+              <div class="form-group">
+                  <label for="field4">Field 4</label>
+                  <input formControlName="field4" type="field4" class="form-control" name="field4">
+              </div><br>
 
-                <div class="reg-div">
-                    <button (click)="cancel()" [disabled]="communityMemberRegForm.invalid" class="cancel"
-                        type="submit">Cancel</button><br>
-                </div>
-            </form>
-        </div>
-    </div>
+              <!-- Add additional fields as needed -->
+
+              <div class="reg-div">
+                  <button (click)="Register()" [disabled]="communityMemberRegForm.invalid" class="register"
+                      type="submit">Register</button><br>
+                  <div class="error-div" *ngIf="regError">
+                      <!-- <small class="text-danger error-box">{{regError}}</small> -->
+                      <small class="text-danger">{{regError}}</small>
+                  </div>
+              </div><br>
+
+              <div class="reg-div">
+                  <button (click)="cancel()" [disabled]="communityMemberRegForm.invalid" class="cancel"
+                      type="submit">Cancel</button><br>
+              </div>
+          </form>
+      </div>
+  </div>
 </section>
